@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack)",
+      "Bash(npm install *)",
+      "Bash(mkdir -p \"C:\\\\Users\\\\farid\\\\.claude\\\\worktrees\\\\heuristic-wilson-2d126d\\\\src\\\\i18n\" \"C:\\\\Users\\\\farid\\\\.claude\\\\worktrees\\\\heuristic-wilson-2d126d\\\\src\\\\app\\\\[locale]\" \"C:\\\\Users\\\\farid\\\\.claude\\\\worktrees\\\\heuristic-wilson-2d126d\\\\src\\\\components\\\\layout\" \"C:\\\\Users\\\\farid\\\\.claude\\\\worktrees\\\\heuristic-wilson-2d126d\\\\src\\\\components\\\\sections\" \"C:\\\\Users\\\\farid\\\\.claude\\\\worktrees\\\\heuristic-wilson-2d126d\\\\src\\\\components\\\\ui\" \"C:\\\\Users\\\\farid\\\\.claude\\\\worktrees\\\\heuristic-wilson-2d126d\\\\src\\\\lib\" \"C:\\\\Users\\\\farid\\\\.claude\\\\worktrees\\\\heuristic-wilson-2d126d\\\\src\\\\hooks\" \"C:\\\\Users\\\\farid\\\\.claude\\\\worktrees\\\\heuristic-wilson-2d126d\\\\src\\\\types\" \"C:\\\\Users\\\\farid\\\\.claude\\\\worktrees\\\\heuristic-wilson-2d126d\\\\messages\" 2>&1)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(node -e \"const f=require\\('C:/Users/farid/.claude/worktrees/heuristic-wilson-2d126d/messages/es.json'\\); console.log\\(JSON.stringify\\(f.trayectoria, null, 2\\)\\)\")",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}

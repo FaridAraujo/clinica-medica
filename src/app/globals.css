@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand colors — coherent with physical signage and business card */
+  --color-navy: #0d2240;       /* dark text, structure */
+  --color-blue: #2e7db5;       /* primary brand blue (card's dominant tone) */
+  --color-blue-light: #6db4d8; /* card's lighter diagonal blue */
+  --color-blue-pale: #eaf4fb;  /* very light blue for section backgrounds */
+  --color-red: #c1121f;        /* cardinal/medical red — clean, authoritative, less orange */
+  --color-white: #ffffff;      /* card background is clean white */
+  --color-warm-white: #f4f8fb; /* page background — slight blue tint, coherent */
+
+  /* Semantic aliases */
+  --color-background: var(--color-warm-white);
+  --color-foreground: var(--color-navy);
+  --color-accent: var(--color-red);
+  --color-primary: var(--color-blue);
+
+  /* Typography */
+  --font-heading: var(--font-cormorant);
+  --font-body: var(--font-inter);
+
+  /* Spacing scale additions */
+  --spacing-section: 6rem;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-warm-white);
+  color: var(--color-navy);
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.6; }
+}
+
+/* ── View Transitions — crossfade suave entre páginas ───────── */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: vt-fade-out 0.18s ease-out;
+}
+
+::view-transition-new(root) {
+  animation: vt-fade-in 0.22s ease-out;
+}
+
+@keyframes vt-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes vt-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Reveal — ocultar antes del scroll para evitar flash ────── */
+/* Solo cuando el usuario acepta movimiento. Si prefiere        */
+/* reduced-motion, GSAP no corre y los elementos quedan visibles*/
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    will-change: opacity, transform;
+  }
+}
+
+/* ── Grain — textura sutil sobre fondos navy ────────────────── */
+/* Opacidad intencionalmente baja (3.5%): añade profundidad     */
+/* sin ser visible como decoración. Solo en secciones oscuras.  */
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+.grain > * {
+  position: relative;
+  z-index: 2;
+}

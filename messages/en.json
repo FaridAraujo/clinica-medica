@@ -1,0 +1,194 @@
+{
+  "metadata": {
+    "title": "Dr. Edwin Alvarado — Cardiovascular Surgeon | Heredia",
+    "description": "Specialist in Cardiovascular and General Surgery, trained in Madrid, Spain, with over 40 years of experience. Private practice in Heredia, Costa Rica.",
+    "ogTitle": "Dr. Edwin Manuel Alvarado Arce | Cardiovascular & General Surgery — Heredia"
+  },
+  "nav": {
+    "consultorio": "The Practice",
+    "sobre": "About",
+    "especialidades": "Specialties",
+    "contacto": "Contact",
+    "agendar": "Book appointment"
+  },
+  "home": {
+    "consultorio": { "cta": "Learn more" },
+    "doctor":      { "cta": "About the Doctor" },
+    "especialidades": { "cta": "View all specialties" },
+    "cta": {
+      "title": "Ready to book an appointment?",
+      "body": "Reach us directly via WhatsApp or call the office. We will confirm availability promptly.",
+      "whatsapp": "Message on WhatsApp"
+    }
+  },
+  "consultorio": {
+    "sectionLabel": "The Practice",
+    "title": "Private care backed by decades of experience",
+    "items": [
+      {
+        "label": "What is it?",
+        "body": "A private cardiovascular and general surgery practice in Heredia, Costa Rica. Direct access to the specialist, no intermediaries, in a setting designed for the patient's comfort."
+      },
+      {
+        "label": "What do we offer?",
+        "body": "Clinical consultation, evaluation, and specialized surgical opinion in cardiovascular and general surgery. Dr. Alvarado personally assesses each case and guides patients toward the most appropriate course of action."
+      },
+      {
+        "label": "How does it work?",
+        "body": "Appointments are scheduled directly via WhatsApp or phone. No referral required. The consultation includes a full clinical evaluation and guidance on next steps."
+      },
+      {
+        "label": "Who can come?",
+        "body": "Patients who need cardiovascular or surgical opinion — whether on their own initiative, referred by another physician, or following up after a previous procedure."
+      }
+    ]
+  },
+  "hero": {
+    "eyebrow": "Private Medical Practice · Heredia, Costa Rica",
+    "title": "Dr. Edwin Manuel Alvarado Arce",
+    "subtitle": "Trained at Hospital Ramón y Cajal in Madrid. Over 40 years of experience in cardiovascular and general surgery in Costa Rica.",
+    "cta": "Book an appointment",
+    "ctaSecondary": "Learn more",
+    "stats": {
+      "experience": { "value": "+40 years",      "label": "of clinical experience" },
+      "service":    { "value": "Hospital México", "label": "Former Department Chief — CCSS" },
+      "teaching":   { "value": "UCR · UCIMED",   "label": "University professor" },
+      "union":      { "value": "Unión Médica",   "label": "National Medical Auditor" }
+    }
+  },
+  "sobre": {
+    "sectionLabel": "About",
+    "title": "A life dedicated to the heart",
+    "body": "Dr. Edwin Manuel Alvarado Arce is a surgeon specializing in Cardiovascular Surgery and General Surgery, with over four decades of practice in Costa Rica. He completed his specialty training at Hospital Ramón y Cajal and the University of Alcalá de Henares in Madrid, Spain.\n\nHe served as Head of the Cardiovascular and Thoracic Surgery Department at Hospital México (CCSS), and has trained generations of physicians as a professor at the University of Costa Rica (UCR) and the University of Medical Sciences (UCIMED).\n\nHis private practice in Heredia combines the expertise of a high-level institutional and international career with the personalized attention each patient deserves.",
+    "credentials": {
+      "cardiovascular": "Cardiovascular Surgery Specialist — Hospital Ramón y Cajal, Madrid",
+      "general": "General Surgery Specialist — University of Costa Rica",
+      "hospital": "Former Head, Cardiovascular Surgery Department — Hospital México (CCSS)",
+      "ucr": "Professor, University of Costa Rica",
+      "ucimed": "Professor, University of Medical Sciences (UCIMED)",
+      "experience": "Over 40 years of experience"
+    }
+  },
+  "trayectoria": {
+    "sectionLabel": "Career",
+    "title": "Training & career",
+    "entries": [
+      {
+        "year": "Specialization",
+        "title": "Cardiovascular Surgery",
+        "institution": "Hospital Ramón y Cajal · University of Alcalá de Henares, Madrid, Spain",
+        "description": "Specialty training at one of Spain's leading cardiovascular referral centers."
+      },
+      {
+        "year": "Specialization",
+        "title": "General Surgery",
+        "institution": "University of Costa Rica",
+        "description": "General Surgery specialization from the University of Costa Rica."
+      },
+      {
+        "year": "Career",
+        "title": "Hospital México — CCSS",
+        "institution": "Costa Rican Social Security Fund",
+        "description": "Cardiovascular surgeon at the country's main referral center for decades of service."
+      },
+      {
+        "year": "Department Head",
+        "title": "Chief of Cardiovascular Surgery",
+        "institution": "Hospital México — CCSS",
+        "description": "Director of Costa Rica's highest-volume cardiovascular surgery department."
+      },
+      {
+        "year": "Academia",
+        "title": "University Professor",
+        "institution": "UCR and UCIMED",
+        "description": "Training specialist physicians at the country's leading universities."
+      },
+      {
+        "year": "Today",
+        "title": "Private Practice",
+        "institution": "Heredia, Costa Rica",
+        "description": "Private care backed by a career of international excellence."
+      }
+    ]
+  },
+  "especialidades": {
+    "sectionLabel": "Specialties",
+    "title": "Areas of care",
+    "items": [
+      {
+        "title": "Open Heart Surgery",
+        "description": "Major cardiovascular procedures with decades of experience at the country's leading referral center."
+      },
+      {
+        "title": "Heart Valve Surgery",
+        "description": "Valve repair and replacement to restore normal cardiac function."
+      },
+      {
+        "title": "Aortic Surgery",
+        "description": "Treatment of aneurysms and pathologies of the thoracic and abdominal aorta."
+      },
+      {
+        "title": "Coronary Revascularization",
+        "description": "Coronary bypass for patients with severe coronary artery disease."
+      },
+      {
+        "title": "General Surgery",
+        "description": "General surgical interventions with the same precision and experience of his entire career."
+      },
+      {
+        "title": "Consultation & Assessment",
+        "description": "Comprehensive evaluation for patients requiring specialized cardiovascular or surgical opinion."
+      }
+    ]
+  },
+  "testimonios": {
+    "sectionLabel": "Testimonials",
+    "title": "What our patients say",
+    "placeholder": "Testimonials coming soon."
+  },
+  "faq": {
+    "sectionLabel": "FAQ",
+    "title": "Common questions",
+    "items": [
+      {
+        "question": "Where is the clinic located?",
+        "answer": "TODO: Add exact clinic address in Heredia."
+      },
+      {
+        "question": "How do I book an appointment?",
+        "answer": "Appointments are coordinated directly via WhatsApp at 8541-8877, or you can call the office at 2237-0269. We will get back to you promptly to confirm an available date and time."
+      },
+      {
+        "question": "How long is the consultation?",
+        "answer": "TODO: Confirm typical consultation duration with Dr. Alvarado."
+      },
+      {
+        "question": "Does he see patients referred by CCSS?",
+        "answer": "TODO: Confirm policy for CCSS-referred patients."
+      },
+      {
+        "question": "Does he accept health insurance?",
+        "answer": "TODO: Confirm which health insurance plans are accepted."
+      }
+    ]
+  },
+  "contacto": {
+    "sectionLabel": "Contact",
+    "title": "Book an appointment",
+    "subtitle": "Reach us via WhatsApp or call directly. We will confirm availability promptly.",
+    "whatsapp": "Message on WhatsApp",
+    "phoneMobile": "8541-8877",
+    "phoneOffice": "2237-0269",
+    "email": "ed_malva@hotmail.com",
+    "address": "50 metres west of Mussi de la UNA, Heredia",
+    "hours": "TODO: Office hours"
+  },
+  "footer": {
+    "tagline": "Cardiovascular and general surgery with international experience.",
+    "rights": "All rights reserved.",
+    "location": "Heredia, Costa Rica"
+  },
+  "whatsapp": {
+    "ariaLabel": "Contact via WhatsApp"
+  }
+}

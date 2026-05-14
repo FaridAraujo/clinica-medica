@@ -1,0 +1,194 @@
+{
+  "metadata": {
+    "title": "Dr. Edwin Alvarado — Cirujano Cardiovascular | Heredia",
+    "description": "Especialista en Cirugía Cardiovascular y General con formación en Madrid, España y más de 40 años de experiencia. Consulta privada en Heredia, Costa Rica.",
+    "ogTitle": "Dr. Edwin Manuel Alvarado Arce | Cirugía Cardiovascular y General — Heredia"
+  },
+  "nav": {
+    "consultorio": "El Consultorio",
+    "sobre": "Sobre el Doctor",
+    "especialidades": "Especialidades",
+    "contacto": "Contacto",
+    "agendar": "Agendar cita"
+  },
+  "home": {
+    "consultorio": { "cta": "Conocer más" },
+    "doctor":      { "cta": "Sobre el Doctor" },
+    "especialidades": { "cta": "Ver todas las especialidades" },
+    "cta": {
+      "title": "¿Listo para agendar su cita?",
+      "body": "Comuníquese directamente por WhatsApp o llámenos al consultorio. Le confirmamos disponibilidad a la brevedad.",
+      "whatsapp": "Escribir por WhatsApp"
+    }
+  },
+  "consultorio": {
+    "sectionLabel": "El Consultorio",
+    "title": "Atención privada con respaldo de décadas",
+    "items": [
+      {
+        "label": "¿Qué es?",
+        "body": "Un consultorio médico privado de cirugía cardiovascular y general en Heredia, Costa Rica. Atención directa con el especialista, sin intermediarios, en un espacio pensado para la comodidad del paciente."
+      },
+      {
+        "label": "¿Qué ofrecemos?",
+        "body": "Consulta, valoración clínica y criterio quirúrgico especializado en el área cardiovascular y general. El Dr. Alvarado evalúa personalmente cada caso y orienta sobre el manejo más adecuado."
+      },
+      {
+        "label": "¿Cómo funciona?",
+        "body": "Las citas se coordinan directamente por WhatsApp o por teléfono. No se requiere referencia previa. La consulta incluye evaluación clínica completa y orientación sobre los próximos pasos."
+      },
+      {
+        "label": "¿Quién puede venir?",
+        "body": "Pacientes que necesitan criterio cardiovascular o quirúrgico, ya sea por iniciativa propia, referidos por otro médico, o en seguimiento después de un procedimiento previo."
+      }
+    ]
+  },
+  "hero": {
+    "eyebrow": "Consultorio Médico · Heredia, Costa Rica",
+    "title": "Dr. Edwin Manuel Alvarado Arce",
+    "subtitle": "Formación en el Hospital Ramón y Cajal de Madrid. Más de 40 años de experiencia en cirugía cardiovascular y general en Costa Rica.",
+    "cta": "Agendar una cita",
+    "ctaSecondary": "Conocer más",
+    "stats": {
+      "experience": { "value": "+40 años",      "label": "de experiencia clínica" },
+      "service":    { "value": "Hospital México", "label": "Ex Jefe de Servicio — CCSS" },
+      "teaching":   { "value": "UCR · UCIMED",   "label": "Profesor universitario" },
+      "union":      { "value": "Unión Médica",   "label": "Fiscal Nacional" }
+    }
+  },
+  "sobre": {
+    "sectionLabel": "Sobre el Doctor",
+    "title": "Una vida dedicada al corazón",
+    "body": "El Dr. Edwin Manuel Alvarado Arce es médico cirujano especializado en Cirugía Cardiovascular y Cirugía General, con más de cuatro décadas de trayectoria en Costa Rica. Realizó su especialización en el Hospital Ramón y Cajal y la Universidad Alcalá de Henares en Madrid, España.\n\nFue Jefe del Servicio de Cirugía Cardiovascular y Torácica del Hospital México de la CCSS, y ha formado generaciones de médicos como profesor en la Universidad de Costa Rica (UCR) y la Universidad de Ciencias Médicas (UCIMED).\n\nSu consulta privada en Heredia combina la experiencia acumulada de una carrera institucional de alto nivel con la atención personalizada que cada paciente merece.",
+    "credentials": {
+      "cardiovascular": "Especialista en Cirugía Cardiovascular — Hospital Ramón y Cajal, Madrid",
+      "general": "Especialista en Cirugía General — Universidad de Costa Rica",
+      "hospital": "Ex Jefe, Servicio de Cirugía Cardiovascular — Hospital México (CCSS)",
+      "ucr": "Profesor, Universidad de Costa Rica",
+      "ucimed": "Profesor, Universidad de Ciencias Médicas (UCIMED)",
+      "experience": "Más de 40 años de experiencia"
+    }
+  },
+  "trayectoria": {
+    "sectionLabel": "Trayectoria",
+    "title": "Formación y carrera",
+    "entries": [
+      {
+        "year": "Especialización",
+        "title": "Cirugía Cardiovascular",
+        "institution": "Hospital Ramón y Cajal · Universidad Alcalá de Henares, Madrid, España",
+        "description": "Formación de especialidad en uno de los centros cardiovasculares de referencia de España."
+      },
+      {
+        "year": "Especialización",
+        "title": "Cirugía General",
+        "institution": "Universidad de Costa Rica",
+        "description": "Especialización en Cirugía General por la Universidad de Costa Rica."
+      },
+      {
+        "year": "Trayectoria",
+        "title": "Hospital México — CCSS",
+        "institution": "Caja Costarricense de Seguro Social",
+        "description": "Cirujano cardiovascular en el principal centro de referencia del país durante décadas de servicio."
+      },
+      {
+        "year": "Jefatura",
+        "title": "Jefe del Servicio de Cirugía Cardiovascular",
+        "institution": "Hospital México — CCSS",
+        "description": "Dirección del servicio de mayor volumen en cirugía cardiovascular de Costa Rica."
+      },
+      {
+        "year": "Docencia",
+        "title": "Profesor Universitario",
+        "institution": "UCR y UCIMED",
+        "description": "Formación de médicos especialistas en las principales universidades del país."
+      },
+      {
+        "year": "Hoy",
+        "title": "Consulta Privada",
+        "institution": "Heredia, Costa Rica",
+        "description": "Atención privada con toda la experiencia de una trayectoria de excelencia internacional."
+      }
+    ]
+  },
+  "especialidades": {
+    "sectionLabel": "Especialidades",
+    "title": "Áreas de atención",
+    "items": [
+      {
+        "title": "Cirugía de Corazón Abierto",
+        "description": "Procedimientos cardiovasculares mayores con décadas de experiencia en el principal centro de referencia del país."
+      },
+      {
+        "title": "Cirugía de Válvulas Cardíacas",
+        "description": "Reparación y reemplazo valvular para restaurar la función cardíaca normal."
+      },
+      {
+        "title": "Cirugía de Aorta",
+        "description": "Tratamiento de aneurismas y patologías de la aorta torácica y abdominal."
+      },
+      {
+        "title": "Revascularización Coronaria",
+        "description": "Bypass coronario para pacientes con enfermedad coronaria severa."
+      },
+      {
+        "title": "Cirugía General",
+        "description": "Intervenciones quirúrgicas generales con la misma precisión y experiencia de toda su trayectoria."
+      },
+      {
+        "title": "Consulta y Valoración",
+        "description": "Evaluación integral para pacientes que requieren criterio cardiovascular o quirúrgico especializado."
+      }
+    ]
+  },
+  "testimonios": {
+    "sectionLabel": "Testimonios",
+    "title": "Lo que dicen nuestros pacientes",
+    "placeholder": "Los testimonios estarán disponibles próximamente."
+  },
+  "faq": {
+    "sectionLabel": "Preguntas frecuentes",
+    "title": "Dudas comunes",
+    "items": [
+      {
+        "question": "¿Dónde queda el consultorio?",
+        "answer": "TODO: Agregar dirección exacta del consultorio en Heredia."
+      },
+      {
+        "question": "¿Cómo agendo una cita?",
+        "answer": "Las citas se coordinan directamente por WhatsApp al número 8541-8877, o puede llamar al consultorio al 2237-0269. Le responderemos a la brevedad para confirmar fecha y hora disponible."
+      },
+      {
+        "question": "¿Cuánto dura la consulta?",
+        "answer": "TODO: Confirmar duración típica de consulta con el Dr. Alvarado."
+      },
+      {
+        "question": "¿Atiende pacientes referidos por la CCSS?",
+        "answer": "TODO: Confirmar política de atención a pacientes referidos por CCSS."
+      },
+      {
+        "question": "¿Acepta seguros médicos?",
+        "answer": "TODO: Confirmar qué seguros médicos acepta el consultorio."
+      }
+    ]
+  },
+  "contacto": {
+    "sectionLabel": "Contacto",
+    "title": "Agendar una cita",
+    "subtitle": "Comuníquese por WhatsApp o llámenos directamente. Le confirmaremos disponibilidad a la brevedad.",
+    "whatsapp": "Escribir por WhatsApp",
+    "phoneMobile": "8541-8877",
+    "phoneOffice": "2237-0269",
+    "email": "ed_malva@hotmail.com",
+    "address": "50 metros al oeste de la Mussi de la UNA, Heredia",
+    "hours": "TODO: Horario de atención"
+  },
+  "footer": {
+    "tagline": "Cirugía cardiovascular y general con experiencia internacional.",
+    "rights": "Todos los derechos reservados.",
+    "location": "Heredia, Costa Rica"
+  },
+  "whatsapp": {
+    "ariaLabel": "Contactar por WhatsApp"
+  }
+}
