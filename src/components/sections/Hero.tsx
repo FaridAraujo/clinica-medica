@@ -79,11 +79,13 @@ export default function Hero() {
           alt=""
           fill
           priority
-          className="object-cover object-center"
+          className="object-cover object-[80%_top] sm:object-center"
           sizes="100vw"
         />
-        {/* Left-to-right gradient: text lives in the dark left zone */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0d1520]/93 via-[#0d1520]/68 to-[#0d1520]/20" />
+        {/* Móvil: overlay oscuro uniforme para que el texto sea legible */}
+        <div className="absolute inset-0 bg-[#0d1520]/75 sm:hidden" />
+        {/* Desktop: gradiente izquierda→derecha — texto en zona oscura izquierda */}
+        <div className="absolute inset-0 hidden bg-gradient-to-r from-[#0d1520]/93 via-[#0d1520]/68 to-[#0d1520]/20 sm:block" />
         {/* Bottom gradient: blends into credential strip */}
         <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#0d1520] via-[#0d1520]/60 to-transparent" />
       </div>

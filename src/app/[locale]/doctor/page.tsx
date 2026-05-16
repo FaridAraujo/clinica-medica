@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import AesculapiusRod from '@/components/ui/AesculapiusRod';
+import { AccordionList } from '@/components/ui/AccordionList';
 
 interface Props { params: Promise<{ locale: string }> }
 
@@ -198,31 +199,20 @@ export default async function DoctorPage({ params }: Props) {
             </h2>
           </div>
 
-          {/* Timeline accordion */}
-          <div className="flex flex-col">
-            {trayectoria.map((entry, i) => (
-              <details
-                key={i}
-                data-reveal
-                data-reveal-delay={String(0.04 * i)}
-                className="group border-t border-navy/[0.08]"
-              >
-                <summary className="flex cursor-pointer list-none select-none items-center justify-between gap-6 py-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue">
-                  <div className="flex items-center gap-5">
-                    <span className="w-[72px] shrink-0 font-body text-[0.575rem] font-semibold uppercase tracking-[0.2em] text-navy/40 sm:w-[90px]">
-                      {entry.year}
-                    </span>
-                    <h3 className="font-heading text-[1.25rem] font-medium leading-snug text-navy sm:text-[1.375rem]">
-                      {entry.title}
-                    </h3>
-                  </div>
-                  <span aria-hidden="true" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-navy/[0.18] text-navy/40 transition-all duration-200 group-open:rotate-45 group-open:border-navy/30 group-open:text-navy">
-                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" className="h-2.5 w-2.5">
-                      <path d="M6 1v10M1 6h10" />
-                    </svg>
+          <AccordionList
+            items={trayectoria.map(entry => ({
+              heading: (
+                <div className="flex items-center gap-5">
+                  <span className="w-[72px] shrink-0 font-body text-[0.575rem] font-semibold uppercase tracking-[0.2em] text-navy/40 sm:w-[90px]">
+                    {entry.year}
                   </span>
-                </summary>
-                <div className="grid grid-cols-1 gap-3 pb-6 pl-0 sm:grid-cols-[90px_1fr] sm:gap-5 sm:pl-0">
+                  <h3 className="font-heading text-[1.25rem] font-medium leading-snug text-navy sm:text-[1.375rem]">
+                    {entry.title}
+                  </h3>
+                </div>
+              ),
+              body: (
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-[90px_1fr] sm:gap-5">
                   <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-navy/40 sm:pt-1">
                     {entry.institution}
                   </p>
@@ -230,10 +220,9 @@ export default async function DoctorPage({ params }: Props) {
                     {entry.description}
                   </p>
                 </div>
-              </details>
-            ))}
-            <div className="border-t border-navy/[0.08]" aria-hidden="true" />
-          </div>
+              ),
+            }))}
+          />
         </div>
       </section>
     </main>
