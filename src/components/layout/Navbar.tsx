@@ -65,13 +65,17 @@ export default function Navbar() {
   const close = useCallback(() => setOpen(false), []);
 
   const links = [
-    { href: `/${locale}/consultorio`, label: t('consultorio') },
-    { href: `/${locale}/doctor`,      label: t('sobre') },
+    { href: `/${locale}`,             label: t('inicio')         },
+    { href: `/${locale}/consultorio`, label: t('consultorio')   },
+    { href: `/${locale}/doctor`,      label: t('sobre')         },
     { href: `/${locale}/especialidades`, label: t('especialidades') },
-    { href: `/${locale}/contacto`,    label: t('contacto') },
+    { href: `/${locale}/contacto`,    label: t('contacto')      },
   ];
 
-  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+  const isActive = (href: string) => {
+    const isHome = href === `/${locale}` || href === `/${locale}/`;
+    return isHome ? pathname === href || pathname === `/${locale}/` : pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   // Sobre el hero: navbar transparente con texto blanco
   // Fuera del hero (o páginas internas): fondo sólido con texto navy
@@ -223,10 +227,17 @@ export default function Navbar() {
       >
         {/* Panel header */}
         <div className="flex h-16 shrink-0 items-center justify-between border-b border-navy/[0.08] px-6">
-          <div className="flex items-center gap-2.5">
-            <MedicalCrossIcon className="h-3 w-3 shrink-0 text-red" aria-hidden="true" />
-            <span className="font-heading text-[1.0625rem] font-medium text-navy">Dr. Alvarado</span>
-          </div>
+          <Link
+            href={`/${locale}`}
+            onClick={close}
+            tabIndex={open ? 0 : -1}
+            className="inline-flex items-center gap-2 font-body text-[0.8rem] font-medium text-navy/55 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+          >
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5" aria-hidden="true">
+              <path d="M10 3L5 8l5 5" />
+            </svg>
+            Inicio
+          </Link>
           <button
             onClick={close}
             aria-label="Cerrar menú"
