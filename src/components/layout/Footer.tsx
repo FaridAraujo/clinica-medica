@@ -19,61 +19,58 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-white border-t border-navy/[0.07]">
+    <footer className="border-t border-navy/[0.07] bg-white">
 
-      {/* ── Main body ──────────────────────────────────────────── */}
-      <div className="mx-auto max-w-7xl px-6 py-10 sm:px-10 sm:py-12 lg:px-14">
-        <div className="grid grid-cols-1 gap-9 sm:grid-cols-[1.6fr_1fr_1.1fr] sm:gap-12 sm:items-start">
+      {/* ── Main bar — todo horizontal ──────────────────────────── */}
+      <div className="mx-auto max-w-7xl px-6 py-5 sm:px-10 sm:py-6 lg:px-14">
+        <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
 
           {/* Identity */}
           <Link
             href={`/${locale}`}
-            className="flex items-start gap-3.5 self-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
+            className="flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
           >
-            <AesculapiusRod className="h-9 w-[15px] shrink-0 text-red" />
-            <span className="flex flex-col gap-1.5 pt-[3px]">
-              <span className="font-heading text-[1.125rem] font-medium leading-[1.15] text-navy">
-                Dr. Edwin Manuel Alvarado Arce
-              </span>
-              <span className="font-body text-[0.575rem] font-semibold uppercase tracking-[0.2em] text-navy/35">
-                {t('location')}
-              </span>
+            <AesculapiusRod className="h-6 w-[11px] shrink-0 text-red" />
+            <span className="font-heading text-[0.9375rem] font-medium leading-none text-navy">
+              Dr. Alvarado
             </span>
           </Link>
 
-          {/* Navigation — sin header, los links hablan por sí solos */}
-          <nav aria-label="Mapa del sitio" className="flex flex-col gap-2.5">
+          {/* Navigation — horizontal */}
+          <nav aria-label="Mapa del sitio" className="flex flex-wrap items-center gap-x-5 gap-y-2">
             {links.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className="w-fit font-body text-[0.825rem] text-navy/55 transition-colors duration-150 hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+                className="font-body text-[0.775rem] text-navy/50 transition-colors duration-150 hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
               >
                 {label}
               </Link>
             ))}
           </nav>
 
-          {/* Contact — links inline, sin botón grande de WhatsApp */}
-          <div className="flex flex-col gap-2.5">
+          {/* Contact — horizontal */}
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <a
               href={`tel:+506${PHONE_OFFICE.replace(/-/g, '')}`}
-              className="w-fit font-body text-[0.825rem] text-navy/55 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+              className="font-body text-[0.775rem] text-navy/50 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
             >
-              T. {PHONE_OFFICE}
+              {PHONE_OFFICE}
             </a>
+            <span className="text-navy/20" aria-hidden="true">·</span>
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-fit items-center gap-1.5 font-body text-[0.825rem] text-navy/55 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+              className="inline-flex items-center gap-1.5 font-body text-[0.775rem] text-navy/50 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
             >
-              <WhatsAppIcon className="h-3 w-3 shrink-0 text-red" aria-hidden="true" />
+              <WhatsAppIcon className="h-2.5 w-2.5 shrink-0 text-red" aria-hidden="true" />
               WhatsApp
             </a>
+            <span className="text-navy/20" aria-hidden="true">·</span>
             <a
               href={`mailto:${EMAIL}`}
-              className="w-fit font-body text-[0.825rem] text-navy/55 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+              className="font-body text-[0.775rem] text-navy/50 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
             >
               {EMAIL}
             </a>
@@ -83,9 +80,9 @@ export default function Footer() {
       </div>
 
       {/* ── Bottom bar ─────────────────────────────────────────── */}
-      <div className="border-t border-navy/[0.06]">
-        <div className="mx-auto flex max-w-7xl px-6 py-4 sm:px-10 lg:px-14">
-          <p className="font-body text-[0.7rem] text-navy/35">
+      <div className="border-t border-navy/[0.05]">
+        <div className="mx-auto max-w-7xl px-6 py-3 sm:px-10 lg:px-14">
+          <p className="font-body text-[0.65rem] text-navy/30">
             © {year} Dr. Edwin Manuel Alvarado Arce · {t('rights')}
           </p>
         </div>

@@ -69,34 +69,36 @@ export default async function EspecialidadesPage({ params }: Props) {
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
           {items.map((item, i) => (
-            <article
+            <details
               key={i}
               data-reveal
-              className="grid grid-cols-1 gap-6 border-t border-navy/[0.08] py-7 sm:gap-8 sm:py-10 lg:grid-cols-[1fr_1fr] lg:gap-20 lg:py-14"
+              className="group border-t border-navy/[0.08]"
             >
-              {/* Categoría + título */}
-              <div className="flex flex-col gap-5">
-                <div className="flex items-center gap-2.5">
-                  <MedicalCrossIcon className="h-[0.6rem] w-[0.6rem] shrink-0 text-red" aria-hidden="true" />
-                  <span className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
-                    {categoryFor(i)}
-                  </span>
+              <summary className="flex cursor-pointer list-none select-none items-center justify-between gap-6 py-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue sm:py-6">
+                <div className="flex items-center gap-4 sm:gap-6">
+                  {/* Categoría pill */}
+                  <div className="hidden items-center gap-1.5 sm:flex">
+                    <MedicalCrossIcon className="h-[0.5rem] w-[0.5rem] shrink-0 text-red" aria-hidden="true" />
+                    <span className="w-[80px] font-body text-[0.55rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
+                      {categoryFor(i)}
+                    </span>
+                  </div>
+                  <h2 className="font-heading font-light leading-snug text-navy" style={{ fontSize: 'clamp(1.25rem, 2.4vw, 1.875rem)' }}>
+                    {item.title}
+                  </h2>
                 </div>
-                <h2
-                  className="font-heading font-light leading-[1.1] text-navy"
-                  style={{ fontSize: 'clamp(1.75rem, 3.2vw, 2.75rem)' }}
-                >
-                  {item.title}
-                </h2>
-              </div>
-
-              {/* Descripción */}
-              <div className="flex flex-col justify-center lg:pt-2">
-                <p className="max-w-[52ch] font-body text-[1.0625rem] leading-[1.95] text-navy/65">
+                <span aria-hidden="true" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-navy/[0.18] text-navy/40 transition-all duration-200 group-open:rotate-45 group-open:border-navy/30 group-open:text-navy">
+                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" className="h-2.5 w-2.5">
+                    <path d="M6 1v10M1 6h10" />
+                  </svg>
+                </span>
+              </summary>
+              <div className="pb-7 sm:pl-[128px]">
+                <p className="max-w-[52ch] font-body text-[1rem] leading-[1.95] text-navy/65">
                   {item.description}
                 </p>
               </div>
-            </article>
+            </details>
           ))}
           {/* Cierre del listado */}
           <div className="border-t border-navy/[0.08]" aria-hidden="true" />

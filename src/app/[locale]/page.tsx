@@ -81,47 +81,47 @@ export default async function HomePage({ params }: Props) {
             <div className="grid grid-cols-1 border-x border-b border-navy/[0.08] divide-y divide-navy/[0.08] sm:grid-cols-3 sm:divide-y-0 sm:divide-x">
 
               {/* Dirección */}
-              <div className="flex flex-col gap-4 px-7 py-10 sm:px-9 sm:py-14">
-                <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
+              <div className="flex flex-col gap-2.5 px-6 py-5 sm:px-7 sm:py-6">
+                <p className="font-body text-[0.575rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
                   Dirección
                 </p>
-                <p className="font-heading text-[1.375rem] font-normal leading-[1.3] text-navy">
+                <p className="font-body text-[0.875rem] leading-snug text-navy/80">
                   {CLINIC_ADDRESS}
                 </p>
                 <a
                   href={MAPS_DIRECTIONS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 self-start font-body text-[0.675rem] font-semibold uppercase tracking-[0.14em] text-navy/45 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+                  className="group inline-flex items-center gap-1.5 self-start font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-navy/40 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
                 >
-                  <MapPinIcon className="h-3.5 w-3.5 shrink-0 transition-transform group-hover:-translate-y-0.5" aria-hidden="true" />
+                  <MapPinIcon className="h-3 w-3 shrink-0 transition-transform group-hover:-translate-y-0.5" aria-hidden="true" />
                   Cómo llegar
                 </a>
               </div>
 
               {/* Teléfono consultorio */}
-              <div className="flex flex-col gap-4 px-7 py-10 sm:px-9 sm:py-14">
-                <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
+              <div className="flex flex-col gap-2.5 px-6 py-5 sm:px-7 sm:py-6">
+                <p className="font-body text-[0.575rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
                   Teléfono consultorio
                 </p>
                 <a
                   href={`tel:+506${PHONE_OFFICE.replace(/-/g, '')}`}
-                  className="font-body text-[2.25rem] font-medium leading-none tracking-[-0.015em] text-navy transition-colors hover:text-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+                  className="font-body text-[1.125rem] font-medium leading-none tracking-[-0.01em] text-navy transition-colors hover:text-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
                 >
                   {PHONE_OFFICE}
                 </a>
               </div>
 
               {/* WhatsApp */}
-              <div className="flex flex-col gap-4 px-7 py-10 sm:px-9 sm:py-14">
-                <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
+              <div className="flex flex-col gap-2.5 px-6 py-5 sm:px-7 sm:py-6">
+                <p className="font-body text-[0.575rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
                   WhatsApp
                 </p>
                 <a
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-body text-[2.25rem] font-medium leading-none tracking-[-0.015em] text-navy transition-colors hover:text-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+                  className="font-body text-[1.125rem] font-medium leading-none tracking-[-0.01em] text-navy transition-colors hover:text-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
                 >
                   {PHONE_MOBILE}
                 </a>
@@ -140,8 +140,8 @@ export default async function HomePage({ params }: Props) {
       <section className="bg-warm-white py-12 sm:py-16 lg:py-24">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
 
-          {/* Section header */}
-          <div className="mb-7 flex flex-col gap-4">
+          {/* Section header — centrado */}
+          <div className="mb-7 flex flex-col items-center gap-4 text-center">
             <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
               {tNav('sobre')}
             </span>
@@ -157,8 +157,8 @@ export default async function HomePage({ params }: Props) {
           {/* Tres columnas: foto | bio+CTA | trayectoria */}
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-[300px_1fr_1fr] lg:items-start lg:gap-16 xl:grid-cols-[340px_1fr_1fr]">
 
-            {/* Foto — columna izquierda, proporción retrato */}
-            <div data-reveal className="relative max-h-[420px] overflow-hidden lg:max-h-none" style={{ aspectRatio: '3/4' }}>
+            {/* Foto — centrada en mobile, columna izquierda en desktop */}
+            <div data-reveal className="relative mx-auto w-full max-w-[260px] overflow-hidden sm:max-w-[300px] lg:max-w-none" style={{ aspectRatio: '3/4' }}>
               <Image
                 src="/images/Edwin-Alvaradoo.png"
                 alt="Dr. Edwin Manuel Alvarado Arce"
