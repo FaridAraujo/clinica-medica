@@ -33,11 +33,11 @@ export default async function ContactoPage({ params }: Props) {
           1+2. TÍTULO + CANALES DIRECTOS — una sola entrada de acción
           Sin header separado: el título compacto vive sobre las tarjetas.
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-white pt-20 sm:pt-28">
+      <section className="bg-white pt-14 sm:pt-20">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
 
           {/* Título compacto — encabeza las tarjetas sin sección propia */}
-          <div className="mb-10 flex flex-col gap-3 sm:mb-12">
+          <div className="mb-7 flex flex-col gap-3 sm:mb-8">
             <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
               {tNav('contacto')}
             </span>
@@ -62,7 +62,7 @@ export default async function ContactoPage({ params }: Props) {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col gap-4 px-7 py-12 transition-colors duration-200 hover:bg-warm-white sm:px-8 sm:py-14"
+              className="group flex flex-col gap-4 px-7 py-9 transition-colors duration-200 hover:bg-warm-white sm:px-8 sm:py-11"
             >
               <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
                 WhatsApp
@@ -81,7 +81,7 @@ export default async function ContactoPage({ params }: Props) {
             {/* Teléfono */}
             <a
               href={`tel:+506${PHONE_OFFICE.replace(/-/g, '')}`}
-              className="group flex flex-col gap-4 px-7 py-12 transition-colors duration-200 hover:bg-warm-white sm:px-8 sm:py-14"
+              className="group flex flex-col gap-4 px-7 py-9 transition-colors duration-200 hover:bg-warm-white sm:px-8 sm:py-11"
             >
               <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
                 Teléfono consultorio
@@ -100,7 +100,7 @@ export default async function ContactoPage({ params }: Props) {
             {/* Email */}
             <a
               href={`mailto:${EMAIL}`}
-              className="group flex flex-col gap-4 px-7 py-12 transition-colors duration-200 hover:bg-warm-white sm:px-8 sm:py-14"
+              className="group flex flex-col gap-4 px-7 py-9 transition-colors duration-200 hover:bg-warm-white sm:px-8 sm:py-11"
             >
               <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
                 Correo electrónico
@@ -122,7 +122,7 @@ export default async function ContactoPage({ params }: Props) {
       {/* ══════════════════════════════════════════════════════════════
           3. FORMULARIO RÁPIDO
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-warm-white py-20 sm:py-28">
+      <section className="bg-warm-white py-14 sm:py-20">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
           <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1fr_1fr] lg:gap-24">
 
@@ -158,10 +158,10 @@ export default async function ContactoPage({ params }: Props) {
       {/* ══════════════════════════════════════════════════════════════
           4. INFORMACIÓN PRÁCTICA — antes de su visita
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-white py-20 sm:py-28">
+      <section className="bg-white py-14 sm:py-20">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
 
-          <div className="mb-12 flex flex-col gap-4">
+          <div className="mb-8 flex flex-col gap-4">
             <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
               Antes de su visita
             </span>
@@ -178,7 +178,7 @@ export default async function ContactoPage({ params }: Props) {
           <div className="grid grid-cols-1 border-t border-navy/[0.08] divide-y divide-navy/[0.08] sm:grid-cols-2 sm:divide-y-0 sm:divide-x lg:grid-cols-4">
 
             {/* Horario */}
-            <div className="flex flex-col gap-4 px-7 py-10 sm:px-8 sm:py-12 sm:border-b sm:border-b-navy/[0.08] lg:border-b-0">
+            <div className="flex flex-col gap-4 px-7 py-7 sm:px-8 sm:py-9 sm:border-b sm:border-b-navy/[0.08] lg:border-b-0">
               <div className="h-px w-7 bg-red" aria-hidden="true" />
               <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-navy/45">
                 Horario de atención
@@ -195,7 +195,7 @@ export default async function ContactoPage({ params }: Props) {
             </div>
 
             {/* Dirección */}
-            <div className="flex flex-col gap-4 px-7 py-10 sm:px-8 sm:py-12 sm:border-b sm:border-b-navy/[0.08] lg:border-b-0">
+            <div className="flex flex-col gap-4 px-7 py-7 sm:px-8 sm:py-9 sm:border-b sm:border-b-navy/[0.08] lg:border-b-0">
               <div className="h-px w-7 bg-red" aria-hidden="true" />
               <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-navy/45">
                 Dirección
@@ -206,7 +206,7 @@ export default async function ContactoPage({ params }: Props) {
             </div>
 
             {/* Referencia médica */}
-            <div className="flex flex-col gap-4 px-7 py-10 sm:px-8 sm:py-12">
+            <div className="flex flex-col gap-4 px-7 py-7 sm:px-8 sm:py-9">
               <div className="h-px w-7 bg-red" aria-hidden="true" />
               <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-navy/45">
                 Referencia médica
@@ -217,7 +217,7 @@ export default async function ContactoPage({ params }: Props) {
             </div>
 
             {/* Cancelaciones */}
-            <div className="flex flex-col gap-4 px-7 py-10 sm:px-8 sm:py-12">
+            <div className="flex flex-col gap-4 px-7 py-7 sm:px-8 sm:py-9">
               <div className="h-px w-7 bg-red" aria-hidden="true" />
               <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-navy/45">
                 Cancelaciones

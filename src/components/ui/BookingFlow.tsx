@@ -208,7 +208,7 @@ function StepDate({ onSelect }: { onSelect: (d: Date) => void }) {
                   disabled={!isClickable}
                   onClick={() => isClickable && onSelect(date)}
                   className={[
-                    'group relative flex flex-col items-center justify-center gap-1 py-4 transition-colors duration-150 focus-visible:outline-none focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-blue sm:py-5',
+                    'group relative flex flex-col items-center justify-center gap-0.5 py-3.5 transition-colors duration-150 focus-visible:outline-none focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-blue sm:gap-1 sm:py-5',
                     isClickable
                       ? 'cursor-pointer hover:bg-navy active:scale-[0.97]'
                       : 'cursor-not-allowed',
@@ -231,12 +231,12 @@ function StepDate({ onSelect }: { onSelect: (d: Date) => void }) {
                     </span>
                   )}
                   {isPast && (
-                    <span className="font-body text-[0.5rem] uppercase tracking-[0.14em] text-navy/20">
+                    <span className="hidden font-body text-[0.5rem] uppercase tracking-[0.14em] text-navy/20 sm:block">
                       —
                     </span>
                   )}
                   {isClickable && (
-                    <span className="font-body text-[0.5rem] uppercase tracking-[0.14em] text-navy/30 transition-colors group-hover:text-white/50">
+                    <span className="hidden font-body text-[0.5rem] uppercase tracking-[0.14em] text-navy/30 transition-colors group-hover:text-white/50 sm:block">
                       Disponible
                     </span>
                   )}
@@ -413,7 +413,7 @@ function StepInfo({ date, time, onSubmit, onBack }: {
           onClick={() => valid && onSubmit({ name: name.trim(), phone: phone.trim(), motivo: motivo.trim() })}
           disabled={!valid}
           className={[
-            'inline-flex items-center justify-center px-8 font-body text-sm font-medium tracking-wide text-white transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2',
+            'inline-flex w-full items-center justify-center px-8 font-body text-sm font-medium tracking-wide text-white transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 sm:w-auto',
             valid
               ? 'bg-navy hover:bg-blue active:scale-[0.97] cursor-pointer'
               : 'cursor-not-allowed bg-navy/20',
@@ -446,7 +446,7 @@ function StepConfirm({ date, time, info, onBack, onRestart }: {
 
       {/* Tarjeta resumen — estilo "comprobante" */}
       <div className="border border-navy/[0.10] bg-warm-white">
-        <div className="grid grid-cols-2 divide-x divide-navy/[0.08]">
+        <div className="grid grid-cols-1 divide-y divide-navy/[0.08] sm:grid-cols-2 sm:divide-x sm:divide-y-0">
           {[
             { label: 'Fecha',    value: formatLong(date) },
             { label: 'Horario',  value: `${time} hrs`    },
@@ -454,8 +454,8 @@ function StepConfirm({ date, time, info, onBack, onRestart }: {
             { label: 'WhatsApp', value: info.phone       },
           ].map(({ label, value }, i) => (
             <div key={label} className={[
-              'flex flex-col gap-1.5 px-5 py-5',
-              i < 2 ? 'border-b border-navy/[0.08]' : '',
+              'flex flex-col gap-1.5 px-5 py-4',
+              i >= 2 ? 'sm:border-t sm:border-navy/[0.08]' : '',
             ].join(' ')}>
               <p className="font-body text-[0.575rem] font-semibold uppercase tracking-[0.18em] text-navy/35">
                 {label}
@@ -499,7 +499,7 @@ function StepConfirm({ date, time, info, onBack, onRestart }: {
           href={waUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2.5 bg-[#25D366] px-8 font-body text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-[#1aad53] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2"
+          className="inline-flex w-full items-center justify-center gap-2.5 bg-[#25D366] px-8 font-body text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-[#1aad53] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 sm:w-auto"
           style={{ height: '3.25rem' }}
         >
           <WaIcon className="h-4 w-4 shrink-0" aria-hidden="true" />

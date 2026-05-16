@@ -44,7 +44,7 @@ export default async function EspecialidadesPage({ params }: Props) {
           1. HEADER
       ══════════════════════════════════════════════════════════════ */}
       {/* Header reducido — solo el título, el listado es el contenido */}
-      <section className="bg-warm-white pt-20 pb-10 sm:pt-28 sm:pb-12">
+      <section className="bg-warm-white pt-14 pb-8 sm:pt-20 sm:pb-10">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
           <div className="flex flex-col">
             <h1
@@ -72,7 +72,7 @@ export default async function EspecialidadesPage({ params }: Props) {
             <article
               key={i}
               data-reveal
-              className="grid grid-cols-1 gap-6 border-t border-navy/[0.08] py-10 sm:gap-8 sm:py-14 lg:grid-cols-[1fr_1fr] lg:gap-20 lg:py-20"
+              className="grid grid-cols-1 gap-6 border-t border-navy/[0.08] py-7 sm:gap-8 sm:py-10 lg:grid-cols-[1fr_1fr] lg:gap-20 lg:py-14"
             >
               {/* Categoría + título */}
               <div className="flex flex-col gap-5">
@@ -106,7 +106,7 @@ export default async function EspecialidadesPage({ params }: Props) {
       {/* ══════════════════════════════════════════════════════════════
           3. SOBRE LAS CONSULTAS — información práctica al cierre
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-warm-white py-20 sm:py-28">
+      <section className="bg-warm-white py-14 sm:py-20">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
 

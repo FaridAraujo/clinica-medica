@@ -40,11 +40,11 @@ export default async function HomePage({ params }: Props) {
           1. EL CONSULTORIO — Ubicación y mapa
           Encabezado arriba, mapa + info de contacto abajo.
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-white py-16 sm:py-24 lg:py-32">
+      <section className="bg-white py-12 sm:py-16 lg:py-24">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
 
           {/* Section header */}
-          <div className="mb-12 flex flex-col gap-4">
+          <div className="mb-8 flex flex-col gap-4">
             <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
               {tNav('consultorio')}
             </span>
@@ -137,11 +137,11 @@ export default async function HomePage({ params }: Props) {
           Sección label + heading, luego foto placeholder de quirófano,
           luego bio + trayectoria en dos columnas.
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-warm-white py-16 sm:py-24 lg:py-32">
+      <section className="bg-warm-white py-12 sm:py-16 lg:py-24">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
 
           {/* Section header */}
-          <div className="mb-10 flex flex-col gap-4">
+          <div className="mb-7 flex flex-col gap-4">
             <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
               {tNav('sobre')}
             </span>
@@ -211,11 +211,11 @@ export default async function HomePage({ params }: Props) {
           Header: title left, solid button right.
           Grid: 3×2 cells separated by hairline dividers.
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-blue-pale py-16 sm:py-24 lg:py-32">
+      <section className="bg-blue-pale py-12 sm:py-16 lg:py-24">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
 
           {/* Header */}
-          <div className="mb-12 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+          <div className="mb-8 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
             <div className="flex flex-col gap-4">
               <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
                 {tNav('especialidades')}
@@ -245,7 +245,7 @@ export default async function HomePage({ params }: Props) {
               {/* Feature: Cirugía de Corazón Abierto — única card con acento rojo */}
               <article
                 data-reveal
-                className="relative flex flex-col gap-6 overflow-hidden bg-blue-pale px-8 py-12 sm:col-span-2 sm:px-12 sm:py-16"
+                className="relative flex flex-col gap-6 overflow-hidden bg-blue-pale px-8 py-10 sm:col-span-2 sm:px-12 sm:py-12"
               >
                 {/* Anatomical heart watermark */}
                 <AnatomicalHeart
@@ -268,7 +268,7 @@ export default async function HomePage({ params }: Props) {
               {/* Card 2: Válvulas */}
               <article
                 data-reveal data-reveal-delay="0.08"
-                className="flex flex-col gap-5 bg-blue-pale px-8 py-10 sm:px-10 sm:py-12"
+                className="flex flex-col gap-5 bg-blue-pale px-8 py-8 sm:px-10 sm:py-10"
               >
                 <h3 className="font-heading text-[1.375rem] font-medium leading-snug text-navy">
                   {especialidades[1].title}
@@ -286,7 +286,7 @@ export default async function HomePage({ params }: Props) {
                   key={idx}
                   data-reveal
                   data-reveal-delay={String(0.05 + i * 0.05)}
-                  className="flex flex-col gap-5 bg-blue-pale px-8 py-10 sm:px-10 sm:py-12"
+                  className="flex flex-col gap-5 bg-blue-pale px-8 py-8 sm:px-10 sm:py-10"
                 >
                   <h3 className="font-heading text-[1.375rem] font-medium leading-snug text-navy">
                     {especialidades[idx].title}
@@ -301,7 +301,7 @@ export default async function HomePage({ params }: Props) {
             {/* Fila 3 — Consulta y Valoración: ancho completo, layout horizontal */}
             <article
               data-reveal data-reveal-delay="0.2"
-              className="flex flex-col gap-6 bg-blue-pale px-8 py-12 sm:flex-row sm:items-start sm:gap-16 sm:px-12 sm:py-14"
+              className="flex flex-col gap-6 bg-blue-pale px-8 py-9 sm:flex-row sm:items-start sm:gap-16 sm:px-12 sm:py-11"
             >
               <div className="flex flex-col gap-5 sm:w-[42%] sm:shrink-0">
                 <h3 className="font-heading text-[1.75rem] font-medium leading-tight text-navy">

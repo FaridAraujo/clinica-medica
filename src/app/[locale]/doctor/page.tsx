@@ -55,7 +55,7 @@ export default async function DoctorPage({ params }: Props) {
       {/* ══════════════════════════════════════════════════════════════
           1. HEADER — nombre + subtítulo + retrato contenido
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-warm-white pt-20 pb-16 sm:pt-28 sm:pb-20">
+      <section className="bg-warm-white pt-14 pb-10 sm:pt-20 sm:pb-14">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_320px] lg:items-center lg:gap-20 xl:grid-cols-[1fr_360px]">
 
@@ -99,7 +99,7 @@ export default async function DoctorPage({ params }: Props) {
       {/* ══════════════════════════════════════════════════════════════
           2. BIO NARRATIVA + CREDENCIALES SIDEBAR
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-white py-20 sm:py-28">
+      <section className="relative overflow-hidden bg-white py-14 sm:py-20">
         {/* Vara de Esculapio — watermark de fondo, esquina inferior derecha */}
         <AesculapiusRod className="pointer-events-none absolute -right-10 -bottom-16 h-[480px] w-auto text-navy/[0.04]" />
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
@@ -181,11 +181,11 @@ export default async function DoctorPage({ params }: Props) {
       {/* ══════════════════════════════════════════════════════════════
           3. TRAYECTORIA EXTENDIDA — timeline con descripciones completas
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-warm-white py-20 sm:py-28">
+      <section className="bg-warm-white py-14 sm:py-20">
         <div className="mx-auto max-w-5xl px-6 sm:px-10 lg:px-14">
 
           {/* Header */}
-          <div className="mb-12 flex flex-col gap-4 sm:mb-16">
+          <div className="mb-8 flex flex-col gap-4 sm:mb-12">
             <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
               {tT('sectionLabel')}
             </span>
@@ -205,7 +205,7 @@ export default async function DoctorPage({ params }: Props) {
                 key={i}
                 data-reveal
                 data-reveal-delay={String(0.05 * i)}
-                className="grid grid-cols-1 gap-5 border-t border-navy/[0.08] py-10 sm:grid-cols-[160px_1fr] sm:gap-12 sm:py-12"
+                className="grid grid-cols-1 gap-5 border-t border-navy/[0.08] py-7 sm:grid-cols-[160px_1fr] sm:gap-12 sm:py-9"
               >
                 {/* Columna izquierda — etapa */}
                 <div className="flex flex-col gap-3">

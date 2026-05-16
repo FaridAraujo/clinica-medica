@@ -43,7 +43,7 @@ export default async function ConsultorioPage({ params }: Props) {
       {/* ══════════════════════════════════════════════════════════════
           1. HEADER — navy oscuro: página de lugar, no de información
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-navy pt-20 pb-16 sm:pt-28 sm:pb-20">
+      <section className="bg-navy pt-14 pb-10 sm:pt-20 sm:pb-14">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
           <div className="flex flex-col">
             <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-white/40">
@@ -67,10 +67,10 @@ export default async function ConsultorioPage({ params }: Props) {
       {/* ══════════════════════════════════════════════════════════════
           2. LO QUE OFRECEMOS — las 4 preguntas en formato editorial
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-white py-20 sm:py-28">
+      <section className="bg-white py-14 sm:py-20">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
 
-          <div className="mb-14 flex flex-col gap-4">
+          <div className="mb-10 flex flex-col gap-4">
             <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
               Sobre el consultorio
             </span>
@@ -90,7 +90,7 @@ export default async function ConsultorioPage({ params }: Props) {
                 key={i}
                 data-reveal
                 data-reveal-delay={String(0.04 * i)}
-                className="grid grid-cols-1 gap-6 border-t border-navy/[0.08] py-10 sm:gap-7 sm:py-12 lg:grid-cols-[1fr_2fr] lg:gap-20 lg:py-14"
+                className="grid grid-cols-1 gap-6 border-t border-navy/[0.08] py-7 sm:gap-7 sm:py-9 lg:grid-cols-[1fr_2fr] lg:gap-20 lg:py-11"
               >
                 {/* Pregunta */}
                 <div className="flex flex-col gap-5">
@@ -116,10 +116,10 @@ export default async function ConsultorioPage({ params }: Props) {
       {/* ══════════════════════════════════════════════════════════════
           3. UBICACIÓN — mapa cinemático + franja editorial
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-warm-white py-20 sm:py-28">
+      <section className="bg-warm-white py-14 sm:py-20">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
 
-          <div className="mb-12 flex flex-col gap-4">
+          <div className="mb-8 flex flex-col gap-4">
             <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
               Ubicación
             </span>
@@ -147,7 +147,7 @@ export default async function ConsultorioPage({ params }: Props) {
             <div className="grid grid-cols-1 border-x border-b border-navy/[0.08] divide-y divide-navy/[0.08] sm:grid-cols-2 sm:divide-y-0 sm:divide-x lg:grid-cols-4">
 
               {/* Dirección — fila 1 sm */}
-              <div className="flex flex-col gap-4 px-7 py-10 sm:px-8 sm:py-12 sm:border-b sm:border-b-navy/[0.08] lg:border-b-0">
+              <div className="flex flex-col gap-4 px-7 py-7 sm:px-8 sm:py-9 sm:border-b sm:border-b-navy/[0.08] lg:border-b-0">
                 <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
                   Dirección
                 </p>
@@ -166,7 +166,7 @@ export default async function ConsultorioPage({ params }: Props) {
               </div>
 
               {/* Teléfono consultorio — fila 1 sm */}
-              <div className="flex flex-col gap-4 px-7 py-10 sm:px-8 sm:py-12 sm:border-b sm:border-b-navy/[0.08] lg:border-b-0">
+              <div className="flex flex-col gap-4 px-7 py-7 sm:px-8 sm:py-9 sm:border-b sm:border-b-navy/[0.08] lg:border-b-0">
                 <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
                   Teléfono
                 </p>
@@ -179,7 +179,7 @@ export default async function ConsultorioPage({ params }: Props) {
               </div>
 
               {/* WhatsApp — fila 2 sm */}
-              <div className="flex flex-col gap-4 px-7 py-10 sm:px-8 sm:py-12">
+              <div className="flex flex-col gap-4 px-7 py-7 sm:px-8 sm:py-9">
                 <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
                   WhatsApp
                 </p>
@@ -194,7 +194,7 @@ export default async function ConsultorioPage({ params }: Props) {
               </div>
 
               {/* Horario */}
-              <div className="flex flex-col gap-4 px-7 py-10 sm:px-8 sm:py-12">
+              <div className="flex flex-col gap-4 px-7 py-7 sm:px-8 sm:py-9">
                 <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
                   Horario
                 </p>
@@ -208,10 +208,10 @@ export default async function ConsultorioPage({ params }: Props) {
       {/* ══════════════════════════════════════════════════════════════
           4. PREGUNTAS FRECUENTES — accordion editorial
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-white py-20 sm:py-28">
+      <section className="bg-white py-14 sm:py-20">
         <div className="mx-auto max-w-4xl px-6 sm:px-10 lg:px-14">
 
-          <div className="mb-14 flex flex-col gap-4">
+          <div className="mb-10 flex flex-col gap-4">
             <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
               {tFaq('sectionLabel')}
             </span>
@@ -232,7 +232,7 @@ export default async function ConsultorioPage({ params }: Props) {
                   key={i}
                   data-reveal
                   data-reveal-delay={String(0.04 * i)}
-                  className="group border-t border-navy/[0.08] py-7 last:border-b last:border-b-navy/[0.08]"
+                  className="group border-t border-navy/[0.08] py-5 last:border-b last:border-b-navy/[0.08]"
                 >
                   <summary className="flex cursor-pointer list-none items-start justify-between gap-6">
                     <span className="font-heading text-[1.125rem] font-medium leading-snug text-navy sm:text-[1.25rem]">

@@ -17,7 +17,7 @@ export default async function AgendarPage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-warm-white pt-16">
-      <div className="mx-auto max-w-6xl px-6 py-14 sm:px-10 sm:py-20 lg:px-14">
+      <div className="mx-auto max-w-6xl px-6 py-10 sm:px-10 sm:py-16 lg:px-14">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[300px_1fr] lg:items-start lg:gap-20 xl:grid-cols-[320px_1fr]">
 
           {/* ── Panel izquierdo — contexto, sticky en desktop ──────── */}
