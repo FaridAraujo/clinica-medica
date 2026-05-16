@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import WhatsAppButton from '@/components/ui/WhatsAppButton';
 import ScrollAnimator from '@/components/ui/ScrollAnimator';
 
 interface LocaleLayoutProps {
@@ -31,7 +30,7 @@ export async function generateMetadata({
     openGraph: {
       title: t('ogTitle'),
       description: t('description'),
-      locale: locale === 'es' ? 'es_CR' : 'en_US',
+      locale: 'es_CR',
       type: 'website',
     },
   };
@@ -49,7 +48,6 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
       <Navbar />
       {children}
       <Footer />
-      <WhatsAppButton />
       <ScrollAnimator />
     </NextIntlClientProvider>
   );

@@ -1,4 +1,14 @@
+// TODO: Reemplazar con dominio final antes de deploy
+export const SITE_URL = 'https://dralvarado.cr';
+
 export const CLINIC_ADDRESS = '50 metros al oeste de la Mussi de la UNA, Heredia';
+
+// Coordenadas aproximadas del consultorio en Heredia
+// TODO: Confirmar coordenadas exactas con Google Maps
+export const CLINIC_GEO = {
+  latitude: 10.000269,
+  longitude: -84.113171,
+} as const;
 
 // URL de embed de Google Maps — obtener desde maps.google.com > Compartir > Incorporar un mapa
 // TODO: Reemplazar con la URL exacta del embed una vez confirmada
@@ -16,3 +26,6 @@ export const EMAIL = 'ed_malva@hotmail.com';
 const WA_PHONE = '50685418877'; // +506 8541-8877
 const WA_MESSAGE = 'Hola Dr. Alvarado, me gustaría agendar una cita en su consultorio.';
 export const WHATSAPP_URL = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(WA_MESSAGE)}`;
+
+// Google Maps — opens directions to the clinic
+export const MAPS_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${CLINIC_GEO.latitude},${CLINIC_GEO.longitude}`;

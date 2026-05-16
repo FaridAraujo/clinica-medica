@@ -50,10 +50,12 @@
     "cta": "Book an appointment",
     "ctaSecondary": "Learn more",
     "stats": {
-      "experience": { "value": "+40 years",      "label": "of clinical experience" },
+      "experience": { "value": "+40 years",       "label": "of clinical experience" },
       "service":    { "value": "Hospital México", "label": "Former Department Chief — CCSS" },
       "teaching":   { "value": "UCR · UCIMED",   "label": "University professor" },
-      "union":      { "value": "Unión Médica",   "label": "National Medical Auditor" }
+      "union":      { "value": "Unión Médica",   "label": "National Medical Auditor" },
+      "madrid":     { "value": "Madrid",          "label": "Trained in Spain" },
+      "clinic":     { "value": "Heredia, CR",     "label": "Active private practice" }
     }
   },
   "sobre": {

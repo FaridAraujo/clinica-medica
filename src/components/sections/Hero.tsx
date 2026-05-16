@@ -14,25 +14,23 @@ export default function Hero() {
     () => {
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // Text block items stagger in
       gsap.fromTo(
         '.hero-item',
-        { opacity: 0, y: reduced ? 0 : 24 },
+        { opacity: 0, y: reduced ? 0 : 20 },
         {
           opacity: 1,
           y: 0,
-          duration: reduced ? 0.3 : 0.7,
+          duration: reduced ? 0.3 : 0.75,
           stagger: reduced ? 0.04 : 0.10,
           ease: 'power3.out',
           clearProps: 'transform',
-          delay: 0.08,
+          delay: 0.2,
         }
       );
 
-      // Credential items slide up slightly later
       gsap.fromTo(
         '.credential-item',
-        { opacity: 0, y: reduced ? 0 : 16 },
+        { opacity: 0, y: reduced ? 0 : 12 },
         {
           opacity: 1,
           y: 0,
@@ -40,19 +38,18 @@ export default function Hero() {
           stagger: reduced ? 0.03 : 0.08,
           ease: 'power2.out',
           clearProps: 'transform',
-          delay: reduced ? 0.2 : 0.6,
+          delay: reduced ? 0.2 : 0.75,
         }
       );
 
-      // Photo column fades in
       gsap.fromTo(
-        '.hero-photo-col',
+        '.ecg-flourish',
         { opacity: 0 },
         {
           opacity: 1,
           duration: reduced ? 0.3 : 0.9,
           ease: 'power2.out',
-          delay: reduced ? 0.05 : 0.15,
+          delay: reduced ? 0.2 : 0.65,
         }
       );
     },
@@ -64,6 +61,8 @@ export default function Hero() {
     { key: 'service',    value: t('stats.service.value'),    label: t('stats.service.label')    },
     { key: 'teaching',   value: t('stats.teaching.value'),   label: t('stats.teaching.label')   },
     { key: 'union',      value: t('stats.union.value'),      label: t('stats.union.label')      },
+    { key: 'madrid',     value: t('stats.madrid.value'),     label: t('stats.madrid.label')     },
+    { key: 'clinic',     value: t('stats.clinic.value'),     label: t('stats.clinic.label')     },
   ] as const;
 
   return (
@@ -71,146 +70,98 @@ export default function Hero() {
       ref={containerRef}
       id="hero"
       aria-labelledby="hero-heading"
-      className="relative min-h-screen bg-warm-white pt-16"
+      className="relative flex min-h-screen flex-col bg-navy pt-16"
     >
-      {/* Very subtle blue wash top-right */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute right-0 top-0 h-[55%] w-[42%] bg-gradient-to-bl from-blue/[0.03] to-transparent" />
+      {/* ── Background image ────────────────────────────────────── */}
+      <div className="absolute inset-0" aria-hidden="true">
+        <Image
+          src="/images/donManuel.png"
+          alt=""
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        {/* Left-to-right gradient: text lives in the dark left zone */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0d1520]/93 via-[#0d1520]/68 to-[#0d1520]/20" />
+        {/* Bottom gradient: blends into credential strip */}
+        <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#0d1520] via-[#0d1520]/60 to-transparent" />
       </div>
 
-      {/*
-        ── Grid layout ───────────────────────────────────────────────
-        Mobile: single column, photo on top, text below, credential strip at foot
-        Desktop: [text col] [photo col — full height]
-        The outer section is min-h-screen; the inner grid stretches to fill it.
-      */}
-      <div className="relative mx-auto grid max-w-7xl grid-cols-1 min-h-[520px] lg:h-[640px] lg:grid-cols-[1fr_42%]">
+      {/* ── Text content ────────────────────────────────────────── */}
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-6 py-20 sm:px-10 lg:px-14">
+        <div className="max-w-sm lg:max-w-xl">
 
-        {/* ── LEFT: text + credential strip ──────────────────────── */}
-        <div className="flex flex-col justify-between">
+          {/* Eyebrow */}
+          <div className="hero-item mb-7 flex items-center gap-2.5">
+            <MedicalCrossIcon className="h-3 w-3 shrink-0 text-red" aria-hidden="true" />
+            <span className="font-body text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-white/45">
+              {t('eyebrow')}
+            </span>
+          </div>
 
-          {/* Text block */}
-          <div className="flex flex-col gap-5 px-5 py-14 sm:px-8 lg:flex-1 lg:justify-center lg:px-10 lg:py-0 xl:px-14">
+          {/* Name */}
+          <h1
+            id="hero-heading"
+            className="hero-item font-heading font-light leading-[1.08] text-white"
+            style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)' }}
+          >
+            Dr. Edwin Manuel<br />Alvarado Arce
+          </h1>
 
-            {/* Eyebrow */}
-            <div className="hero-item flex items-center gap-2.5">
-              <MedicalCrossIcon className="h-3 w-3 shrink-0 text-red" aria-hidden="true" />
-              <span className="font-body text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-navy/45">
-                {t('eyebrow')}
-              </span>
-            </div>
+          {/* Red rule */}
+          <div className="hero-item my-7 h-[2px] w-14 bg-red" aria-hidden="true" />
 
-            {/* Doctor name */}
-            <h1
-              id="hero-heading"
-              className="hero-item font-heading font-light leading-[1.07] text-navy"
-              style={{ fontSize: 'clamp(2.2rem, 3.8vw, 3.25rem)' }}
+          {/* Subtitle */}
+          <p className="hero-item max-w-[46ch] font-body text-[1.0625rem] leading-relaxed text-white/60">
+            {t('subtitle')}
+          </p>
+
+          {/* CTAs */}
+          <div className="hero-item mt-10">
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 items-center bg-red px-7 font-body text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-[#9a0e1a] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
             >
-              {t('title')}
-            </h1>
-
-            {/* Red rule */}
-            <div className="hero-item h-[2px] w-16 bg-red" aria-hidden="true" />
-
-            {/* Subtitle */}
-            <p className="hero-item max-w-[48ch] font-body text-[1.0625rem] leading-relaxed text-navy/60">
-              {t('subtitle')}
-            </p>
-
-            {/* CTAs */}
-            <div className="hero-item flex flex-wrap items-center gap-4 pt-1">
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-[3.25rem] items-center gap-2.5 bg-red px-6 font-body text-sm font-medium text-white transition-colors duration-150 hover:bg-[#9a0e1a] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2"
-              >
-                <WhatsAppIcon className="h-[1.125rem] w-[1.125rem] shrink-0" aria-hidden="true" />
-                {t('cta')}
-              </a>
-
-              <a
-                href="#sobre"
-                className="font-body text-sm text-navy/50 underline-offset-4 transition-colors duration-150 hover:text-navy hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2"
-              >
-                {t('ctaSecondary')}
-                <span aria-hidden="true"> →</span>
-              </a>
-            </div>
-          </div>
-
-          {/* ── Credential strip ───────────────────────────────────── */}
-          <div className="border-t border-navy/[0.07] px-5 sm:px-8 lg:px-10 xl:px-14">
-            <dl className="grid grid-cols-2 gap-px bg-navy/[0.07] sm:grid-cols-4">
-              {stats.map(({ key, value, label }) => (
-                <div
-                  key={key}
-                  className="credential-item flex flex-col gap-1.5 bg-warm-white px-4 py-5 sm:px-5"
-                >
-                  <dt className="font-body text-[1.25rem] font-semibold leading-none tracking-tight text-navy">
-                    {value}
-                  </dt>
-                  <dd className="font-body text-[0.675rem] font-medium uppercase tracking-[0.12em] leading-tight text-navy/45">
-                    {label}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+              {t('cta')}
+            </a>
           </div>
         </div>
+      </div>
 
-        {/* ── RIGHT: full-height photo column ────────────────────── */}
-        {/*
-          Mobile: fixed aspect ratio box (order-first, on top)
-          Desktop: absolutely / sticky fills the right track of the grid
-        */}
-        <div
-          className="hero-photo-col order-first lg:order-last"
-          aria-hidden="true"
-        >
-          {/* Mobile photo — fixed aspect ratio, zoom-stable */}
-          <div className="relative mx-auto aspect-[3/4] w-full max-w-[340px] overflow-hidden sm:max-w-[380px] lg:hidden">
-            <Image
-              src="/images/Edwin-Alvaradoo.png"
-              alt="Dr. Edwin Manuel Alvarado Arce, Médico Cirujano especialista en Cirugía Cardiovascular"
-              fill
-              priority
-              className="object-cover object-top"
-              sizes="(max-width: 640px) 340px, 380px"
-            />
-            <span
-              aria-hidden="true"
-              className="absolute bottom-0 left-0 h-1 w-12 bg-red"
-            />
-          </div>
+      {/* ── ECG flourish — guiño médico antes del strip ──────────── */}
+      <div className="ecg-flourish relative flex justify-center pb-4 sm:pb-5" aria-hidden="true">
+        <ECGTrace className="h-4 w-32 text-white/30 sm:h-5 sm:w-44" />
+      </div>
 
-          {/* Desktop photo — inherits fixed grid row height (860px), no vh dependency */}
-          <div className="relative hidden h-full overflow-hidden lg:block">
-            <Image
-              src="/images/Edwin-Alvaradoo.png"
-              alt="Dr. Edwin Manuel Alvarado Arce, Médico Cirujano especialista en Cirugía Cardiovascular"
-              fill
-              priority
-              className="object-cover object-top"
-              sizes="(max-width: 1280px) 340px, 380px"
-            />
-            {/* Red accent bar */}
-            <span
-              aria-hidden="true"
-              className="absolute bottom-0 left-0 h-1 w-14 bg-red"
-            />
-            {/* Subtle left-edge fade so photo meets text column gracefully */}
+      {/* ── Credential strip ────────────────────────────────────── */}
+      <div className="relative border-t border-white/[0.08]">
+        <dl className="grid grid-cols-2 gap-px bg-white/[0.06] sm:grid-cols-3 lg:grid-cols-6">
+          {stats.map(({ key, value, label }) => (
             <div
-              aria-hidden="true"
-              className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-warm-white/20 to-transparent"
-            />
-          </div>
-        </div>
+              key={key}
+              className={[
+                'credential-item flex flex-col gap-1.5 bg-[#0d1520]/40 px-6 py-6 sm:px-8 backdrop-blur-sm',
+                // Ocultar los últimos 2 en móvil — se muestran desde sm en adelante
+                (key === 'madrid' || key === 'clinic') ? 'hidden sm:flex' : '',
+              ].join(' ')}
+            >
+              <dt className="font-body text-[1.25rem] font-semibold leading-none tracking-tight text-white">
+                {value}
+              </dt>
+              <dd className="font-body text-[0.675rem] font-medium uppercase tracking-[0.12em] leading-tight text-white/40">
+                {label}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
 
       {/* Scroll indicator */}
-      <div aria-hidden="true" className="absolute bottom-8 left-1/2 -translate-x-1/2 lg:hidden">
-        <div className="h-10 w-px animate-[scrollPulse_2.2s_ease-in-out_infinite] bg-gradient-to-b from-navy/30 to-transparent" />
+      <div aria-hidden="true" className="absolute bottom-28 right-8 hidden lg:block">
+        <div className="h-12 w-px animate-[scrollPulse_2.2s_ease-in-out_infinite] bg-gradient-to-b from-transparent via-white/30 to-transparent" />
       </div>
     </section>
   );
@@ -224,10 +175,34 @@ function MedicalCrossIcon({ className, ...props }: React.SVGProps<SVGSVGElement>
   );
 }
 
-function WhatsAppIcon({ className, ...props }: React.SVGProps<SVGSVGElement>) {
+/**
+ * Trazo de ECG estilizado — el complejo QRS-T característico del latido cardíaco.
+ * Es el guiño médico más reconocible: línea de base, espiga ascendente brusca,
+ * espiga descendente, onda T suave, y de vuelta a la línea de base.
+ *
+ * Coordenadas pensadas con un viewBox 100×24, midline en y=12:
+ *   - 0→40:  línea de base
+ *   - 40→44: onda P pequeña hacia arriba
+ *   - 44→46: dip Q
+ *   - 46→47: espiga R (sube hasta y=2)
+ *   - 47→49: espiga S (baja hasta y=22)
+ *   - 49→55: vuelta a base + onda T
+ *   - 55→100: línea de base
+ */
+function ECGTrace({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} {...props}>
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    <svg
+      viewBox="0 0 100 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="0.9"
+      strokeLinejoin="round"
+      strokeLinecap="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M0,12 L40,12 L42,11 L44,12 L46,13 L47,3 L49,21 L50,12 L55,10.5 L58,12 L100,12" />
     </svg>
   );
 }
+

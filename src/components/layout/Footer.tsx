@@ -2,150 +2,92 @@
 
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
-import { usePathname } from 'next/navigation';
 import { WHATSAPP_URL, PHONE_OFFICE, EMAIL } from '@/lib/constants';
+import AesculapiusRod from '@/components/ui/AesculapiusRod';
 
 export default function Footer() {
-  const locale = useLocale();
-  const t      = useTranslations('footer');
-  const tNav   = useTranslations('nav');
-  const pathname = usePathname();
-
-  const otherLocale = locale === 'es' ? 'en' : 'es';
-  const strippedPath = pathname.startsWith(`/${locale}`)
-    ? pathname.slice(`/${locale}`.length) || '/'
-    : pathname;
-  const otherLocalePath = `/${otherLocale}${strippedPath === '/' ? '' : strippedPath}`;
-
+  const locale  = useLocale();
+  const t       = useTranslations('footer');
+  const tNav    = useTranslations('nav');
   const links = [
-    { href: `/${locale}/consultorio`,   label: tNav('consultorio') },
-    { href: `/${locale}/doctor`,        label: tNav('sobre') },
+    { href: `/${locale}/consultorio`,    label: tNav('consultorio')   },
+    { href: `/${locale}/doctor`,         label: tNav('sobre')         },
     { href: `/${locale}/especialidades`, label: tNav('especialidades') },
-    { href: `/${locale}/contacto`,      label: tNav('contacto') },
+    { href: `/${locale}/contacto`,       label: tNav('contacto')      },
   ];
 
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-white border-t border-navy/[0.08]">
+    <footer className="bg-white border-t border-navy/[0.07]">
 
-      {/* Main body */}
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:px-10 sm:py-20 lg:px-14">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]">
+      {/* ── Main body ──────────────────────────────────────────── */}
+      <div className="mx-auto max-w-7xl px-6 py-10 sm:px-10 sm:py-12 lg:px-14">
+        <div className="grid grid-cols-1 gap-9 sm:grid-cols-[1.6fr_1fr_1.1fr] sm:gap-12 sm:items-start">
 
-          {/* Identity block */}
-          <div className="flex flex-col gap-4">
-            <Link
-              href={`/${locale}`}
-              className="flex flex-col gap-1 self-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
-            >
-              <span className="font-heading text-[1.25rem] font-medium leading-none text-navy">
+          {/* Identity */}
+          <Link
+            href={`/${locale}`}
+            className="flex items-start gap-3.5 self-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
+          >
+            <AesculapiusRod className="h-9 w-[15px] shrink-0 text-red" />
+            <span className="flex flex-col gap-1.5 pt-[3px]">
+              <span className="font-heading text-[1.125rem] font-medium leading-[1.15] text-navy">
                 Dr. Edwin Manuel Alvarado Arce
               </span>
-              <span className="font-body text-[0.625rem] font-medium uppercase tracking-[0.16em] text-navy/40">
+              <span className="font-body text-[0.575rem] font-semibold uppercase tracking-[0.2em] text-navy/35">
                 {t('location')}
               </span>
-            </Link>
-            <p className="max-w-[34ch] font-body text-[0.875rem] leading-relaxed text-navy/50">
-              {t('tagline')}
-            </p>
-          </div>
+            </span>
+          </Link>
 
-          {/* Navigation */}
-          <nav aria-label={locale === 'es' ? 'Mapa del sitio' : 'Site map'}>
-            <p className="mb-5 font-body text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-navy/35">
-              {locale === 'es' ? 'Navegación' : 'Navigation'}
-            </p>
-            <ul className="flex flex-col gap-3" role="list">
-              {links.map(({ href, label }) => (
-                <li key={href}>
-                  <Link
-                    href={href}
-                    className="font-body text-[0.875rem] text-navy/60 transition-colors duration-150 hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* Navigation — sin header, los links hablan por sí solos */}
+          <nav aria-label="Mapa del sitio" className="flex flex-col gap-2.5">
+            {links.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="w-fit font-body text-[0.825rem] text-navy/55 transition-colors duration-150 hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+              >
+                {label}
+              </Link>
+            ))}
           </nav>
 
-          {/* Contact block */}
-          <div className="flex flex-col gap-5">
-            <p className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-navy/35">
-              {locale === 'es' ? 'Contacto' : 'Contact'}
-            </p>
-
+          {/* Contact — links inline, sin botón grande de WhatsApp */}
+          <div className="flex flex-col gap-2.5">
+            <a
+              href={`tel:+506${PHONE_OFFICE.replace(/-/g, '')}`}
+              className="w-fit font-body text-[0.825rem] text-navy/55 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+            >
+              T. {PHONE_OFFICE}
+            </a>
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-11 items-center gap-2.5 self-start bg-red px-5 font-body text-sm font-medium text-white transition-colors duration-150 hover:bg-[#9a0e1a] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2"
+              className="inline-flex w-fit items-center gap-1.5 font-body text-[0.825rem] text-navy/55 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
             >
-              <WhatsAppIcon className="h-4 w-4 shrink-0" aria-hidden="true" />
+              <WhatsAppIcon className="h-3 w-3 shrink-0 text-red" aria-hidden="true" />
               WhatsApp
             </a>
-
-            <dl className="flex flex-col gap-3">
-              <div>
-                <dt className="mb-0.5 font-body text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-navy/30">
-                  {locale === 'es' ? 'Teléfono' : 'Phone'}
-                </dt>
-                <dd>
-                  <a
-                    href={`tel:+506${PHONE_OFFICE.replace(/-/g, '')}`}
-                    className="font-body text-[0.875rem] text-navy/60 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
-                  >
-                    {PHONE_OFFICE}
-                  </a>
-                </dd>
-              </div>
-              <div>
-                <dt className="mb-0.5 font-body text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-navy/30">
-                  Email
-                </dt>
-                <dd>
-                  <a
-                    href={`mailto:${EMAIL}`}
-                    className="font-body text-[0.875rem] text-navy/60 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
-                  >
-                    {EMAIL}
-                  </a>
-                </dd>
-              </div>
-            </dl>
+            <a
+              href={`mailto:${EMAIL}`}
+              className="w-fit font-body text-[0.825rem] text-navy/55 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+            >
+              {EMAIL}
+            </a>
           </div>
+
         </div>
       </div>
 
-      {/* Bottom bar */}
+      {/* ── Bottom bar ─────────────────────────────────────────── */}
       <div className="border-t border-navy/[0.06]">
-        <div className="mx-auto flex max-w-7xl flex-col items-start gap-4 px-6 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-10 lg:px-14">
-
-          <p className="font-body text-[0.75rem] text-navy/35">
+        <div className="mx-auto flex max-w-7xl px-6 py-4 sm:px-10 lg:px-14">
+          <p className="font-body text-[0.7rem] text-navy/35">
             © {year} Dr. Edwin Manuel Alvarado Arce · {t('rights')}
           </p>
-
-          {/* Language pill toggle */}
-          <div
-            role="group"
-            aria-label={locale === 'es' ? 'Idioma' : 'Language'}
-            className="flex items-center gap-1 rounded-sm border border-navy/[0.1] p-0.5"
-          >
-            <span
-              aria-current="true"
-              className="rounded-[2px] bg-navy px-3 py-1 font-body text-[0.7rem] font-semibold uppercase tracking-[0.1em] text-white"
-            >
-              {locale === 'es' ? 'ES' : 'EN'}
-            </span>
-            <Link
-              href={otherLocalePath}
-              aria-label={locale === 'es' ? 'Switch to English' : 'Cambiar a Español'}
-              className="rounded-[2px] px-3 py-1 font-body text-[0.7rem] font-semibold uppercase tracking-[0.1em] text-navy/35 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
-            >
-              {otherLocale === 'es' ? 'ES' : 'EN'}
-            </Link>
-          </div>
         </div>
       </div>
     </footer>

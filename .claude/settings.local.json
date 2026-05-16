@@ -8,7 +8,9 @@
       "Bash(npm run *)",
       "Bash(node -e \"const f=require\\('C:/Users/farid/.claude/worktrees/heuristic-wilson-2d126d/messages/es.json'\\); console.log\\(JSON.stringify\\(f.trayectoria, null, 2\\)\\)\")",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "mcp__Claude_in_Chrome__list_connected_browsers",
+      "Bash(npx next *)"
     ]
   }
 }

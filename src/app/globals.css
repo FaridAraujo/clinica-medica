@@ -36,10 +36,7 @@ body {
   font-family: var(--font-inter), system-ui, sans-serif;
 }
 
-h1,
-h2,
-h3,
-h4 {
+:where(h1, h2, h3, h4) {
   font-family: var(--font-cormorant), Georgia, serif;
 }
 

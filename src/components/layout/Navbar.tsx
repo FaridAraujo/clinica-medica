@@ -64,12 +64,6 @@ export default function Navbar() {
 
   const close = useCallback(() => setOpen(false), []);
 
-  const otherLocale = locale === 'es' ? 'en' : 'es';
-  const strippedPath = pathname.startsWith(`/${locale}`)
-    ? pathname.slice(`/${locale}`.length) || '/'
-    : pathname;
-  const otherLocalePath = `/${otherLocale}${strippedPath === '/' ? '' : strippedPath}`;
-
   const links = [
     { href: `/${locale}/consultorio`, label: t('consultorio') },
     { href: `/${locale}/doctor`,      label: t('sobre') },
@@ -79,33 +73,44 @@ export default function Navbar() {
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
-  const langLabel = locale === 'es' ? 'Idioma' : 'Language';
-  const switchLabel = otherLocale === 'es' ? 'Cambiar a Español' : 'Switch to English';
+  // Sobre el hero: navbar transparente con texto blanco
+  // Fuera del hero (o páginas internas): fondo sólido con texto navy
+  const overHero = !ctaVisible;
 
   return (
     <>
       {/* ─── Header ─────────────────────────────────────────────── */}
       <header
         className={[
-          'fixed inset-x-0 top-0 z-50 bg-warm-white transition-shadow duration-300',
-          scrolled ? 'shadow-[0_1px_0_0_rgba(13,34,64,0.08)]' : '',
+          'fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-300',
+          overHero ? 'bg-transparent' : 'bg-warm-white',
+          scrolled && !overHero ? 'shadow-[0_1px_0_0_rgba(13,34,64,0.08)]' : '',
         ].join(' ')}
       >
         <nav
-          aria-label={locale === 'es' ? 'Navegación principal' : 'Main navigation'}
+          aria-label="Navegación principal"
           className="flex h-16 items-center justify-between px-6 sm:px-10 lg:px-14"
         >
           {/* Logo */}
           <Link
             href={`/${locale}`}
-            className="flex flex-col leading-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
+            className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
           >
-            <span className="font-heading text-[1.125rem] font-medium text-navy">
-              Dr. Alvarado
-            </span>
-            <span className="font-body text-[0.625rem] font-medium uppercase tracking-[0.16em] text-navy/40">
-              Consultorio Médico · Heredia
-            </span>
+            <MedicalCrossIcon className="h-3.5 w-3.5 shrink-0 text-red" aria-hidden="true" />
+            <div className="flex flex-col leading-none">
+              <span className={[
+                'font-heading text-[1.125rem] font-medium transition-colors duration-300',
+                overHero ? 'text-white' : 'text-navy',
+              ].join(' ')}>
+                Dr. Alvarado
+              </span>
+              <span className={[
+                'font-body text-[0.625rem] font-medium uppercase tracking-[0.16em] transition-colors duration-300',
+                overHero ? 'text-white/40' : 'text-navy/40',
+              ].join(' ')}>
+                Consultorio Médico · Heredia
+              </span>
+            </div>
           </Link>
 
           {/* Desktop links */}
@@ -120,14 +125,17 @@ export default function Navbar() {
                     className={[
                       'group relative py-1 font-body text-sm transition-colors duration-150',
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2',
-                      active ? 'text-navy' : 'text-navy/55 hover:text-navy',
+                      overHero
+                        ? active ? 'text-white' : 'text-white/55 hover:text-white'
+                        : active ? 'text-navy'  : 'text-navy/55 hover:text-navy',
                     ].join(' ')}
                   >
                     {label}
                     <span
                       aria-hidden="true"
                       className={[
-                        'absolute -bottom-px left-0 h-px bg-blue transition-[width] duration-200 ease-out',
+                        'absolute -bottom-px left-0 h-px transition-[width] duration-200 ease-out',
+                        overHero ? 'bg-white' : 'bg-blue',
                         active ? 'w-full' : 'w-0 group-hover:w-full',
                       ].join(' ')}
                     />
@@ -137,7 +145,7 @@ export default function Navbar() {
             })}
           </ul>
 
-          {/* Desktop CTA — se oculta mientras el hero es visible */}
+          {/* Desktop CTA — enlace editorial, no botón. Se oculta sobre el hero. */}
           <div
             className={[
               'hidden items-center lg:flex',
@@ -148,11 +156,17 @@ export default function Navbar() {
             ].join(' ')}
           >
             <Link
-              href={`/${locale}/contacto`}
+              href={`/${locale}/agendar`}
               tabIndex={ctaVisible ? 0 : -1}
-              className="inline-flex h-9 items-center border border-navy px-4 font-body text-[0.8rem] font-medium text-navy transition-colors duration-200 hover:bg-navy hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2"
+              className="group relative inline-flex items-center py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
             >
-              {t('agendar')}
+              <span className="relative font-body text-[0.825rem] font-medium text-navy transition-colors duration-200 group-hover:text-blue">
+                {t('agendar')}
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-1 left-0 right-0 h-px bg-navy/25 transition-colors duration-200 group-hover:bg-blue"
+                />
+              </span>
             </Link>
           </div>
 
@@ -162,15 +176,19 @@ export default function Navbar() {
             type="button"
             aria-expanded={open}
             aria-controls="mobile-menu"
-            aria-label={open
-              ? (locale === 'es' ? 'Cerrar menú' : 'Close menu')
-              : (locale === 'es' ? 'Abrir menú' : 'Open menu')}
+            aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
             onClick={() => setOpen(v => !v)}
             className="relative flex h-11 w-11 flex-col items-center justify-center lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
           >
-            <span aria-hidden="true" className={['absolute block h-px w-[22px] bg-navy origin-center transition-all duration-200 ease-out', open ? 'rotate-45' : '-translate-y-[6px]'].join(' ')} />
-            <span aria-hidden="true" className={['absolute block h-px w-[22px] bg-navy transition-all duration-150', open ? 'opacity-0 scale-x-0' : ''].join(' ')} />
-            <span aria-hidden="true" className={['absolute block h-px w-[22px] bg-navy origin-center transition-all duration-200 ease-out', open ? '-rotate-45' : 'translate-y-[6px]'].join(' ')} />
+            {['', '', ''].map((_, i) => (
+              <span key={i} aria-hidden="true" className={[
+                'absolute block h-px w-[22px] origin-center transition-all duration-200 ease-out',
+                overHero ? 'bg-white' : 'bg-navy',
+                i === 0 ? (open ? 'rotate-45'    : '-translate-y-[6px]') : '',
+                i === 1 ? (open ? 'opacity-0 scale-x-0 duration-150' : '') : '',
+                i === 2 ? (open ? '-rotate-45'   : 'translate-y-[6px]')  : '',
+              ].join(' ')} />
+            ))}
           </button>
         </nav>
       </header>
@@ -186,7 +204,7 @@ export default function Navbar() {
         ].join(' ')}
       >
         <nav
-          aria-label={locale === 'es' ? 'Menú de navegación' : 'Navigation menu'}
+          aria-label="Menú de navegación"
           className="flex h-full flex-col overflow-y-auto px-6 pb-10 pt-2 sm:px-10"
         >
           <ul role="list" className="flex flex-col">
@@ -215,7 +233,7 @@ export default function Navbar() {
 
           <div className="mt-8 flex flex-col gap-3">
             <Link
-              href={`/${locale}/contacto`}
+              href={`/${locale}/agendar`}
               onClick={close}
               tabIndex={open ? 0 : -1}
               className="flex h-14 items-center justify-center bg-navy font-body font-medium text-warm-white transition-colors hover:bg-blue active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2"
@@ -223,29 +241,17 @@ export default function Navbar() {
               {t('agendar')}
             </Link>
 
-            {/* Language switcher — mobile */}
-            <div
-              role="group"
-              aria-label={langLabel}
-              className="flex items-center justify-center gap-3 py-2 font-body text-sm"
-            >
-              <span className="font-medium text-navy" aria-current="true">
-                {locale === 'es' ? 'Español' : 'English'}
-              </span>
-              <span aria-hidden="true" className="h-3.5 w-px bg-navy/20" />
-              <Link
-                href={otherLocalePath}
-                onClick={close}
-                tabIndex={open ? 0 : -1}
-                aria-label={switchLabel}
-                className="text-navy/35 transition-colors duration-150 hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
-              >
-                {otherLocale === 'es' ? 'Español' : 'English'}
-              </Link>
-            </div>
           </div>
         </nav>
       </div>
     </>
+  );
+}
+
+function MedicalCrossIcon({ className, ...props }: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 12 12" fill="currentColor" className={className} {...props}>
+      <path d="M4.5 0h3v4.5H12v3H7.5V12h-3V7.5H0v-3h4.5z" />
+    </svg>
   );
 }

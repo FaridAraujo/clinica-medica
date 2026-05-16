@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import Hero from '@/components/sections/Hero';
 import MapEmbed from '@/components/ui/MapEmbed';
-import { WHATSAPP_URL, PHONE_OFFICE, PHONE_MOBILE, EMAIL, CLINIC_ADDRESS, MAPS_EMBED_URL } from '@/lib/constants';
+import { PHONE_OFFICE, PHONE_MOBILE, CLINIC_ADDRESS, MAPS_EMBED_URL, WHATSAPP_URL, MAPS_DIRECTIONS_URL } from '@/lib/constants';
+import { buildHomeJsonLd } from '@/lib/jsonLd';
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -27,13 +28,19 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <main>
+      {/* JSON-LD structured data — Physician + MedicalBusiness para SEO local */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildHomeJsonLd()) }}
+      />
+
       <Hero />
 
       {/* ══════════════════════════════════════════════════════════════
           1. EL CONSULTORIO — Ubicación y mapa
           Encabezado arriba, mapa + info de contacto abajo.
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-white py-24 sm:py-32">
+      <section className="bg-white py-16 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
 
           {/* Section header */}
@@ -51,63 +58,73 @@ export default async function HomePage({ params }: Props) {
               </h2>
               <Link
                 href={`/${locale}/consultorio`}
-                className="inline-flex h-12 shrink-0 items-center gap-2 self-start bg-navy px-7 font-body text-sm font-medium text-white transition-colors duration-150 hover:bg-blue active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 sm:self-auto"
+                className="inline-flex h-12 shrink-0 items-center self-start bg-navy px-7 font-body text-sm font-medium text-white transition-colors duration-200 hover:bg-blue active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 sm:self-auto"
               >
                 {tHome('consultorio.cta')}
-                <span aria-hidden="true" className="ml-0.5">→</span>
               </Link>
             </div>
           </div>
 
-          {/* Map + info */}
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_320px]">
+          {/* Mapa + franja editorial */}
+          <div data-reveal data-reveal-delay="0.1" className="flex flex-col">
 
+            {/* Mapa — formato cinemático */}
             <div className="border border-navy/[0.08]">
               <MapEmbed
                 src={MAPS_EMBED_URL}
-                title={locale === 'es' ? 'Ubicación del consultorio' : 'Office location'}
-
+                title="Ubicación del consultorio"
                 aspectRatio="16/9"
               />
             </div>
 
-            {/* Info sidebar — tarjeta navy */}
-            <div className="flex flex-col bg-navy px-8 py-10 gap-10">
+            {/* Franja informativa: dirección + teléfonos */}
+            <div className="grid grid-cols-1 border-x border-b border-navy/[0.08] divide-y divide-navy/[0.08] sm:grid-cols-3 sm:divide-y-0 sm:divide-x">
 
-              {/* Consultorio phone */}
-              <div className="flex flex-col gap-2">
-                <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-white/30">
-                  {locale === 'es' ? 'Teléfono consultorio' : 'Office phone'}
+              {/* Dirección */}
+              <div className="flex flex-col gap-4 px-7 py-10 sm:px-9 sm:py-14">
+                <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
+                  Dirección
+                </p>
+                <p className="font-heading text-[1.375rem] font-normal leading-[1.3] text-navy">
+                  {CLINIC_ADDRESS}
+                </p>
+                <a
+                  href={MAPS_DIRECTIONS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 self-start font-body text-[0.675rem] font-semibold uppercase tracking-[0.14em] text-navy/45 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+                >
+                  <MapPinIcon className="h-3.5 w-3.5 shrink-0 transition-transform group-hover:-translate-y-0.5" aria-hidden="true" />
+                  Cómo llegar
+                </a>
+              </div>
+
+              {/* Teléfono consultorio */}
+              <div className="flex flex-col gap-4 px-7 py-10 sm:px-9 sm:py-14">
+                <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
+                  Teléfono consultorio
                 </p>
                 <a
                   href={`tel:+506${PHONE_OFFICE.replace(/-/g, '')}`}
-                  className="font-body text-[2rem] font-medium leading-none tracking-[-0.01em] text-white transition-colors hover:text-blue-light"
+                  className="font-body text-[2.25rem] font-medium leading-none tracking-[-0.015em] text-navy transition-colors hover:text-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
                 >
                   {PHONE_OFFICE}
                 </a>
               </div>
 
-              {/* WhatsApp phone */}
-              <div className="flex flex-col gap-2 border-t border-white/[0.08] pt-10">
-                <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-white/30">
+              {/* WhatsApp */}
+              <div className="flex flex-col gap-4 px-7 py-10 sm:px-9 sm:py-14">
+                <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
                   WhatsApp
                 </p>
                 <a
-                  href={`tel:+506${PHONE_MOBILE.replace(/-/g, '')}`}
-                  className="font-body text-[2rem] font-medium leading-none tracking-[-0.01em] text-white transition-colors hover:text-blue-light"
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-body text-[2.25rem] font-medium leading-none tracking-[-0.015em] text-navy transition-colors hover:text-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
                 >
                   {PHONE_MOBILE}
                 </a>
-              </div>
-
-              {/* Address */}
-              <div className="flex flex-col gap-2 border-t border-white/[0.08] pt-10 mt-auto">
-                <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-white/30">
-                  {locale === 'es' ? 'Dirección' : 'Address'}
-                </p>
-                <p className="font-body text-[0.875rem] leading-relaxed text-white/65">
-                  {CLINIC_ADDRESS}
-                </p>
               </div>
 
             </div>
@@ -120,7 +137,7 @@ export default async function HomePage({ params }: Props) {
           Sección label + heading, luego foto placeholder de quirófano,
           luego bio + trayectoria en dos columnas.
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-warm-white py-24 sm:py-32">
+      <section className="bg-warm-white py-16 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
 
           {/* Section header */}
@@ -137,19 +154,19 @@ export default async function HomePage({ params }: Props) {
             </h2>
           </div>
 
-          {/* Foto del Dr. Alvarado */}
-          <div data-reveal className="relative mb-14 overflow-hidden" style={{ aspectRatio: '21/8' }}>
-            <Image
-              src="/images/donManuel.png"
-              alt="Dr. Edwin Manuel Alvarado Arce"
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 1280px) 100vw, 1280px"
-            />
-          </div>
+          {/* Tres columnas: foto | bio+CTA | trayectoria */}
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[300px_1fr_1fr] lg:items-start lg:gap-16 xl:grid-cols-[340px_1fr_1fr]">
 
-          {/* Two-column split: bio + CTA | trayectoria */}
-          <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:items-start lg:gap-20">
+            {/* Foto — columna izquierda, proporción retrato */}
+            <div data-reveal className="relative max-h-[420px] overflow-hidden lg:max-h-none" style={{ aspectRatio: '3/4' }}>
+              <Image
+                src="/images/Edwin-Alvaradoo.png"
+                alt="Dr. Edwin Manuel Alvarado Arce"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 1024px) 100vw, 340px"
+              />
+            </div>
 
             {/* Bio + CTA */}
             <div className="flex flex-col gap-8">
@@ -158,20 +175,19 @@ export default async function HomePage({ params }: Props) {
               </p>
               <Link
                 href={`/${locale}/doctor`}
-                className="inline-flex h-12 items-center gap-2 self-start bg-navy px-7 font-body text-sm font-medium text-white transition-colors duration-150 hover:bg-blue active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
+                className="inline-flex h-12 items-center self-start bg-navy px-7 font-body text-sm font-medium text-white transition-colors duration-200 hover:bg-blue active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
               >
                 {tHome('doctor.cta')}
-                <span aria-hidden="true" className="ml-0.5">→</span>
               </Link>
             </div>
 
             {/* Trayectoria */}
             <div>
               <p className="mb-6 font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
-                {locale === 'es' ? 'Trayectoria' : 'Career'}
+                Trayectoria
               </p>
               <ul className="flex flex-col divide-y divide-navy/[0.10]" role="list">
-                {trayectoria.slice(0, 4).map((entry, i) => (
+                {trayectoria.map((entry, i) => (
                   <li key={i} className="flex flex-col gap-1 py-5">
                     <span className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-navy/40">
                       {entry.year}
@@ -195,7 +211,7 @@ export default async function HomePage({ params }: Props) {
           Header: title left, solid button right.
           Grid: 3×2 cells separated by hairline dividers.
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-blue-pale py-24 sm:py-32">
+      <section className="bg-blue-pale py-16 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
 
           {/* Header */}
@@ -214,98 +230,120 @@ export default async function HomePage({ params }: Props) {
             </div>
             <Link
               href={`/${locale}/especialidades`}
-              className="inline-flex h-12 shrink-0 items-center gap-2 bg-navy px-7 font-body text-sm font-medium text-white transition-colors duration-150 hover:bg-blue active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 sm:self-end"
+              className="inline-flex h-12 shrink-0 items-center bg-navy px-7 font-body text-sm font-medium text-white transition-colors duration-200 hover:bg-blue active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 sm:self-end"
             >
               {tHome('especialidades.cta')}
-              <span aria-hidden="true" className="ml-0.5">→</span>
             </Link>
           </div>
 
-          {/* 3×2 grid */}
-          <div className="grid grid-cols-1 gap-px bg-navy/[0.08] sm:grid-cols-2 lg:grid-cols-3">
-            {especialidades.map((item, i) => (
-              <div key={i} data-reveal data-reveal-delay={String(i * 0.07)} className="flex flex-col gap-3 bg-blue-pale px-6 py-8 sm:px-8">
-                <h3 className="font-heading text-[1.2rem] font-medium leading-snug text-navy">
-                  {item.title}
+          {/* Editorial asimétrico — 3 filas con jerarquía variable */}
+          <div className="flex flex-col gap-px bg-navy/[0.10]">
+
+            {/* Fila 1 — Feature (2/3) + Card secundaria (1/3) */}
+            <div className="grid grid-cols-1 gap-px sm:grid-cols-3">
+
+              {/* Feature: Cirugía de Corazón Abierto — única card con acento rojo */}
+              <article
+                data-reveal
+                className="relative flex flex-col gap-6 overflow-hidden bg-blue-pale px-8 py-12 sm:col-span-2 sm:px-12 sm:py-16"
+              >
+                {/* Anatomical heart watermark */}
+                <AnatomicalHeart
+                  className="pointer-events-none absolute -right-6 -bottom-6 h-auto w-[52%] max-w-[280px] text-navy/[0.05]"
+                  aria-hidden="true"
+                />
+
+                <div className="h-px w-10 bg-red" aria-hidden="true" />
+                <h3
+                  className="font-heading font-light leading-[1.1] text-navy"
+                  style={{ fontSize: 'clamp(1.875rem, 2.8vw, 2.5rem)' }}
+                >
+                  {especialidades[0].title}
+                </h3>
+                <p className="max-w-[52ch] font-body text-[1rem] leading-[1.8] text-navy/65">
+                  {especialidades[0].description}
+                </p>
+              </article>
+
+              {/* Card 2: Válvulas */}
+              <article
+                data-reveal data-reveal-delay="0.08"
+                className="flex flex-col gap-5 bg-blue-pale px-8 py-10 sm:px-10 sm:py-12"
+              >
+                <h3 className="font-heading text-[1.375rem] font-medium leading-snug text-navy">
+                  {especialidades[1].title}
                 </h3>
                 <p className="font-body text-[0.875rem] leading-relaxed text-navy/60">
-                  {item.description}
+                  {especialidades[1].description}
                 </p>
+              </article>
+            </div>
+
+            {/* Fila 2 — 3 cards equilibradas (Aorta, Revascularización, Cirugía General) */}
+            <div className="grid grid-cols-1 gap-px sm:grid-cols-3">
+              {[2, 3, 4].map((idx, i) => (
+                <article
+                  key={idx}
+                  data-reveal
+                  data-reveal-delay={String(0.05 + i * 0.05)}
+                  className="flex flex-col gap-5 bg-blue-pale px-8 py-10 sm:px-10 sm:py-12"
+                >
+                  <h3 className="font-heading text-[1.375rem] font-medium leading-snug text-navy">
+                    {especialidades[idx].title}
+                  </h3>
+                  <p className="font-body text-[0.875rem] leading-relaxed text-navy/60">
+                    {especialidades[idx].description}
+                  </p>
+                </article>
+              ))}
+            </div>
+
+            {/* Fila 3 — Consulta y Valoración: ancho completo, layout horizontal */}
+            <article
+              data-reveal data-reveal-delay="0.2"
+              className="flex flex-col gap-6 bg-blue-pale px-8 py-12 sm:flex-row sm:items-start sm:gap-16 sm:px-12 sm:py-14"
+            >
+              <div className="flex flex-col gap-5 sm:w-[42%] sm:shrink-0">
+                <h3 className="font-heading text-[1.75rem] font-medium leading-tight text-navy">
+                  {especialidades[5].title}
+                </h3>
               </div>
-            ))}
+              <p className="font-body text-[0.95rem] leading-[1.85] text-navy/65 sm:flex-1 sm:pt-7">
+                {especialidades[5].description}
+              </p>
+            </article>
+
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════
-          4. CTA FINAL
-      ══════════════════════════════════════════════════════════════ */}
-      <section className="grain bg-navy py-24 sm:py-32">
-        <div className="mx-auto max-w-3xl px-6 text-center sm:px-10">
-
-          <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-white/30">
-            {tNav('contacto')}
-          </span>
-
-          <h2
-            data-reveal data-reveal-delay="0.07"
-            className="mt-5 font-heading font-light leading-[1.05] text-white"
-            style={{ fontSize: 'clamp(2.25rem, 4.5vw, 3.75rem)' }}
-          >
-            {tHome('cta.title')}
-          </h2>
-
-          <p data-reveal data-reveal-delay="0.12" className="mx-auto mt-6 max-w-[44ch] font-body text-[1rem] leading-[1.8] text-white/50">
-            {tHome('cta.body')}
-          </p>
-
-          <div data-reveal data-reveal-delay="0.18" className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-[3.25rem] w-full items-center justify-center gap-2.5 bg-red px-8 font-body text-sm font-medium text-white transition-colors duration-150 hover:bg-[#9a0e1a] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-navy sm:w-auto"
-            >
-              <WhatsAppIcon className="h-[1.1rem] w-[1.1rem] shrink-0" aria-hidden="true" />
-              {tHome('cta.whatsapp')}
-            </a>
-
-            <a
-              href={`tel:+506${PHONE_OFFICE.replace(/-/g, '')}`}
-              className="inline-flex h-[3.25rem] w-full items-center justify-center gap-2 border border-white/20 px-8 font-body text-sm font-medium text-white/70 transition-colors duration-150 hover:border-white/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-navy sm:w-auto"
-            >
-              <PhoneIcon className="h-[1rem] w-[1rem] shrink-0" aria-hidden="true" />
-              {PHONE_OFFICE}
-            </a>
-          </div>
-
-          <p className="mt-8 font-body text-[0.8rem] text-white/30">
-            {locale === 'es' ? 'o escríbanos a ' : 'or email us at '}
-            <a
-              href={`mailto:${EMAIL}`}
-              className="text-white/50 underline underline-offset-4 transition-colors hover:text-white/80"
-            >
-              {EMAIL}
-            </a>
-          </p>
-        </div>
-      </section>
     </main>
   );
 }
 
-function WhatsAppIcon({ className }: { className?: string }) {
+function MapPinIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+      <circle cx="12" cy="10" r="3" />
     </svg>
   );
 }
 
-function PhoneIcon({ className }: { className?: string }) {
+/**
+ * Simplified anatomical heart silhouette — guiño visual en la card de
+ * Cirugía de Corazón Abierto. Dibujado para leerse bien a baja opacidad.
+ * Incluye silueta del corazón + aorta ascendente como forma rellena.
+ */
+function AnatomicalHeart({ className, ...props }: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92l-.08 2z" />
+    <svg viewBox="0 0 200 195" fill="currentColor" className={className} {...props}>
+      {/* Cuerpo del corazón */}
+      <path d="M100,170 C62,145 12,108 15,62 C18,24 46,8 68,19 C79,25 90,36 100,51 C110,36 121,25 132,19 C154,8 182,24 185,62 C188,108 138,145 100,170Z" />
+      {/* Aorta ascendente — arco sobre el corazón */}
+      <path d="M90,50 C86,35 80,14 72,10 C64,6 58,14 60,28 C62,38 68,44 76,46 C80,47 84,48 86,50Z" />
+      {/* Arteria pulmonar — rama derecha */}
+      <path d="M108,51 C112,38 118,18 126,13 C132,9 137,16 135,28 C133,37 127,43 119,47 C115,48 111,49 108,51Z" />
     </svg>
   );
 }

@@ -50,10 +50,12 @@
     "cta": "Agendar una cita",
     "ctaSecondary": "Conocer más",
     "stats": {
-      "experience": { "value": "+40 años",      "label": "de experiencia clínica" },
-      "service":    { "value": "Hospital México", "label": "Ex Jefe de Servicio — CCSS" },
+      "experience": { "value": "+40 años",       "label": "de experiencia clínica" },
+      "service":    { "value": "Hospital México", "label": "Ex Jefe de Servicio, CCSS" },
       "teaching":   { "value": "UCR · UCIMED",   "label": "Profesor universitario" },
-      "union":      { "value": "Unión Médica",   "label": "Fiscal Nacional" }
+      "union":      { "value": "Unión Médica",   "label": "Fiscal Nacional" },
+      "madrid":     { "value": "Madrid",          "label": "Formación en España" },
+      "clinic":     { "value": "Heredia, CR",     "label": "Consulta privada activa" }
     }
   },
   "sobre": {
@@ -61,9 +63,9 @@
     "title": "Una vida dedicada al corazón",
     "body": "El Dr. Edwin Manuel Alvarado Arce es médico cirujano especializado en Cirugía Cardiovascular y Cirugía General, con más de cuatro décadas de trayectoria en Costa Rica. Realizó su especialización en el Hospital Ramón y Cajal y la Universidad Alcalá de Henares en Madrid, España.\n\nFue Jefe del Servicio de Cirugía Cardiovascular y Torácica del Hospital México de la CCSS, y ha formado generaciones de médicos como profesor en la Universidad de Costa Rica (UCR) y la Universidad de Ciencias Médicas (UCIMED).\n\nSu consulta privada en Heredia combina la experiencia acumulada de una carrera institucional de alto nivel con la atención personalizada que cada paciente merece.",
     "credentials": {
-      "cardiovascular": "Especialista en Cirugía Cardiovascular — Hospital Ramón y Cajal, Madrid",
-      "general": "Especialista en Cirugía General — Universidad de Costa Rica",
-      "hospital": "Ex Jefe, Servicio de Cirugía Cardiovascular — Hospital México (CCSS)",
+      "cardiovascular": "Especialista en Cirugía Cardiovascular, Hospital Ramón y Cajal, Madrid",
+      "general": "Especialista en Cirugía General, Universidad de Costa Rica",
+      "hospital": "Ex Jefe del Servicio de Cirugía Cardiovascular, Hospital México (CCSS)",
       "ucr": "Profesor, Universidad de Costa Rica",
       "ucimed": "Profesor, Universidad de Ciencias Médicas (UCIMED)",
       "experience": "Más de 40 años de experiencia"
@@ -87,14 +89,14 @@
       },
       {
         "year": "Trayectoria",
-        "title": "Hospital México — CCSS",
+        "title": "Hospital México",
         "institution": "Caja Costarricense de Seguro Social",
         "description": "Cirujano cardiovascular en el principal centro de referencia del país durante décadas de servicio."
       },
       {
         "year": "Jefatura",
         "title": "Jefe del Servicio de Cirugía Cardiovascular",
-        "institution": "Hospital México — CCSS",
+        "institution": "Hospital México, CCSS",
         "description": "Dirección del servicio de mayor volumen en cirugía cardiovascular de Costa Rica."
       },
       {
@@ -152,7 +154,7 @@
     "items": [
       {
         "question": "¿Dónde queda el consultorio?",
-        "answer": "TODO: Agregar dirección exacta del consultorio en Heredia."
+        "answer": "El consultorio se encuentra a 50 metros al oeste de la Mussi de la UNA, en Heredia, Costa Rica. Si desea indicaciones más detalladas, con gusto le ayudamos por WhatsApp."
       },
       {
         "question": "¿Cómo agendo una cita?",
