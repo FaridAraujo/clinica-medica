@@ -195,8 +195,8 @@ export default async function DoctorPage({ params }: Props) {
           <AccordionList
             items={trayectoria.map(entry => ({
               heading: (
-                <div className="flex items-center gap-5">
-                  <span className="w-[72px] shrink-0 font-body text-[0.575rem] font-semibold uppercase tracking-[0.2em] text-navy/40 sm:w-[90px]">
+                <div className="flex items-center gap-4">
+                  <span className="w-[108px] shrink-0 font-body text-[0.575rem] font-semibold uppercase leading-tight tracking-[0.15em] text-navy/40">
                     {entry.year}
                   </span>
                   <h3 className="font-heading text-[1.25rem] font-medium leading-snug text-navy sm:text-[1.375rem]">
