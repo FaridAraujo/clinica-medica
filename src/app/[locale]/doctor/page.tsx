@@ -147,13 +147,13 @@ export default async function DoctorPage({ params }: Props) {
 
               <div className="flex flex-col gap-9">
                 {credentialGroups.map((group, i) => (
-                  <div key={i} className="flex flex-col gap-3.5">
-                    <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
+                  <div key={i} className="flex flex-col gap-3">
+                    <p className="font-body text-[0.575rem] font-semibold uppercase tracking-[0.14em] text-navy/40">
                       {group.label}
                     </p>
                     <ul className="flex flex-col divide-y divide-navy/[0.08]" role="list">
                       {group.items.map((item, j) => (
-                        <li key={j} className="py-3.5 font-body text-[0.9rem] leading-snug text-navy/75">
+                        <li key={j} className="py-3 font-body text-[0.875rem] leading-snug text-navy/75">
                           {item}
                         </li>
                       ))}
