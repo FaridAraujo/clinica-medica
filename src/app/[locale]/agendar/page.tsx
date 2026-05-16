@@ -36,35 +36,36 @@ export default async function AgendarPage({ params }: Props) {
               </p>
             </div>
 
-            {/* Cómo funciona — accordion */}
-            <div className="flex flex-col gap-4">
-              <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-navy/35">
-                Cómo funciona
-              </p>
-              <AccordionList
-                items={[
-                  { n: '01', title: 'Elija fecha y horario', body: 'Vea los espacios disponibles y escoja el que mejor le quede.' },
-                  { n: '02', title: 'Ingrese sus datos',     body: 'Solo necesitamos su nombre y número de WhatsApp.' },
-                  { n: '03', title: 'Confirme por WhatsApp', body: 'Le respondemos en menos de 24 horas hábiles para confirmar.' },
-                ].map(({ n, title, body }) => ({
-                  heading: (
-                    <div className="flex items-center gap-3.5">
-                      <span className="font-body text-[0.65rem] font-semibold tabular-nums tracking-[0.1em] text-red">
-                        {n}
-                      </span>
-                      <span className="font-body text-[0.875rem] font-medium leading-snug text-navy">
-                        {title}
-                      </span>
-                    </div>
-                  ),
-                  body: (
-                    <p className="pl-[30px] font-body text-[0.8rem] leading-relaxed text-navy/55">
-                      {body}
-                    </p>
-                  ),
-                }))}
-              />
-            </div>
+            {/* Cómo funciona — un solo accordion que despliega los 3 pasos */}
+            <AccordionList
+              items={[{
+                heading: (
+                  <span className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-navy/50">
+                    Cómo funciona
+                  </span>
+                ),
+                body: (
+                  <ol className="flex flex-col">
+                    {[
+                      { n: '01', title: 'Elija fecha y horario', body: 'Vea los espacios disponibles y escoja el que mejor le quede.' },
+                      { n: '02', title: 'Ingrese sus datos',     body: 'Solo necesitamos su nombre y número de WhatsApp.' },
+                      { n: '03', title: 'Confirme por WhatsApp', body: 'Le respondemos en menos de 24 horas hábiles para confirmar.' },
+                    ].map(({ n, title, body }, i) => (
+                      <li
+                        key={n}
+                        className={['grid grid-cols-[24px_1fr] gap-x-3 gap-y-1 py-3.5', i > 0 ? 'border-t border-navy/[0.07]' : ''].join(' ')}
+                      >
+                        <span className="row-span-2 pt-[2px] font-body text-[0.65rem] font-semibold tabular-nums tracking-[0.08em] text-red">
+                          {n}
+                        </span>
+                        <p className="font-body text-[0.85rem] font-medium leading-snug text-navy">{title}</p>
+                        <p className="font-body text-[0.775rem] leading-relaxed text-navy/50">{body}</p>
+                      </li>
+                    ))}
+                  </ol>
+                ),
+              }]}
+            />
 
             {/* Separador */}
             <div className="h-px bg-navy/[0.08]" aria-hidden="true" />
