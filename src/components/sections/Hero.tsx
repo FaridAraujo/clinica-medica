@@ -79,7 +79,7 @@ export default function Hero() {
           alt=""
           fill
           priority
-          className="object-cover object-[80%_top] sm:object-center"
+          className="object-cover object-center"
           sizes="100vw"
         />
         {/* Móvil: overlay oscuro uniforme para que el texto sea legible */}

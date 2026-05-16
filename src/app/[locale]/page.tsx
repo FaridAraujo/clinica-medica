@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import Hero from '@/components/sections/Hero';
 import MapEmbed from '@/components/ui/MapEmbed';
+import { AccordionList } from '@/components/ui/AccordionList';
 import { PHONE_OFFICE, PHONE_MOBILE, CLINIC_ADDRESS, MAPS_EMBED_URL, WHATSAPP_URL, MAPS_DIRECTIONS_URL } from '@/lib/constants';
 import { buildHomeJsonLd } from '@/lib/jsonLd';
 
@@ -181,26 +182,35 @@ export default async function HomePage({ params }: Props) {
               </Link>
             </div>
 
-            {/* Trayectoria */}
+            {/* Trayectoria — accordion */}
             <div>
-              <p className="mb-6 font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
+              <p className="mb-4 font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
                 Trayectoria
               </p>
-              <ul className="flex flex-col divide-y divide-navy/[0.10]" role="list">
-                {trayectoria.map((entry, i) => (
-                  <li key={i} className="flex flex-col gap-1 py-5">
-                    <span className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-navy/40">
-                      {entry.year}
-                    </span>
-                    <span className="font-body text-[0.9rem] font-semibold leading-snug text-navy">
-                      {entry.title}
-                    </span>
-                    <span className="font-body text-[0.8rem] text-navy/55">
-                      {entry.institution}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              <AccordionList
+                items={trayectoria.map(entry => ({
+                  heading: (
+                    <div className="flex flex-col gap-0.5">
+                      <span className="font-body text-[0.575rem] font-semibold uppercase tracking-[0.14em] text-navy/40">
+                        {entry.year}
+                      </span>
+                      <span className="font-body text-[0.9rem] font-semibold leading-snug text-navy">
+                        {entry.title}
+                      </span>
+                    </div>
+                  ),
+                  body: (
+                    <div className="flex flex-col gap-1.5">
+                      <span className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-navy/45">
+                        {entry.institution}
+                      </span>
+                      <p className="max-w-[42ch] font-body text-[0.875rem] leading-relaxed text-navy/60">
+                        {entry.description}
+                      </p>
+                    </div>
+                  ),
+                }))}
+              />
             </div>
           </div>
         </div>
@@ -236,84 +246,24 @@ export default async function HomePage({ params }: Props) {
             </Link>
           </div>
 
-          {/* Editorial asimétrico — 3 filas con jerarquía variable */}
-          <div className="flex flex-col gap-px bg-navy/[0.10]">
-
-            {/* Fila 1 — Feature (2/3) + Card secundaria (1/3) */}
-            <div className="grid grid-cols-1 gap-px sm:grid-cols-3">
-
-              {/* Feature: Cirugía de Corazón Abierto — única card con acento rojo */}
-              <article
-                data-reveal
-                className="relative flex flex-col gap-6 overflow-hidden bg-blue-pale px-8 py-10 sm:col-span-2 sm:px-12 sm:py-12"
-              >
-                {/* Anatomical heart watermark */}
-                <AnatomicalHeart
-                  className="pointer-events-none absolute -right-6 -bottom-6 h-auto w-[52%] max-w-[280px] text-navy/[0.05]"
-                  aria-hidden="true"
-                />
-
-                <div className="h-px w-10 bg-red" aria-hidden="true" />
-                <h3
-                  className="font-heading font-light leading-[1.1] text-navy"
-                  style={{ fontSize: 'clamp(1.875rem, 2.8vw, 2.5rem)' }}
-                >
-                  {especialidades[0].title}
-                </h3>
-                <p className="max-w-[52ch] font-body text-[1rem] leading-[1.8] text-navy/65">
-                  {especialidades[0].description}
-                </p>
-              </article>
-
-              {/* Card 2: Válvulas */}
-              <article
-                data-reveal data-reveal-delay="0.08"
-                className="flex flex-col gap-5 bg-blue-pale px-8 py-8 sm:px-10 sm:py-10"
-              >
-                <h3 className="font-heading text-[1.375rem] font-medium leading-snug text-navy">
-                  {especialidades[1].title}
-                </h3>
-                <p className="font-body text-[0.875rem] leading-relaxed text-navy/60">
-                  {especialidades[1].description}
-                </p>
-              </article>
-            </div>
-
-            {/* Fila 2 — 3 cards equilibradas (Aorta, Revascularización, Cirugía General) */}
-            <div className="grid grid-cols-1 gap-px sm:grid-cols-3">
-              {[2, 3, 4].map((idx, i) => (
-                <article
-                  key={idx}
-                  data-reveal
-                  data-reveal-delay={String(0.05 + i * 0.05)}
-                  className="flex flex-col gap-5 bg-blue-pale px-8 py-8 sm:px-10 sm:py-10"
-                >
-                  <h3 className="font-heading text-[1.375rem] font-medium leading-snug text-navy">
-                    {especialidades[idx].title}
+          {/* Accordion de especialidades */}
+          <AccordionList
+            items={especialidades.map((item, i) => ({
+              heading: (
+                <div className="flex items-center gap-4">
+                  <div className="h-px w-5 shrink-0 bg-red" aria-hidden="true" />
+                  <h3 className="font-heading font-light leading-snug text-navy" style={{ fontSize: 'clamp(1.125rem, 2vw, 1.5rem)' }}>
+                    {item.title}
                   </h3>
-                  <p className="font-body text-[0.875rem] leading-relaxed text-navy/60">
-                    {especialidades[idx].description}
-                  </p>
-                </article>
-              ))}
-            </div>
-
-            {/* Fila 3 — Consulta y Valoración: ancho completo, layout horizontal */}
-            <article
-              data-reveal data-reveal-delay="0.2"
-              className="flex flex-col gap-6 bg-blue-pale px-8 py-9 sm:flex-row sm:items-start sm:gap-16 sm:px-12 sm:py-11"
-            >
-              <div className="flex flex-col gap-5 sm:w-[42%] sm:shrink-0">
-                <h3 className="font-heading text-[1.75rem] font-medium leading-tight text-navy">
-                  {especialidades[5].title}
-                </h3>
-              </div>
-              <p className="font-body text-[0.95rem] leading-[1.85] text-navy/65 sm:flex-1 sm:pt-7">
-                {especialidades[5].description}
-              </p>
-            </article>
-
-          </div>
+                </div>
+              ),
+              body: (
+                <p className="max-w-[58ch] font-body text-[0.9375rem] leading-[1.9] text-navy/65 pl-9">
+                  {item.description}
+                </p>
+              ),
+            }))}
+          />
         </div>
       </section>
 
@@ -330,20 +280,3 @@ function MapPinIcon({ className }: { className?: string }) {
   );
 }
 
-/**
- * Simplified anatomical heart silhouette — guiño visual en la card de
- * Cirugía de Corazón Abierto. Dibujado para leerse bien a baja opacidad.
- * Incluye silueta del corazón + aorta ascendente como forma rellena.
- */
-function AnatomicalHeart({ className, ...props }: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 200 195" fill="currentColor" className={className} {...props}>
-      {/* Cuerpo del corazón */}
-      <path d="M100,170 C62,145 12,108 15,62 C18,24 46,8 68,19 C79,25 90,36 100,51 C110,36 121,25 132,19 C154,8 182,24 185,62 C188,108 138,145 100,170Z" />
-      {/* Aorta ascendente — arco sobre el corazón */}
-      <path d="M90,50 C86,35 80,14 72,10 C64,6 58,14 60,28 C62,38 68,44 76,46 C80,47 84,48 86,50Z" />
-      {/* Arteria pulmonar — rama derecha */}
-      <path d="M108,51 C112,38 118,18 126,13 C132,9 137,16 135,28 C133,37 127,43 119,47 C115,48 111,49 108,51Z" />
-    </svg>
-  );
-}
