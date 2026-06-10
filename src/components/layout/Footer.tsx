@@ -1,260 +1,100 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
-import Image from "next/image";
-import { gsap } from "@/lib/gsap";
+import Link from 'next/link';
+import { useTranslations, useLocale } from 'next-intl';
+import { WHATSAPP_URL, PHONE_OFFICE, EMAIL } from '@/lib/constants';
+import AesculapiusRod from '@/components/ui/AesculapiusRod';
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
-
-const MALLS = [
-  "Multiplaza Escazú",
-  "Multiplaza Curridabat",
-  "Lincoln Plaza",
-  "City Mall Alajuela",
-  "Mall Oxígeno",
-] as const;
-
-// ─── Palette ──────────────────────────────────────────────────────────────────
-const BG      = "#1A1816";
-const DIVIDER = "#2A2724";
-const WHITE   = "#F0EDE8";
-const MUTED   = "rgba(240,237,232,0.35)";
-
-// ─── Social icon components ───────────────────────────────────────────────────
-
-function IconInstagram() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="12" cy="12" r="4.5" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
-    </svg>
-  );
-}
-
-function IconTikTok() {
-  return (
-    <svg width="16" height="18" viewBox="0 0 24 27" fill="none" aria-hidden="true">
-      <path
-        d="M17 0h-4v17.5a4 4 0 1 1-4-4v-4a8 8 0 1 0 8 8V8.5A12.6 12.6 0 0 0 24 9V5a8.6 8.6 0 0 1-7-5Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-
-function IconWhatsApp() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.16 1.6 5.97L0 24l6.18-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52Z"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        fill="none"
-      />
-      <path
-        d="M17.5 14.9c-.3-.15-1.77-.87-2.04-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.68-1.63-.93-2.23-.24-.59-.49-.51-.68-.52h-.58c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.86 1.21 3.06c.15.2 2.09 3.19 5.06 4.47.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"
-        fill="currentColor"
-        opacity="0.9"
-      />
-    </svg>
-  );
-}
-
-function SocialLink({
-  href,
-  label,
-  children,
-}: {
-  href: string;
-  label: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={label}
-      style={{
-        color:      WHITE,
-        opacity:    0.55,
-        display:    "flex",
-        alignItems: "center",
-        transition: "opacity 160ms ease-out",
-      }}
-      onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-      onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.55")}
-    >
-      {children}
-    </a>
-  );
-}
-
-/** Dot separator between inline items */
-function Dot() {
-  return (
-    <span
-      aria-hidden="true"
-      className="font-body"
-      style={{ fontSize: 10, color: MUTED, opacity: 0.6, userSelect: "none" }}
-    >
-      ·
-    </span>
-  );
-}
-
-// ─── Component ────────────────────────────────────────────────────────────────
 export default function Footer() {
-  const footerRef = useRef<HTMLElement>(null);
+  const locale  = useLocale();
+  const t       = useTranslations('footer');
+  const tNav    = useTranslations('nav');
+  const links = [
+    { href: `/${locale}/consultorio`,    label: tNav('consultorio')   },
+    { href: `/${locale}/doctor`,         label: tNav('sobre')         },
+    { href: `/${locale}/especialidades`, label: tNav('especialidades') },
+    { href: `/${locale}/contacto`,       label: tNav('contacto')      },
+  ];
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from("[data-footer-row]", {
-        y:        12,
-        opacity:  0,
-        duration: 0.55,
-        ease:     "power3.out",
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start:   "top 92%",
-          once:    true,
-        },
-      });
-    }, footerRef);
-    return () => ctx.revert();
-  }, []);
-
-  const scrollToStores = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const el = document.getElementById("sucursales");
-    if (el) {
-      e.preventDefault();
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-    // else: let the href="/#sucursales" handle navigation naturally
-  };
+  const year = new Date().getFullYear();
 
   return (
-    <footer
-      ref={footerRef}
-      style={{ background: BG, width: "100%", position: "relative", overflow: "hidden" }}
-    >
-      {/* ── Logo watermark + copyright debajo ──────────────────────────── */}
-      <div
-        aria-hidden="true"
-        style={{
-          position:       "absolute",
-          inset:          0,
-          display:        "flex",
-          flexDirection:  "column",
-          alignItems:     "center",
-          justifyContent: "center",
-          pointerEvents:  "none",
-          zIndex:         0,
-          gap:            "0.6rem",
-        }}
-      >
-        <div style={{ position: "relative", width: "82%", height: "55%" }}>
-          <Image
-            src="/images/logo-white.png"
-            alt=""
-            fill
-            className="object-contain"
-            style={{ opacity: 0.055 }}
-          />
+    <footer className="border-t border-navy/[0.07] bg-white">
+
+      {/* ── Main bar — todo horizontal ──────────────────────────── */}
+      <div className="mx-auto max-w-7xl px-6 py-5 sm:px-10 sm:py-6 lg:px-14">
+        <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
+
+          {/* Identity */}
+          <Link
+            href={`/${locale}`}
+            className="flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
+          >
+            <AesculapiusRod className="h-6 w-[11px] shrink-0 text-red" />
+            <span className="font-heading text-[0.9375rem] font-medium leading-none text-navy">
+              Dr. Alvarado
+            </span>
+          </Link>
+
+          {/* Navigation — horizontal */}
+          <nav aria-label="Mapa del sitio" className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            {links.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="font-body text-[0.775rem] text-navy/50 transition-colors duration-150 hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Contact — horizontal */}
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <a
+              href={`tel:+506${PHONE_OFFICE.replace(/-/g, '')}`}
+              className="font-body text-[0.775rem] text-navy/50 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+            >
+              {PHONE_OFFICE}
+            </a>
+            <span className="text-navy/20" aria-hidden="true">·</span>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-body text-[0.775rem] text-navy/50 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+            >
+              <WhatsAppIcon className="h-2.5 w-2.5 shrink-0 text-red" aria-hidden="true" />
+              WhatsApp
+            </a>
+            <span className="text-navy/20" aria-hidden="true">·</span>
+            <a
+              href={`mailto:${EMAIL}`}
+              className="font-body text-[0.775rem] text-navy/50 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+            >
+              {EMAIL}
+            </a>
+          </div>
+
         </div>
-        <span
-          className="font-body"
-          style={{
-            fontSize:      11,
-            color:         WHITE,
-            letterSpacing: "0.1em",
-            opacity:       0.18,
-            userSelect:    "none",
-          }}
-        >
-          © 2026
-        </span>
       </div>
 
-      {/* ── Content ─────────────────────────────────────────────────────── */}
-      <div style={{ position: "relative", zIndex: 1, borderTop: `1px solid ${DIVIDER}` }}>
-        <div
-          data-footer-row
-          className="footer-row"
-          style={{
-            display:    "flex",
-            alignItems: "center",
-            padding:    "clamp(2rem, 3.5vw, 3rem) clamp(1.5rem, 5vw, 5rem)",
-          }}
-        >
-
-          {/* LEFT — Tiendas inline */}
-          <div style={{ display: "flex", alignItems: "baseline", gap: "0.55rem", flexWrap: "wrap", flex: 1 }}>
-            <span
-              className="font-body footer-tiendas-label"
-              style={{
-                fontSize:      10,
-                fontWeight:    500,
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                color:         MUTED,
-                flexShrink:    0,
-              }}
-            >
-              Tiendas
-            </span>
-            {MALLS.map((mall, i) => (
-              <span key={mall} style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
-                {i > 0 && <Dot />}
-                <a
-                  href="/#sucursales"
-                  className="font-body"
-                  onClick={scrollToStores}
-                  style={{
-                    fontSize:       12,
-                    color:          WHITE,
-                    textDecoration: "none",
-                    opacity:        0.65,
-                    whiteSpace:     "nowrap",
-                    transition:     "opacity 160ms ease-out",
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.65")}
-                >
-                  {mall}
-                </a>
-              </span>
-            ))}
-          </div>
-
-          {/* RIGHT — Síguenos con íconos */}
-          <div className="footer-social" style={{ display: "flex", alignItems: "center", gap: "1rem", flexShrink: 0 }}>
-            <span
-              className="font-body"
-              style={{
-                fontSize:      10,
-                fontWeight:    500,
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                color:         MUTED,
-              }}
-            >
-              Síguenos
-            </span>
-            <SocialLink href="https://instagram.com/sneax_cr" label="Instagram @sneax_cr">
-              <IconInstagram />
-            </SocialLink>
-            <SocialLink href="https://www.tiktok.com/@sneax_costarica" label="TikTok @sneax_costarica">
-              <IconTikTok />
-            </SocialLink>
-            <SocialLink href="https://wa.me/50688888888" label="WhatsApp">
-              <IconWhatsApp />
-            </SocialLink>
-          </div>
-
+      {/* ── Bottom bar ─────────────────────────────────────────── */}
+      <div className="border-t border-navy/[0.05]">
+        <div className="mx-auto max-w-7xl px-6 py-3 sm:px-10 lg:px-14">
+          <p className="font-body text-[0.65rem] text-navy/30">
+            © {year} Dr. Edwin Manuel Alvarado Arce · {t('rights')}
+          </p>
         </div>
       </div>
     </footer>
+  );
+}
+
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
   );
 }

@@ -1,13 +1,8 @@
-"use client";
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-/*
-  Register all GSAP plugins once at module load time.
-  Import from this file rather than directly from "gsap" so plugin
-  registration is guaranteed before any component uses them.
-*/
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export { gsap, ScrollTrigger };
+export { useGSAP } from '@gsap/react';

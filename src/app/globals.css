@@ -1,288 +1,104 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Prevent any overflowing child from creating horizontal scroll on mobile.
-   Only set overflow-x on body — NOT on html. Setting it on both shifts the
-   scroll container to <body> in Chrome, which breaks GSAP ScrollTrigger's
-   window-based position calculations across all scroll-driven animations. */
+@theme {
+  /* Brand colors — coherent with physical signage and business card */
+  --color-navy: #0d2240;       /* dark text, structure */
+  --color-blue: #2e7db5;       /* primary brand blue (card's dominant tone) */
+  --color-blue-light: #6db4d8; /* card's lighter diagonal blue */
+  --color-blue-pale: #eaf4fb;  /* very light blue for section backgrounds */
+  --color-red: #c1121f;        /* cardinal/medical red — clean, authoritative, less orange */
+  --color-white: #ffffff;      /* card background is clean white */
+  --color-warm-white: #f4f8fb; /* page background — slight blue tint, coherent */
+
+  /* Semantic aliases */
+  --color-background: var(--color-warm-white);
+  --color-foreground: var(--color-navy);
+  --color-accent: var(--color-red);
+  --color-primary: var(--color-blue);
+
+  /* Typography */
+  --font-heading: var(--font-cormorant);
+  --font-body: var(--font-inter);
+
+  /* Spacing scale additions */
+  --spacing-section: 6rem;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-  overflow-x: hidden;
-  width: 100%;
+  background-color: var(--color-warm-white);
+  color: var(--color-navy);
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
 
-/* ─── Auth layout helpers ─────────────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .hidden-mobile { display: none !important; }
-
-  /* Hero X logo — reduce scale so PRÓXIMO doesn't overflow on narrow screens */
-  .hero-x-logo {
-    transform: scale(1.15) translateX(-0.05em) !important;
-  }
-
-  /* Hero video — full height on mobile (portrait has no need for the 46px seam gap) */
-  .hero-video {
-    height: 100% !important;
-  }
-
-  /* Hero outro — oculto en mobile, no hay transición de color que cubrir */
-  [data-hero-outro] {
-    display: none !important;
-  }
-
-  /* ── FeaturedDrop mobile ───────────────────────────────────────────── */
-  .fd-main     { flex-direction: column !important; }
-  .fd-left     { width: 100% !important; min-height: 72vw; }
-  .fd-right    { width: 100% !important; }
-  .fd-cta      { width: 100% !important; }
-  /* Carousel sube al tope — borde pasa de arriba a abajo */
-  .fd-carousel { order: -1; border-top: none !important; border-bottom: 1px solid #B8B4AC; }
-  /* Dots siguen al carousel (ambos order -1, DOM order los mantiene en secuencia) */
-  .fd-dots     { order: -1; }
-
-  /* ── ProductDetail mobile layout ──────────────────────────────────── */
-  .pd-layout    { flex-direction: column !important; min-height: 0 !important; }
-  .pd-left      { order: 3; width: 100% !important; padding-right: 0 !important;
-                  border-right: none !important; border-top: 1px solid #B8B4AC;
-                  padding-top: 1.5rem !important; }
-  .pd-center    { order: 1; flex: unset !important; padding-top: 2.5rem; }
-  .pd-right     { order: 2; width: 100% !important; padding-left: 0 !important;
-                  border-left: none !important; border-top: 1px solid #B8B4AC;
-                  padding-top: 1.5rem !important; }
-  .pd-size-btn  { height: 44px !important; }
-  .related-grid { grid-template-columns: repeat(2, 1fr) !important; }
-
-  /* ── FeaturedDrop — quita el minHeight de 100svh en mobile para que no
-        deje espacio vacío debajo del contenido apilado ──────────────────── */
-  #featured-drop { min-height: 0 !important; }
-
-  /* ── ProductDetail — oculta descripción en mobile, solo etiquetas ──────── */
-  .pd-description { display: none !important; margin-bottom: 0 !important; }
-
-  /* ── Size Guide Modal — bottom sheet en mobile ────────────────────────── */
-  .size-guide-backdrop {
-    padding: 0 !important;
-    align-items: flex-end !important;
-  }
-  .size-guide-modal {
-    border-radius: 12px 12px 0 0 !important;
-    max-height: 82vh !important;
-    display: flex !important;
-    flex-direction: column !important;
-    overflow: hidden !important;
-  }
-  .size-guide-table {
-    max-height: 42vh !important;
-    flex: 1 !important;
-  }
-
-
-  /* ── About — track heights en mobile ───────────────────────────────── */
-  /* act1/act2: 200svh → 100svh de pin para scrub controlable */
-  .act1-track { height: 200svh !important; }
-  .act2-track { height: 200svh !important; }
-
-  /* ── Sucursales — reduce padding de items para igualar alto de la foto ── */
-  [data-location-item] { padding-top: 7px !important; padding-bottom: 7px !important; }
-
-  /* ── Hero words — un poco más grandes en mobile ───────────────────────── */
-  [data-hero-word]:nth-child(1),
-  [data-hero-word]:nth-child(3) { font-size: clamp(6rem, 24vw, 15rem) !important; }
-  [data-hero-word]:nth-child(2) { font-size: clamp(4.4rem, 17vw, 10.5rem) !important; }
-
-  /* ── Collection band — padding-top para bajar el título dentro de la franja */
-  .col-band { padding-top: 2rem !important; padding-bottom: 1.5rem !important; }
+:where(h1, h2, h3, h4) {
+  font-family: var(--font-cormorant), Georgia, serif;
 }
 
-/* ── Collection band — solo visible en mobile ───────────────────────────── */
-@media (min-width: 769px) {
-  .col-band {
-    background: #E8E6E1 !important;
-    box-shadow: none !important;
-    padding-top: clamp(3rem, 5vw, 5rem) !important;
-  }
-  .col-grid {
-    padding-top: clamp(1rem, 2vw, 1.75rem) !important;
-  }
-  .col-band-watermark { display: none !important; }
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.6; }
 }
 
-/* Show "Agregar" button on touch devices (no hover state available) */
-@media (hover: none) {
-  .card-add-btn { opacity: 1 !important; transform: translateY(0) !important; }
+/* ── View Transitions — crossfade suave entre páginas ───────── */
+@view-transition {
+  navigation: auto;
 }
 
-/* ── Footer mobile ──────────────────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .footer-row {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 1.5rem;
-  }
-  .footer-social {
-    border-top: 1px solid #2A2724;
-    padding-top: 1.5rem;
-    width: 100%;
-  }
-  .footer-tiendas-label {
-    width: 100%;
-    margin-bottom: 0.25rem;
-  }
+::view-transition-old(root) {
+  animation: vt-fade-out 0.18s ease-out;
 }
 
-/* ─── SNEAX Design Tokens ────────────────────────────────────────────────── */
-:root {
-  /* Surfaces */
-  --color-concrete: #E8E6E1;
-  --color-surface: #D4D0C8;
-  --color-border: #B8B4AC;
-
-  /* Text */
-  --color-ink: #0A0A0A;
-  --color-ink-muted: #5A5850;
-
-  /* Accent */
-  --color-accent: #F2BF1A;
-
-  /* Semantic aliases — light mode */
-  --bg: var(--color-concrete);
-  --bg-surface: var(--color-surface);
-  --bg-border: var(--color-border);
-  --text-primary: var(--color-ink);
-  --text-muted: var(--color-ink-muted);
+::view-transition-new(root) {
+  animation: vt-fade-in 0.22s ease-out;
 }
 
-
-/* ─── Base Typography ─────────────────────────────────────────────────────── */
-@layer base {
-  html {
-    scroll-behavior: smooth;
-    background-color: var(--bg);
-    color: var(--text-primary);
-  }
-
-  body {
-    font-family: var(--font-dm-sans), "DM Sans", sans-serif;
-    font-size: 1rem;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: var(--bg);
-    color: var(--text-primary);
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-bebas-neue), "Bebas Neue", sans-serif;
-    font-weight: 400; /* Bebas Neue is inherently bold — weight 400 is the display weight */
-    line-height: 0.95;
-    letter-spacing: 0.02em;
-    color: var(--text-primary);
-  }
-
-  /* Editorial scale */
-  h1 { font-size: clamp(4rem, 12vw, 10rem); }
-  h2 { font-size: clamp(2.5rem, 6vw, 6rem); }
-  h3 { font-size: clamp(1.75rem, 4vw, 3.5rem); }
-  h4 { font-size: clamp(1.25rem, 2.5vw, 2rem); }
-
-  p {
-    font-family: var(--font-dm-sans), "DM Sans", sans-serif;
-    font-size: clamp(0.875rem, 1.5vw, 1rem);
-  }
-
-  /* Selection accent */
-  ::selection {
-    background-color: var(--color-accent);
-    color: var(--color-ink);
-  }
+@keyframes vt-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
 }
 
-/* ─── Nav hover states ───────────────────────────────────────────────────── */
-/*
-  Nav links/buttons use inline style for color (needed for isDark crossfade).
-  Hover is handled via CSS custom property --nav-hover set on the <nav> element
-  from JS, so :hover can read it without React re-renders on every mousemove.
-*/
-.nav-item {
-  transition: color 180ms ease, opacity 180ms ease;
-}
-.nav-item:hover {
-  color: var(--nav-hover) !important;
-}
-.nav-search-btn {
-  transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
-}
-.nav-search-btn:hover {
-  color: var(--nav-hover) !important;
-  border-color: var(--nav-hover) !important;
-  background: var(--nav-search-hover-bg) !important;
+@keyframes vt-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-/* ─── Collection search inputs ──────────────────────────────────────────── */
-.collection-search-input::placeholder { color: #8A8680; }
-.collection-search-input::-webkit-search-cancel-button { display: none; }
-.nav-collection-search::placeholder { color: rgba(184,180,172,0.7); }
-.nav-collection-search::-webkit-search-cancel-button { display: none; }
-
-/* ─── Component keyframes ────────────────────────────────────────────────── */
-
-/* Login — submit button spinner */
-@keyframes sneax-spin {
-  to { transform: rotate(360deg); }
-}
-
-/* About Act 1 — scroll cue gentle bounce */
-@keyframes act1-cue {
-  0%, 100% { transform: translateY(0);   opacity: 0.9; }
-  50%      { transform: translateY(4px); opacity: 0.45; }
-}
-
-/* FeaturedDrop — floating sneaker + shadow pulse */
-@keyframes fd-float {
-  from { transform: translateY(0px);   }
-  to   { transform: translateY(-14px); }
-}
-@keyframes fd-shadow {
-  from { transform: scaleX(1);    opacity: 1;    }
-  to   { transform: scaleX(0.75); opacity: 0.55; }
-}
-
-/*
-  ProductDetail — combined float + drop-shadow.
-  The shadow Y offset grows as translateY goes negative so it
-  stays anchored to the same "ground" plane:
-    rest: translateY(0px)   + drop-shadow(0 14px) → shadow at +14px
-    peak: translateY(-16px) + drop-shadow(0 30px) → shadow at +14px ✓
-*/
-@keyframes pd-float-shadow {
-  from { transform: translateY(0px);   filter: drop-shadow(0 14px 10px rgba(0,0,0,0.30)); }
-  to   { transform: translateY(-16px); filter: drop-shadow(0 30px  5px rgba(0,0,0,0.11)); }
-}
-
-/* ─── Scroll & Motion ─────────────────────────────────────────────────────── */
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  /* GSAP will handle scroll animations; this ensures no flash of unstyled content */
-  .gsap-init-hidden {
+/* ── Reveal — ocultar antes del scroll para evitar flash ────── */
+/* Solo cuando el usuario acepta movimiento. Si prefiere        */
+/* reduced-motion, GSAP no corre y los elementos quedan visibles*/
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
     opacity: 0;
-    transform: translateY(40px);
+    will-change: opacity, transform;
   }
+}
 
-  /* Concrete texture overlay utility */
-  .texture-concrete {
-    position: relative;
-  }
+/* ── Grain — textura sutil sobre fondos navy ────────────────── */
+/* Opacidad intencionalmente baja (3.5%): añade profundidad     */
+/* sin ser visible como decoración. Solo en secciones oscuras.  */
+.grain {
+  position: relative;
+  isolation: isolate;
+}
 
-  .texture-concrete::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    opacity: 0.4;
-  }
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+.grain > * {
+  position: relative;
+  z-index: 2;
 }

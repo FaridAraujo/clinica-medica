@@ -1,59 +1,41 @@
-import type { Metadata } from "next";
-import { Bebas_Neue, DM_Sans } from "next/font/google";
-import "./globals.css";
-import { AuthProvider } from "@/context/AuthContext";
-import { CartProvider } from "@/context/CartContext";
+import type { Metadata } from 'next';
+import { Cormorant_Garamond, Inter } from 'next/font/google';
+import { getLocale } from 'next-intl/server';
+import './globals.css';
 
-const bebasNeue = Bebas_Neue({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-bebas-neue",
-  display: "swap",
+const cormorant = Cormorant_Garamond({
+  variable: '--font-cormorant',
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  display: 'swap',
 });
 
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
-  display: "swap",
+const inter = Inter({
+  variable: '--font-inter',
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: "Sneax CR",
-    template: "%s | Sneax CR",
-  },
-  description:
-    "La tienda de sneakers de Costa Rica. Drops exclusivos, marcas selectas, cultura auténtica.",
-  keywords: ["sneakers", "zapatillas", "Costa Rica", "SNEAX"],
-  // Prevents Chrome / browser auto-translation from wrapping text nodes in
-  // <font> tags — that DOM mutation desyncs React's fiber tree and causes
-  // "removeChild: node is not a child" crashes on route navigation.
-  other: { google: "notranslate" },
-  openGraph: {
-    title: "Sneax CR",
-    description: "La tienda de sneakers de Costa Rica. Drops exclusivos, marcas selectas, cultura auténtica.",
-    locale: "es_CR",
-    type: "website",
-  },
+  metadataBase: new URL('https://dralvarado.vercel.app'),
+  robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const locale = await getLocale();
+
   return (
     <html
-      lang="es"
-      translate="no"
-      suppressHydrationWarning
-      className={`notranslate ${bebasNeue.variable} ${dmSans.variable}`}
+      lang={locale}
+      className={`${cormorant.variable} ${inter.variable}`}
     >
-      <body className="font-body antialiased bg-[var(--bg)] text-[var(--text-primary)]">
-        <AuthProvider>
-          <CartProvider>{children}</CartProvider>
-        </AuthProvider>
-      </body>
+      <body className="min-h-screen antialiased">{children}</body>
     </html>
   );
 }
