@@ -1,35 +1,29 @@
 {
-  "name": "shoe-store",
+  "name": "heuristic-wilson-2d126d",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
-    "@react-three/drei": "^9.122.0",
-    "@react-three/fiber": "^8.18.0",
-    "@react-three/postprocessing": "^3.0.4",
-    "framer-motion": "^12.38.0",
     "gsap": "^3.15.0",
-    "next": "14.2.35",
-    "next-themes": "^0.4.6",
-    "react": "^18",
-    "react-dom": "^18",
-    "three": "^0.184.0"
+    "next": "16.2.6",
+    "next-intl": "^4.12.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "@types/three": "^0.184.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.35",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "tailwindcss": "^4",
     "typescript": "^5"
   }
 }
