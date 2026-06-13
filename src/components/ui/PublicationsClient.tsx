@@ -33,7 +33,7 @@ function ThumbnailPlaceholder() {
   return (
     <div
       className="shrink-0 animate-pulse bg-white/[0.06] ring-1 ring-white/[0.08]"
-      style={{ width: 108, height: 153 }}
+      style={{ width: 180, height: 255 }}
     />
   );
 }
@@ -59,7 +59,7 @@ function VideoThumbnail({ videoId }: { videoId: string }) {
   return (
     <div
       className="relative shrink-0 overflow-hidden ring-1 ring-white/[0.1]"
-      style={{ width: 108, height: 153 }}
+      style={{ width: 180, height: 255 }}
     >
       <img
         src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`}
@@ -90,7 +90,7 @@ function PublicationRow({
     <article
       className={[
         'group grid gap-x-6 gap-y-3 border-b border-white/[0.06] py-7 sm:py-9',
-        'grid-cols-[108px_1fr] lg:grid-cols-[108px_1fr_auto]',
+        'grid-cols-[180px_1fr] lg:grid-cols-[180px_1fr_auto]',
         isInteractive ? 'cursor-pointer' : '',
       ].join(' ')}
       onClick={isInteractive ? () => onOpen(pub) : undefined}

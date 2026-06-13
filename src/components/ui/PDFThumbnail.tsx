@@ -6,7 +6,7 @@ import { Document, Page, pdfjs } from 'react-pdf';
 // Worker via CDN — versión siempre alineada con pdfjs-dist instalado
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-const W = 108;
+const W = 180;
 const H = Math.round(W * 1.414); // ratio A4
 
 type Status = 'loading' | 'ready' | 'error';
