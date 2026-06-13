@@ -82,7 +82,7 @@ export default function Navbar() {
 
   const overHero  = !ctaVisible;
   // Páginas con fondo navy — navbar queda oscuro siempre
-  const isDarkPage = pathname.includes('/consultorio') || pathname.includes('/publicaciones');
+  const isDarkPage = pathname.includes('/consultorio');
   const dark = overHero || isDarkPage;
 
   return (

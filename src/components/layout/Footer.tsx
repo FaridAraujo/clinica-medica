@@ -12,7 +12,7 @@ export default function Footer() {
   const tNav     = useTranslations('nav');
   const pathname = usePathname();
 
-  const isDarkPage = pathname.includes('/consultorio') || pathname.includes('/publicaciones');
+  const isDarkPage = pathname.includes('/consultorio');
 
   const links = [
     { href: `/${locale}/consultorio`,    label: tNav('consultorio')    },

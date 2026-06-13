@@ -1,46 +1,111 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 
-// Worker via CDN — versión siempre alineada con pdfjs-dist instalado
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-const W = 180;
-const H = Math.round(W * 1.414); // ratio A4
+type Status  = 'loading' | 'ready' | 'error';
+type Variant = 'dark' | 'light';
 
-type Status = 'loading' | 'ready' | 'error';
+interface PDFThumbnailProps {
+  pdfPath: string;
+  // fixed width mode (sidebar list)
+  width?: number;
+  // fill mode: stretches to container width (card grid)
+  fill?: boolean;
+  variant?: Variant;
+}
 
-export default function PDFThumbnail({ pdfPath }: { pdfPath: string }) {
-  const [status, setStatus] = useState<Status>('loading');
+export default function PDFThumbnail({
+  pdfPath,
+  width = 180,
+  fill = false,
+  variant = 'dark',
+}: PDFThumbnailProps) {
+  const [status, setStatus]       = useState<Status>('loading');
+  const [renderW, setRenderW]     = useState(fill ? 0 : width);
+  const containerRef              = useRef<HTMLDivElement>(null);
 
+  // fill mode — mide el contenedor y actualiza al cambiar
+  useEffect(() => {
+    if (!fill) return;
+    const el = containerRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => {
+      setRenderW(Math.floor(entry.contentRect.width));
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [fill]);
+
+  const skeletonCls = variant === 'dark'
+    ? 'animate-pulse bg-white/[0.06]'
+    : 'animate-pulse bg-navy/[0.05]';
+
+  const errorBgCls = variant === 'dark'
+    ? 'flex items-center justify-center bg-white/[0.04]'
+    : 'flex items-center justify-center bg-navy/[0.04]';
+
+  const iconCls = variant === 'dark' ? 'h-7 w-7 text-white/20' : 'h-7 w-7 text-navy/20';
+
+  if (fill) {
+    return (
+      <div ref={containerRef} className="relative h-full w-full overflow-hidden">
+        {/* Skeleton / error */}
+        <div
+          className={[
+            'absolute inset-0 transition-opacity duration-300',
+            status === 'ready' ? 'opacity-0' : 'opacity-100',
+            status === 'error' ? errorBgCls : skeletonCls,
+          ].join(' ')}
+        >
+          {status === 'error' && <FileIcon className={iconCls} />}
+        </div>
+
+        {/* PDF canvas */}
+        {renderW > 0 && (
+          <div className={['transition-opacity duration-500', status === 'ready' ? 'opacity-100' : 'opacity-0'].join(' ')}>
+            <Document
+              file={pdfPath}
+              onLoadSuccess={() => setStatus('ready')}
+              onLoadError={() => setStatus('error')}
+              loading={null}
+              error={null}
+            >
+              <Page
+                pageNumber={1}
+                width={renderW}
+                renderAnnotationLayer={false}
+                renderTextLayer={false}
+                loading={null}
+                error={null}
+              />
+            </Document>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Fixed-width mode
+  const H = Math.round(width * 1.414);
   return (
     <div
-      className="relative shrink-0 overflow-hidden ring-1 ring-white/[0.1]"
-      style={{ width: W, height: H }}
+      className="relative shrink-0 overflow-hidden"
+      style={{ width, height: H }}
     >
-      {/* Skeleton / error */}
       <div
         className={[
           'absolute inset-0 transition-opacity duration-300',
           status === 'ready' ? 'opacity-0' : 'opacity-100',
-          status === 'error'
-            ? 'flex items-center justify-center bg-white/[0.04]'
-            : 'animate-pulse bg-white/[0.06]',
+          status === 'error' ? errorBgCls : skeletonCls,
         ].join(' ')}
       >
-        {status === 'error' && (
-          <FileIcon className="h-7 w-7 text-white/20" />
-        )}
+        {status === 'error' && <FileIcon className={iconCls} />}
       </div>
 
-      {/* Página renderizada */}
-      <div
-        className={[
-          'transition-opacity duration-500',
-          status === 'ready' ? 'opacity-100' : 'opacity-0',
-        ].join(' ')}
-      >
+      <div className={['transition-opacity duration-500', status === 'ready' ? 'opacity-100' : 'opacity-0'].join(' ')}>
         <Document
           file={pdfPath}
           onLoadSuccess={() => setStatus('ready')}
@@ -50,7 +115,7 @@ export default function PDFThumbnail({ pdfPath }: { pdfPath: string }) {
         >
           <Page
             pageNumber={1}
-            width={W}
+            width={width}
             renderAnnotationLayer={false}
             renderTextLayer={false}
             loading={null}
