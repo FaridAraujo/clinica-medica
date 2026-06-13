@@ -2,24 +2,33 @@
 
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
+import { usePathname } from 'next/navigation';
 import { WHATSAPP_URL, PHONE_OFFICE, EMAIL } from '@/lib/constants';
 import AesculapiusRod from '@/components/ui/AesculapiusRod';
 
 export default function Footer() {
-  const locale  = useLocale();
-  const t       = useTranslations('footer');
-  const tNav    = useTranslations('nav');
+  const locale   = useLocale();
+  const t        = useTranslations('footer');
+  const tNav     = useTranslations('nav');
+  const pathname = usePathname();
+
+  const isDarkPage = pathname.includes('/consultorio') || pathname.includes('/publicaciones');
+
   const links = [
-    { href: `/${locale}/consultorio`,    label: tNav('consultorio')   },
-    { href: `/${locale}/doctor`,         label: tNav('sobre')         },
+    { href: `/${locale}/consultorio`,    label: tNav('consultorio')    },
+    { href: `/${locale}/doctor`,         label: tNav('sobre')          },
     { href: `/${locale}/especialidades`, label: tNav('especialidades') },
-    { href: `/${locale}/contacto`,       label: tNav('contacto')      },
+    { href: `/${locale}/publicaciones`,  label: tNav('publicaciones')  },
+    { href: `/${locale}/contacto`,       label: tNav('contacto')       },
   ];
 
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-navy/[0.07] bg-white">
+    <footer className={isDarkPage
+      ? 'border-t border-white/[0.08] bg-navy'
+      : 'border-t border-navy/[0.07] bg-white'
+    }>
 
       {/* ── Main bar — todo horizontal ──────────────────────────── */}
       <div className="mx-auto max-w-7xl px-6 py-5 sm:px-10 sm:py-6 lg:px-14">
@@ -31,7 +40,10 @@ export default function Footer() {
             className="flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
           >
             <AesculapiusRod className="h-6 w-[11px] shrink-0 text-red" />
-            <span className="font-heading text-[0.9375rem] font-medium leading-none text-navy">
+            <span className={[
+              'font-heading text-[0.9375rem] font-medium leading-none',
+              isDarkPage ? 'text-white' : 'text-navy',
+            ].join(' ')}>
               Dr. Alvarado
             </span>
           </Link>
@@ -42,7 +54,12 @@ export default function Footer() {
               <Link
                 key={href}
                 href={href}
-                className="font-body text-[0.775rem] text-navy/50 transition-colors duration-150 hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+                className={[
+                  'font-body text-[0.775rem] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue',
+                  isDarkPage
+                    ? 'text-white/40 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white'
+                    : 'text-navy/50 [@media(hover:hover)_and_(pointer:fine)]:hover:text-navy',
+                ].join(' ')}
               >
                 {label}
               </Link>
@@ -53,24 +70,39 @@ export default function Footer() {
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <a
               href={`tel:+506${PHONE_OFFICE.replace(/-/g, '')}`}
-              className="font-body text-[0.775rem] text-navy/50 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+              className={[
+                'font-body text-[0.775rem] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue',
+                isDarkPage
+                  ? 'text-white/40 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white'
+                  : 'text-navy/50 [@media(hover:hover)_and_(pointer:fine)]:hover:text-navy',
+              ].join(' ')}
             >
               {PHONE_OFFICE}
             </a>
-            <span className="text-navy/20" aria-hidden="true">·</span>
+            <span className={isDarkPage ? 'text-white/20' : 'text-navy/20'} aria-hidden="true">·</span>
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-body text-[0.775rem] text-navy/50 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+              className={[
+                'inline-flex items-center gap-1.5 font-body text-[0.775rem] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue',
+                isDarkPage
+                  ? 'text-white/40 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white'
+                  : 'text-navy/50 [@media(hover:hover)_and_(pointer:fine)]:hover:text-navy',
+              ].join(' ')}
             >
               <WhatsAppIcon className="h-2.5 w-2.5 shrink-0 text-red" aria-hidden="true" />
               WhatsApp
             </a>
-            <span className="text-navy/20" aria-hidden="true">·</span>
+            <span className={isDarkPage ? 'text-white/20' : 'text-navy/20'} aria-hidden="true">·</span>
             <a
               href={`mailto:${EMAIL}`}
-              className="font-body text-[0.775rem] text-navy/50 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+              className={[
+                'font-body text-[0.775rem] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue',
+                isDarkPage
+                  ? 'text-white/40 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white'
+                  : 'text-navy/50 [@media(hover:hover)_and_(pointer:fine)]:hover:text-navy',
+              ].join(' ')}
             >
               {EMAIL}
             </a>
@@ -80,9 +112,12 @@ export default function Footer() {
       </div>
 
       {/* ── Bottom bar ─────────────────────────────────────────── */}
-      <div className="border-t border-navy/[0.05]">
+      <div className={isDarkPage ? 'border-t border-white/[0.05]' : 'border-t border-navy/[0.05]'}>
         <div className="mx-auto max-w-7xl px-6 py-3 sm:px-10 lg:px-14">
-          <p className="font-body text-[0.65rem] text-navy/30">
+          <p className={[
+            'font-body text-[0.65rem]',
+            isDarkPage ? 'text-white/30' : 'text-navy/30',
+          ].join(' ')}>
             © {year} Dr. Edwin Manuel Alvarado Arce · {t('rights')}
           </p>
         </div>

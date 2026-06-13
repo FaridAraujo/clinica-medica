@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import MapEmbed from '@/components/ui/MapEmbed';
-import AvailabilityBadge from '@/components/ui/AvailabilityBadge';
 import {
   PHONE_OFFICE,
   PHONE_MOBILE,
@@ -28,196 +26,171 @@ export default async function ConsultorioPage({ params }: Props) {
   const tFaq = await getTranslations({ locale, namespace: 'faq' });
   const tNav = await getTranslations({ locale, namespace: 'nav' });
 
-  const items    = tC.raw('items')    as { label: string; body: string }[];
-  const faqItems = tFaq.raw('items')  as { question: string; answer: string }[];
+  const items    = tC.raw('items')   as { label: string; body: string }[];
+  const faqItems = tFaq.raw('items') as { question: string; answer: string }[];
 
-  // Las respuestas marcadas como "TODO:" en el JSON son placeholders —
-  // se renderizan con un texto genérico hasta que se confirmen.
   const isPlaceholder = (answer: string) => answer.startsWith('TODO:');
   const placeholderText =
     'Estamos confirmando estos detalles. Para información actualizada, escríbanos por WhatsApp o llame al consultorio.';
 
   return (
-    <main className="pt-16">
+    <main className="bg-navy pt-16">
 
-      {/* ══════════════════════════════════════════════════════════════
-          1. HEADER — navy oscuro: página de lugar, no de información
-      ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-navy pt-14 pb-10 sm:pt-20 sm:pb-14">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
-          <div className="flex flex-col">
-            <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-white/40">
-              {tNav('consultorio')}
-            </span>
-            <h1
-              data-reveal data-reveal-delay="0.06"
-              className="mt-5 font-heading font-light leading-[1.04] text-white"
-              style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)' }}
-            >
-              {tC('title')}
-            </h1>
-            <div data-reveal data-reveal-delay="0.11" className="mt-7 h-[2px] w-14 bg-red" aria-hidden="true" />
-            <p data-reveal data-reveal-delay="0.15" className="mt-7 max-w-[55ch] font-body text-[1.0625rem] leading-[1.85] text-white/55">
-              Atención privada en Heredia, Costa Rica. Directo con el especialista, sin intermediarios ni listas de espera institucionales.
-            </p>
-          </div>
+      {/* ── 1. HEADER ────────────────────────────────────────────────── */}
+      <section className="px-6 pb-12 pt-14 sm:px-10 sm:pt-20 sm:pb-16 lg:px-14">
+        <div className="mx-auto max-w-7xl">
+          <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-white/30">
+            {tNav('consultorio')}
+          </span>
+          <h1
+            data-reveal data-reveal-delay="0.06"
+            className="mt-5 font-heading font-light leading-[1.04] text-white"
+            style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)' }}
+          >
+            {tC('title')}
+          </h1>
+          <div data-reveal data-reveal-delay="0.11" className="mt-7 h-[2px] w-14 bg-red" aria-hidden="true" />
+          <p data-reveal data-reveal-delay="0.15" className="mt-7 max-w-[52ch] font-body text-[1.0625rem] leading-[1.85] text-white/45">
+            Atención privada en Heredia, Costa Rica. Directo con el especialista,
+            sin intermediarios ni listas de espera institucionales.
+          </p>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════
-          2. LO QUE OFRECEMOS — las 4 preguntas en formato editorial
-      ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-white py-14 sm:py-20">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
+      {/* ── 2. MAPA + CONTACTO ───────────────────────────────────────── */}
+      {/* Mapa full-bleed como protagonista visual, con filtro oscuro.   */}
+      {/* Panel de contacto flotante sobre el mapa en desktop.           */}
+      <section className="relative" data-reveal>
 
-          <div className="mb-10 flex flex-col gap-4">
-            <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
-              Sobre el consultorio
-            </span>
-            <h2
-              data-reveal data-reveal-delay="0.06"
-              className="font-heading font-light leading-[1.05] text-navy"
-              style={{ fontSize: 'clamp(1.875rem, 3.2vw, 2.75rem)' }}
-            >
-              Lo que ofrecemos
-            </h2>
-          </div>
+        {/* Mapa */}
+        <div className="relative h-[55vh] min-h-[340px] sm:h-[65vh] lg:h-[72vh]">
+          {/* Iframe directo — filtro CSS para dar tono navy al mapa */}
+          <iframe
+            src={MAPS_EMBED_URL}
+            title="Ubicación del consultorio"
+            className="absolute inset-0 h-full w-full [filter:invert(1)_hue-rotate(180deg)_brightness(0.85)_contrast(0.9)_saturate(0.6)]"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
 
-          {/* Lista editorial de preguntas */}
-          <div className="flex flex-col">
-            {items.map((item, i) => (
-              <article
-                key={i}
-                data-reveal
-                data-reveal-delay={String(0.04 * i)}
-                className="grid grid-cols-1 gap-6 border-t border-navy/[0.08] py-7 sm:gap-7 sm:py-9 lg:grid-cols-[1fr_2fr] lg:gap-20 lg:py-11"
-              >
-                {/* Pregunta */}
-                <div className="flex flex-col gap-5">
-                  <div className="h-px w-7 bg-red" aria-hidden="true" />
-                  <h3 className="font-heading text-[1.625rem] font-medium leading-snug text-navy sm:text-[1.875rem]">
-                    {item.label}
-                  </h3>
-                </div>
+          {/* Viñeta superior — funde con el header navy */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-navy to-transparent" aria-hidden="true" />
 
-                {/* Respuesta */}
-                <div className="flex flex-col justify-center lg:pt-2">
-                  <p className="max-w-[58ch] font-body text-[1.0625rem] leading-[1.95] text-navy/65">
-                    {item.body}
-                  </p>
-                </div>
-              </article>
-            ))}
-            <div className="border-t border-navy/[0.08]" aria-hidden="true" />
-          </div>
-        </div>
-      </section>
+          {/* Panel de contacto — flotante sobre el mapa en desktop,
+              debajo del mapa en mobile */}
+          <div className="absolute bottom-0 left-0 right-0 lg:bottom-8 lg:left-8 lg:right-auto lg:w-80 xl:w-96">
+            <div className="border-t border-white/[0.1] bg-navy/95 px-7 py-7 backdrop-blur-sm lg:border lg:border-white/[0.08]">
 
-      {/* ══════════════════════════════════════════════════════════════
-          3. UBICACIÓN — mapa cinemático + franja editorial
-      ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-warm-white py-14 sm:py-20">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
-
-          <div className="mb-8 flex flex-col gap-4">
-            <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
-              Ubicación
-            </span>
-            <h2
-              data-reveal data-reveal-delay="0.06"
-              className="font-heading font-light leading-[1.05] text-navy"
-              style={{ fontSize: 'clamp(1.875rem, 3.2vw, 2.75rem)' }}
-            >
-              Cómo encontrarnos
-            </h2>
-          </div>
-
-          <div data-reveal data-reveal-delay="0.1" className="flex flex-col">
-
-            {/* Mapa */}
-            <div className="border border-navy/[0.08]">
-              <MapEmbed
-                src={MAPS_EMBED_URL}
-                title="Ubicación del consultorio"
-                aspectRatio="16/9"
-              />
-            </div>
-
-            {/* Franja informativa: 4 columnas */}
-            <div className="grid grid-cols-1 border-x border-b border-navy/[0.08] divide-y divide-navy/[0.08] sm:grid-cols-2 sm:divide-y-0 sm:divide-x lg:grid-cols-4">
-
-              {/* Dirección — fila 1 sm */}
-              <div className="flex flex-col gap-4 px-7 py-7 sm:px-8 sm:py-9 sm:border-b sm:border-b-navy/[0.08] lg:border-b-0">
-                <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
+              {/* Dirección */}
+              <div className="mb-6 flex flex-col gap-2">
+                <p className="font-body text-[0.56rem] font-semibold uppercase tracking-[0.22em] text-white/30">
                   Dirección
                 </p>
-                <p className="font-heading text-[1.125rem] font-normal leading-snug text-navy">
+                <p className="font-body text-[0.9375rem] leading-snug text-white/80">
                   {CLINIC_ADDRESS}
                 </p>
                 <a
                   href={MAPS_DIRECTIONS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 self-start font-body text-[0.675rem] font-semibold uppercase tracking-[0.14em] text-navy/45 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+                  className="mt-1 inline-flex items-center gap-1.5 self-start font-body text-[0.625rem] font-semibold uppercase tracking-[0.16em] text-white/35 transition-colors [@media(hover:hover)_and_(pointer:fine)]:hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
                 >
-                  <MapPinIcon className="h-3.5 w-3.5 shrink-0 transition-transform group-hover:-translate-y-0.5" aria-hidden="true" />
+                  <MapPinIcon className="h-3 w-3 shrink-0" aria-hidden="true" />
                   Cómo llegar
                 </a>
               </div>
 
-              {/* Teléfono consultorio — fila 1 sm */}
-              <div className="flex flex-col gap-4 px-7 py-7 sm:px-8 sm:py-9 sm:border-b sm:border-b-navy/[0.08] lg:border-b-0">
-                <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
-                  Teléfono
-                </p>
-                <a
-                  href={`tel:+506${PHONE_OFFICE.replace(/-/g, '')}`}
-                  className="font-body text-[1.75rem] font-medium leading-none tracking-[-0.015em] text-navy transition-colors hover:text-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
-                >
-                  {PHONE_OFFICE}
-                </a>
-              </div>
+              <div className="h-px bg-white/[0.08]" aria-hidden="true" />
 
-              {/* WhatsApp — fila 2 sm */}
-              <div className="flex flex-col gap-4 px-7 py-7 sm:px-8 sm:py-9">
-                <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
-                  WhatsApp
-                </p>
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-body text-[1.75rem] font-medium leading-none tracking-[-0.015em] text-navy transition-colors hover:text-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
-                >
-                  {PHONE_MOBILE}
-                </a>
-              </div>
+              {/* Teléfonos */}
+              <div className="mt-6 grid grid-cols-2 gap-5">
+                <div className="flex flex-col gap-2">
+                  <p className="font-body text-[0.56rem] font-semibold uppercase tracking-[0.22em] text-white/30">
+                    Teléfono
+                  </p>
+                  <a
+                    href={`tel:+506${PHONE_OFFICE.replace(/-/g, '')}`}
+                    className="font-body text-[1.25rem] font-medium leading-none tracking-tight text-white transition-colors [@media(hover:hover)_and_(pointer:fine)]:hover:text-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+                  >
+                    {PHONE_OFFICE}
+                  </a>
+                </div>
 
-              {/* Horario */}
-              <div className="flex flex-col gap-4 px-7 py-7 sm:px-8 sm:py-9">
-                <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-navy/45">
-                  Horario
-                </p>
-                <AvailabilityBadge />
+                <div className="flex flex-col gap-2">
+                  <p className="font-body text-[0.56rem] font-semibold uppercase tracking-[0.22em] text-white/30">
+                    WhatsApp
+                  </p>
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-body text-[1.25rem] font-medium leading-none tracking-tight text-white transition-colors [@media(hover:hover)_and_(pointer:fine)]:hover:text-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+                  >
+                    {PHONE_MOBILE}
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════
-          4. PREGUNTAS FRECUENTES — accordion editorial
-      ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-white py-14 sm:py-20">
-        <div className="mx-auto max-w-4xl px-6 sm:px-10 lg:px-14">
+      {/* ── 3. LO QUE OFRECEMOS ──────────────────────────────────────── */}
+      <section className="border-t border-white/[0.06] px-6 py-16 sm:px-10 sm:py-24 lg:px-14">
+        <div className="mx-auto max-w-7xl">
 
-          <div className="mb-10 flex flex-col gap-4">
-            <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
+          <div className="mb-12 flex flex-col gap-4">
+            <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-white/30">
+              Sobre el consultorio
+            </span>
+            <h2
+              data-reveal data-reveal-delay="0.06"
+              className="font-heading font-light leading-[1.05] text-white"
+              style={{ fontSize: 'clamp(1.875rem, 3.2vw, 2.75rem)' }}
+            >
+              Lo que ofrecemos
+            </h2>
+          </div>
+
+          <div className="flex flex-col">
+            {items.map((item, i) => (
+              <article
+                key={i}
+                data-reveal
+                data-reveal-delay={String(0.04 * i)}
+                className="grid grid-cols-1 gap-6 border-t border-white/[0.07] py-8 sm:gap-8 sm:py-11 lg:grid-cols-[1fr_2fr] lg:gap-20 lg:py-14"
+              >
+                <div className="flex flex-col gap-4">
+                  <h3 className="font-heading text-[1.625rem] font-light leading-snug text-white sm:text-[1.875rem]">
+                    {item.label}
+                  </h3>
+                </div>
+
+                <div className="flex flex-col justify-center lg:pt-2">
+                  <p className="max-w-[58ch] font-body text-[1.0625rem] leading-[1.95] text-white/45">
+                    {item.body}
+                  </p>
+                </div>
+              </article>
+            ))}
+            <div className="border-t border-white/[0.07]" aria-hidden="true" />
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. FAQ ───────────────────────────────────────────────────── */}
+      <section className="border-t border-white/[0.06] px-6 py-16 sm:px-10 sm:py-24 lg:px-14">
+        <div className="mx-auto max-w-4xl">
+
+          <div className="mb-12 flex flex-col gap-4">
+            <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-white/30">
               {tFaq('sectionLabel')}
             </span>
             <h2
               data-reveal data-reveal-delay="0.06"
-              className="font-heading font-light leading-[1.05] text-navy"
+              className="font-heading font-light leading-[1.05] text-white"
               style={{ fontSize: 'clamp(1.875rem, 3.2vw, 2.75rem)' }}
             >
               {tFaq('title')}
@@ -232,30 +205,27 @@ export default async function ConsultorioPage({ params }: Props) {
                   key={i}
                   data-reveal
                   data-reveal-delay={String(0.04 * i)}
-                  className="group border-t border-navy/[0.08] py-5 last:border-b last:border-b-navy/[0.08]"
+                  className="group border-t border-white/[0.07] py-6 last:border-b last:border-b-white/[0.07]"
                 >
                   <summary className="flex cursor-pointer list-none items-start justify-between gap-6">
-                    <span className="font-heading text-[1.125rem] font-medium leading-snug text-navy sm:text-[1.25rem]">
+                    <span className="font-heading text-[1.125rem] font-light leading-snug text-white sm:text-[1.25rem]">
                       {item.question}
                     </span>
                     <span
                       aria-hidden="true"
-                      className="mt-1.5 shrink-0 font-light text-[1.25rem] leading-none text-navy/30 transition-transform duration-200 ease-out group-open:rotate-45"
+                      className="mt-1 shrink-0 font-light text-[1.25rem] leading-none text-white/25 transition-transform duration-200 ease-out group-open:rotate-45"
                     >
                       +
                     </span>
                   </summary>
 
                   <div className="mt-5">
-                    {pending ? (
-                      <p className="max-w-[60ch] font-body text-[0.95rem] leading-[1.85] italic text-navy/40">
-                        {placeholderText}
-                      </p>
-                    ) : (
-                      <p className="max-w-[60ch] font-body text-[0.95rem] leading-[1.85] text-navy/65">
-                        {item.answer}
-                      </p>
-                    )}
+                    <p className={[
+                      'max-w-[60ch] font-body text-[0.95rem] leading-[1.85]',
+                      pending ? 'italic text-white/25' : 'text-white/45',
+                    ].join(' ')}>
+                      {pending ? placeholderText : item.answer}
+                    </p>
                   </div>
                 </details>
               );
@@ -263,6 +233,7 @@ export default async function ConsultorioPage({ params }: Props) {
           </div>
         </div>
       </section>
+
     </main>
   );
 }

@@ -65,11 +65,12 @@ export default function Navbar() {
   const close = useCallback(() => setOpen(false), []);
 
   const links = [
-    { href: `/${locale}`,                label: t('inicio')         },
-    { href: `/${locale}/consultorio`,    label: t('consultorio')    },
-    { href: `/${locale}/doctor`,         label: t('sobre')          },
-    { href: `/${locale}/especialidades`, label: t('especialidades') },
-    { href: `/${locale}/contacto`,       label: t('contacto')       },
+    { href: `/${locale}`,                 label: t('inicio')          },
+    { href: `/${locale}/consultorio`,     label: t('consultorio')     },
+    { href: `/${locale}/doctor`,          label: t('sobre')           },
+    { href: `/${locale}/especialidades`,  label: t('especialidades')  },
+    { href: `/${locale}/publicaciones`,   label: t('publicaciones')   },
+    { href: `/${locale}/contacto`,        label: t('contacto')        },
   ];
 
   const isActive = (href: string) => {
@@ -79,7 +80,10 @@ export default function Navbar() {
       : pathname === href || pathname.startsWith(`${href}/`);
   };
 
-  const overHero = !ctaVisible;
+  const overHero  = !ctaVisible;
+  // Páginas con fondo navy — navbar queda oscuro siempre
+  const isDarkPage = pathname.includes('/consultorio') || pathname.includes('/publicaciones');
+  const dark = overHero || isDarkPage;
 
   return (
     <>
@@ -87,8 +91,8 @@ export default function Navbar() {
       <header
         className={[
           'fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-300',
-          overHero ? 'bg-transparent' : 'bg-warm-white',
-          scrolled && !overHero ? 'shadow-[0_1px_0_0_rgba(13,34,64,0.08)]' : '',
+          overHero ? 'bg-transparent' : isDarkPage ? 'bg-navy/95 backdrop-blur-sm' : 'bg-warm-white',
+          scrolled && !dark ? 'shadow-[0_1px_0_0_rgba(13,34,64,0.08)]' : '',
         ].join(' ')}
       >
         <nav
@@ -104,20 +108,20 @@ export default function Navbar() {
             <MedicalCrossIcon
               className={[
                 'h-3.5 w-3.5 shrink-0 text-red transition-opacity duration-300',
-                overHero ? 'opacity-0' : 'opacity-100',
+                dark ? 'opacity-0' : 'opacity-100',
               ].join(' ')}
               aria-hidden="true"
             />
             <div className="flex flex-col leading-none">
               <span className={[
                 'font-heading text-[1.125rem] font-medium transition-colors duration-300',
-                overHero ? 'text-white' : 'text-navy',
+                dark ? 'text-white' : 'text-navy',
               ].join(' ')}>
                 Dr. Alvarado
               </span>
               <span className={[
                 'font-body text-[0.625rem] font-medium uppercase tracking-[0.16em] transition-colors duration-300',
-                overHero ? 'text-white/40' : 'text-navy/40',
+                dark ? 'text-white/40' : 'text-navy/40',
               ].join(' ')}>
                 Consultorio Médico · Heredia
               </span>
@@ -137,7 +141,7 @@ export default function Navbar() {
                     className={[
                       'group relative py-2.5 font-body text-sm transition-colors duration-150',
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2',
-                      overHero
+                      dark
                         ? active
                           ? 'text-white'
                           : 'text-white/60 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white'
@@ -151,7 +155,7 @@ export default function Navbar() {
                       aria-hidden="true"
                       className={[
                         'absolute -bottom-px left-0 h-px transition-[width] duration-200 ease-out',
-                        overHero ? 'bg-white' : 'bg-blue',
+                        dark ? 'bg-white' : 'bg-blue',
                         active ? 'w-full' : 'w-0 [@media(hover:hover)_and_(pointer:fine)]:group-hover:w-full',
                       ].join(' ')}
                     />
@@ -177,11 +181,11 @@ export default function Navbar() {
               style={{ touchAction: 'manipulation' }}
               className="group relative inline-flex items-center py-2.5 active:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
             >
-              <span className="relative font-body text-[0.825rem] font-medium text-navy transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:group-hover:text-blue">
+              <span className={['relative font-body text-[0.825rem] font-medium transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:group-hover:text-blue', dark ? 'text-white' : 'text-navy'].join(' ')}>
                 {t('agendar')}
                 <span
                   aria-hidden="true"
-                  className="absolute -bottom-1 left-0 right-0 h-px bg-navy/25 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:group-hover:bg-blue"
+                  className={['absolute -bottom-1 left-0 right-0 h-px transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:group-hover:bg-blue', dark ? 'bg-white/25' : 'bg-navy/25'].join(' ')}
                 />
               </span>
             </Link>
@@ -201,7 +205,7 @@ export default function Navbar() {
             {['', '', ''].map((_, i) => (
               <span key={i} aria-hidden="true" className={[
                 'absolute block h-px w-[22px] origin-center transition-all duration-200 ease-out',
-                overHero ? 'bg-white' : 'bg-navy',
+                dark ? 'bg-white' : 'bg-navy',
                 i === 0 ? (open ? 'rotate-45'              : '-translate-y-[6px]') : '',
                 i === 1 ? (open ? 'opacity-0 scale-x-0 duration-150' : '')        : '',
                 i === 2 ? (open ? '-rotate-45'             : 'translate-y-[6px]') : '',
