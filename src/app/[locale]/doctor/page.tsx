@@ -8,9 +8,9 @@ interface Props { params: Promise<{ locale: string }> }
 
 export async function generateMetadata(_: Props): Promise<Metadata> {
   return {
-    title: 'Dr. Edwin Alvarado — Sobre el Doctor | Cirujano Cardiovascular',
+    title: 'Dr. Edwin Alvarado, Sobre el Doctor | Cirujano Cardiovascular',
     description:
-      'Más de 40 años de trayectoria en cirugía cardiovascular y general. Formado en el Hospital Ramón y Cajal de Madrid. Ex jefe del Servicio de Cirugía Cardiovascular del Hospital México (CCSS).',
+      'Más de 40 años de trayectoria en cirugía cardiovascular y general. Formado en el Hospital Ramón y Cajal de Madrid. Jefe del Servicio de Cirugía de Tórax y Cardiovascular del Hospital México (CCSS).',
   };
 }
 
@@ -39,6 +39,7 @@ export default async function DoctorPage({ params }: Props) {
       label: 'Cargos institucionales',
       items: [
         tS('credentials.hospital'),
+        tS('credentials.editor'),
       ],
     },
     {
@@ -156,7 +157,19 @@ export default async function DoctorPage({ params }: Props) {
                   ))}
                 </ul>
 
-                {/* Línea final — experiencia destacada */}
+                {/* ORCID */}
+                <li className="border-t border-navy/[0.08] py-3.5">
+                  <a
+                    href="https://orcid.org/0000-0002-9569-5962"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-body text-[0.825rem] leading-snug text-blue/80 transition-colors [@media(hover:hover)_and_(pointer:fine)]:hover:text-blue"
+                  >
+                    ORCID 0000-0002-9569-5962
+                  </a>
+                </li>
+
+                {/* Línea final - experiencia destacada */}
                 <div className="flex flex-col gap-2 border-t border-navy/[0.08] pt-6">
                   <p className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
                     Trayectoria

@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "title": "Dr. Edwin Alvarado — Cardiovascular Surgeon | Heredia",
+    "title": "Dr. Edwin Alvarado, Cardiovascular Surgeon | Heredia",
     "description": "Specialist in Cardiovascular and General Surgery, trained in Madrid, Spain, with over 40 years of experience. Private practice in Heredia, Costa Rica.",
-    "ogTitle": "Dr. Edwin Manuel Alvarado Arce | Cardiovascular & General Surgery — Heredia"
+    "ogTitle": "Dr. Edwin Manuel Alvarado Arce | Cardiovascular & General Surgery, Heredia"
   },
   "nav": {
     "inicio": "Home",
@@ -41,7 +41,7 @@
       },
       {
         "label": "Who can come?",
-        "body": "Patients who need cardiovascular or surgical opinion — whether on their own initiative, referred by another physician, or following up after a previous procedure."
+        "body": "Patients who need cardiovascular or surgical opinion, whether on their own initiative, referred by another physician, or following up after a previous procedure."
       }
     ]
   },
@@ -53,8 +53,8 @@
     "ctaSecondary": "Learn more",
     "stats": {
       "experience": { "value": "+40 years",       "label": "of clinical experience" },
-      "service":    { "value": "Hospital México", "label": "Former Department Chief — CCSS" },
-      "teaching":   { "value": "UCR · UCIMED",   "label": "University professor" },
+      "service":    { "value": "Hospital México", "label": "Chief, Thoracic & Cardiovascular Surgery" },
+      "teaching":   { "value": "UCR · UCIMED",   "label": "Professor & Full Professor" },
       "union":      { "value": "Unión Médica",   "label": "National Medical Auditor" },
       "madrid":     { "value": "Madrid",          "label": "Trained in Spain" },
       "clinic":     { "value": "Heredia, CR",     "label": "Active private practice" }
@@ -63,13 +63,14 @@
   "sobre": {
     "sectionLabel": "About",
     "title": "A life dedicated to the heart",
-    "body": "Dr. Edwin Manuel Alvarado Arce is a surgeon specializing in Cardiovascular Surgery and General Surgery, with over four decades of practice in Costa Rica. He completed his specialty training at Hospital Ramón y Cajal and the University of Alcalá de Henares in Madrid, Spain.\n\nHe served as Head of the Cardiovascular and Thoracic Surgery Department at Hospital México (CCSS), and has trained generations of physicians as a professor at the University of Costa Rica (UCR) and the University of Medical Sciences (UCIMED).\n\nHis private practice in Heredia combines the expertise of a high-level institutional and international career with the personalized attention each patient deserves.",
+    "body": "Dr. Edwin Manuel Alvarado Arce is a surgeon specializing in Cardiovascular Surgery and General Surgery, with over four decades of practice in Costa Rica. He completed his specialty training at Hospital Ramón y Cajal and the University of Alcalá de Henares in Madrid, Spain.\n\nHe serves as Head of the Thoracic and Cardiovascular Surgery Department at Hospital México (CCSS), and has trained generations of physicians as a Professor at the School of Medicine of the University of Costa Rica (UCR) and as Full Professor (Catedrático) at the University of Medical Sciences (UCIMED).\n\nHis academic and research work includes presentations at the National Medical Congress and publications in national and international scientific journals. His private practice in Heredia combines the expertise of a high-level institutional career with the personalized attention each patient deserves.",
     "credentials": {
-      "cardiovascular": "Cardiovascular Surgery Specialist — Hospital Ramón y Cajal, Madrid",
-      "general": "General Surgery Specialist — University of Costa Rica",
-      "hospital": "Former Head, Cardiovascular Surgery Department — Hospital México (CCSS)",
-      "ucr": "Professor, University of Costa Rica",
-      "ucimed": "Professor, University of Medical Sciences (UCIMED)",
+      "cardiovascular": "Cardiovascular Surgery Specialist, Hospital Ramón y Cajal, Madrid",
+      "general": "General Surgery Specialist, University of Costa Rica",
+      "hospital": "Head, Thoracic & Cardiovascular Surgery Department, Hospital México (CCSS)",
+      "editor": "National Editor, Revista Costarricense de Cardiologia",
+      "ucr": "Professor, School of Medicine, University of Costa Rica",
+      "ucimed": "Full Professor (Catedrático), University of Medical Sciences (UCIMED)",
       "experience": "Over 40 years of experience"
     }
   },
@@ -91,21 +92,21 @@
       },
       {
         "year": "Career",
-        "title": "Hospital México — CCSS",
+        "title": "Hospital México, CCSS",
         "institution": "Costa Rican Social Security Fund",
-        "description": "Cardiovascular surgeon at the country's main referral center for decades of service."
+        "description": "Thoracic and cardiovascular surgeon at the country's main referral center, contributing to some of the most significant milestones in Costa Rican cardiovascular medicine."
       },
       {
         "year": "Department Head",
-        "title": "Chief of Cardiovascular Surgery",
-        "institution": "Hospital México — CCSS",
-        "description": "Director of Costa Rica's highest-volume cardiovascular surgery department."
+        "title": "Chief, Thoracic & Cardiovascular Surgery",
+        "institution": "Hospital México, CCSS",
+        "description": "Director of Costa Rica's highest-volume cardiovascular surgery department. Presented the History of Cardiovascular Surgery in Costa Rica at the 76th National Medical Congress, recognized by the editorial board of the Revista Médica de Costa Rica."
       },
       {
         "year": "Academia",
-        "title": "University Professor",
-        "institution": "UCR and UCIMED",
-        "description": "Training specialist physicians at the country's leading universities."
+        "title": "Professor & Full Professor",
+        "institution": "School of Medicine, UCR · UCIMED",
+        "description": "Training specialist physicians as Professor at the School of Medicine of the University of Costa Rica and as Full Professor (Catedrático) at the University of Medical Sciences (UCIMED)."
       },
       {
         "year": "Today",
@@ -134,6 +135,10 @@
       {
         "title": "Coronary Revascularization",
         "description": "Coronary bypass for patients with severe coronary artery disease."
+      },
+      {
+        "title": "Thoracic Surgery",
+        "description": "Surgical management of thoracic conditions including mediastinal tumors, superior vena cava syndrome, pericardial pathology, and pulmonary surgery."
       },
       {
         "title": "General Surgery",

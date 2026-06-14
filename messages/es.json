@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "title": "Dr. Edwin Alvarado — Cirujano Cardiovascular | Heredia",
+    "title": "Dr. Edwin Alvarado, Cirujano Cardiovascular | Heredia",
     "description": "Especialista en Cirugía Cardiovascular y General con formación en Madrid, España y más de 40 años de experiencia. Consulta privada en Heredia, Costa Rica.",
-    "ogTitle": "Dr. Edwin Manuel Alvarado Arce | Cirugía Cardiovascular y General — Heredia"
+    "ogTitle": "Dr. Edwin Manuel Alvarado Arce | Cirugía Cardiovascular y General, Heredia"
   },
   "nav": {
     "inicio": "Inicio",
@@ -53,8 +53,8 @@
     "ctaSecondary": "Conocer más",
     "stats": {
       "experience": { "value": "+40 años",       "label": "de experiencia clínica" },
-      "service":    { "value": "Hospital México", "label": "Ex Jefe de Servicio, CCSS" },
-      "teaching":   { "value": "UCR · UCIMED",   "label": "Profesor universitario" },
+      "service":    { "value": "Hospital México", "label": "Jefe, Cirugía de Tórax y Cardiovascular" },
+      "teaching":   { "value": "UCR · UCIMED",   "label": "Profesor y Catedrático" },
       "union":      { "value": "Unión Médica",   "label": "Fiscal Nacional" },
       "madrid":     { "value": "Madrid",          "label": "Formación en España" },
       "clinic":     { "value": "Heredia, CR",     "label": "Consulta privada activa" }
@@ -63,13 +63,14 @@
   "sobre": {
     "sectionLabel": "Sobre el Doctor",
     "title": "Una vida dedicada al corazón",
-    "body": "El Dr. Edwin Manuel Alvarado Arce es médico cirujano especializado en Cirugía Cardiovascular y Cirugía General, con más de cuatro décadas de trayectoria en Costa Rica. Realizó su especialización en el Hospital Ramón y Cajal y la Universidad Alcalá de Henares en Madrid, España.\n\nFue Jefe del Servicio de Cirugía Cardiovascular y Torácica del Hospital México de la CCSS, y ha formado generaciones de médicos como profesor en la Universidad de Costa Rica (UCR) y la Universidad de Ciencias Médicas (UCIMED).\n\nSu consulta privada en Heredia combina la experiencia acumulada de una carrera institucional de alto nivel con la atención personalizada que cada paciente merece.",
+    "body": "El Dr. Edwin Manuel Alvarado Arce es médico cirujano especializado en Cirugía Cardiovascular y Cirugía General, con más de cuatro décadas de trayectoria en Costa Rica. Realizó su especialización en el Hospital Ramón y Cajal y la Universidad de Alcalá de Henares en Madrid, España.\n\nEs Jefe del Servicio de Cirugía de Tórax y Cardiovascular del Hospital México de la CCSS, y ha formado generaciones de médicos como Profesor de la Facultad de Medicina de la Universidad de Costa Rica (UCR) y como Catedrático de la Universidad de Ciencias Médicas (UCIMED).\n\nSu labor académica e investigativa incluye presentaciones en el Congreso Médico Nacional y publicaciones en revistas científicas nacionales e internacionales. Su consulta privada en Heredia combina la experiencia de una carrera institucional de alto nivel con la atención personalizada que cada paciente merece.",
     "credentials": {
       "cardiovascular": "Especialista en Cirugía Cardiovascular, Hospital Ramón y Cajal, Madrid",
       "general": "Especialista en Cirugía General, Universidad de Costa Rica",
-      "hospital": "Ex Jefe del Servicio de Cirugía Cardiovascular, Hospital México (CCSS)",
-      "ucr": "Profesor, Universidad de Costa Rica",
-      "ucimed": "Profesor, Universidad de Ciencias Médicas (UCIMED)",
+      "hospital": "Jefe del Servicio de Cirugía de Tórax y Cardiovascular, Hospital México (CCSS)",
+      "editor": "Editor Nacional, Revista Costarricense de Cardiología",
+      "ucr": "Profesor, Facultad de Medicina, Universidad de Costa Rica",
+      "ucimed": "Catedrático, Universidad de Ciencias Médicas (UCIMED)",
       "experience": "Más de 40 años de experiencia"
     }
   },
@@ -93,19 +94,19 @@
         "year": "Trayectoria",
         "title": "Hospital México",
         "institution": "Caja Costarricense de Seguro Social",
-        "description": "Cirujano cardiovascular en el principal centro de referencia del país durante décadas de servicio."
+        "description": "Cirujano cardiovascular y de tórax en el principal centro de referencia del país, formando parte de los avances más significativos de la medicina cardiovascular en Costa Rica."
       },
       {
         "year": "Jefatura",
-        "title": "Jefe del Servicio de Cirugía Cardiovascular",
+        "title": "Jefe del Servicio de Cirugía de Tórax y Cardiovascular",
         "institution": "Hospital México, CCSS",
-        "description": "Dirección del servicio de mayor volumen en cirugía cardiovascular de Costa Rica."
+        "description": "Dirección del servicio de mayor volumen en cirugía cardiovascular de Costa Rica. Presentó la Historia de la Cirugía Cardiovascular en Costa Rica en el 76° Congreso Médico Nacional, reconocida por la dirección de la Revista Médica de Costa Rica."
       },
       {
         "year": "Docencia",
-        "title": "Profesor Universitario",
-        "institution": "UCR y UCIMED",
-        "description": "Formación de médicos especialistas en las principales universidades del país."
+        "title": "Profesor y Catedrático Universitario",
+        "institution": "Facultad de Medicina, UCR · UCIMED",
+        "description": "Formación de médicos especialistas como Profesor de la Facultad de Medicina de la Universidad de Costa Rica y como Catedrático de la Universidad de Ciencias Médicas (UCIMED)."
       },
       {
         "year": "Hoy",
@@ -134,6 +135,10 @@
       {
         "title": "Revascularización Coronaria",
         "description": "Bypass coronario para pacientes con enfermedad coronaria severa."
+      },
+      {
+        "title": "Cirugía Torácica",
+        "description": "Atención quirúrgica de enfermedades del tórax: tumores mediastinales, síndrome de vena cava superior, patologías del pericardio y cirugía pulmonar."
       },
       {
         "title": "Cirugía General",

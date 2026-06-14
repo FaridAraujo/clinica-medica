@@ -7,7 +7,7 @@ interface AccordionItem {
   body: React.ReactNode;
 }
 
-export function AccordionList({ items }: { items: AccordionItem[] }) {
+export function AccordionList({ items, icon = 'cross' }: { items: AccordionItem[]; icon?: 'cross' | 'chevron' }) {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
@@ -24,29 +24,42 @@ export function AccordionList({ items }: { items: AccordionItem[] }) {
               className="flex w-full items-center justify-between gap-6 py-5 text-left active:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue sm:py-6"
             >
               {item.heading}
-              <span
-                aria-hidden="true"
-                className={[
-                  'flex h-6 w-6 shrink-0 items-center justify-center rounded-full border',
-                  'motion-safe:transition-[transform,border-color,color] motion-safe:duration-[220ms]',
-                  isOpen ? 'border-red/40 text-red' : 'border-navy/[0.18] text-navy/35',
-                ].join(' ')}
-                style={{
-                  transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
-                  transitionTimingFunction: 'cubic-bezier(0.34,1.56,0.64,1)',
-                }}
-              >
-                <svg
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.25"
-                  strokeLinecap="round"
-                  className="h-2.5 w-2.5"
+
+              {icon === 'cross' ? (
+                <span
+                  aria-hidden="true"
+                  className={[
+                    'flex h-6 w-6 shrink-0 items-center justify-center rounded-full border',
+                    'motion-safe:transition-[transform,border-color,color] motion-safe:duration-[220ms]',
+                    isOpen ? 'border-red/40 text-red' : 'border-navy/[0.18] text-navy/35',
+                  ].join(' ')}
+                  style={{
+                    transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+                    transitionTimingFunction: 'cubic-bezier(0.34,1.56,0.64,1)',
+                  }}
                 >
-                  <path d="M6 1v10M1 6h10" />
-                </svg>
-              </span>
+                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" className="h-2.5 w-2.5">
+                    <path d="M6 1v10M1 6h10" />
+                  </svg>
+                </span>
+              ) : (
+                <span
+                  aria-hidden="true"
+                  className={[
+                    'flex h-5 w-5 shrink-0 items-center justify-center',
+                    'motion-safe:transition-[transform,color] motion-safe:duration-[250ms]',
+                    isOpen ? 'text-navy/60' : 'text-navy/25',
+                  ].join(' ')}
+                  style={{
+                    transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                    transitionTimingFunction: 'cubic-bezier(0.34,1.56,0.64,1)',
+                  }}
+                >
+                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className="h-3 w-3">
+                    <path d="M2 4l4 4 4-4" />
+                  </svg>
+                </span>
+              )}
             </button>
 
             {/* Open: 220ms ease-out — Close: 140ms ease-in (asymmetric per motion principles) */}

@@ -10,11 +10,10 @@ type Variant = 'dark' | 'light';
 
 interface PDFThumbnailProps {
   pdfPath: string;
-  // fixed width mode (sidebar list)
   width?: number;
-  // fill mode: stretches to container width (card grid)
   fill?: boolean;
   variant?: Variant;
+  onStatusChange?: (status: Status) => void;
 }
 
 export default function PDFThumbnail({
@@ -22,8 +21,14 @@ export default function PDFThumbnail({
   width = 180,
   fill = false,
   variant = 'dark',
+  onStatusChange,
 }: PDFThumbnailProps) {
-  const [status, setStatus]       = useState<Status>('loading');
+  const [status, setStatus] = useState<Status>('loading');
+
+  const updateStatus = (s: Status) => {
+    setStatus(s);
+    onStatusChange?.(s);
+  };
   const [renderW, setRenderW]     = useState(fill ? 0 : width);
   const containerRef              = useRef<HTMLDivElement>(null);
 
@@ -41,13 +46,9 @@ export default function PDFThumbnail({
 
   const skeletonCls = variant === 'dark'
     ? 'animate-pulse bg-white/[0.06]'
-    : 'animate-pulse bg-navy/[0.05]';
+    : 'animate-pulse bg-navy/[0.04]';
 
-  const errorBgCls = variant === 'dark'
-    ? 'flex items-center justify-center bg-white/[0.04]'
-    : 'flex items-center justify-center bg-navy/[0.04]';
-
-  const iconCls = variant === 'dark' ? 'h-7 w-7 text-white/20' : 'h-7 w-7 text-navy/20';
+  const dark = variant === 'dark';
 
   if (fill) {
     return (
@@ -57,19 +58,17 @@ export default function PDFThumbnail({
           className={[
             'absolute inset-0 transition-opacity duration-300',
             status === 'ready' ? 'opacity-0' : 'opacity-100',
-            status === 'error' ? errorBgCls : skeletonCls,
+            status === 'error' ? 'opacity-0' : skeletonCls,
           ].join(' ')}
-        >
-          {status === 'error' && <FileIcon className={iconCls} />}
-        </div>
+        />
 
         {/* PDF canvas */}
         {renderW > 0 && (
           <div className={['transition-opacity duration-500', status === 'ready' ? 'opacity-100' : 'opacity-0'].join(' ')}>
             <Document
               file={pdfPath}
-              onLoadSuccess={() => setStatus('ready')}
-              onLoadError={() => setStatus('error')}
+              onLoadSuccess={() => updateStatus('ready')}
+              onLoadError={() => updateStatus('error')}
               loading={null}
               error={null}
             >
@@ -99,17 +98,31 @@ export default function PDFThumbnail({
         className={[
           'absolute inset-0 transition-opacity duration-300',
           status === 'ready' ? 'opacity-0' : 'opacity-100',
-          status === 'error' ? errorBgCls : skeletonCls,
+          status === 'error'
+            ? dark
+              ? 'flex flex-col items-center justify-center gap-2 bg-white/[0.03]'
+              : 'flex flex-col items-center justify-center gap-2 bg-navy/[0.04]'
+            : skeletonCls,
         ].join(' ')}
       >
-        {status === 'error' && <FileIcon className={iconCls} />}
+        {status === 'error' && (
+          <>
+            <FileIcon className={dark ? 'h-6 w-6 text-white/25' : 'h-6 w-6 text-navy/20'} />
+            <span className={[
+              'px-2 text-center font-body text-[0.5rem] font-medium uppercase tracking-[0.12em]',
+              dark ? 'text-white/20' : 'text-navy/30',
+            ].join(' ')}>
+              Preview no disponible
+            </span>
+          </>
+        )}
       </div>
 
       <div className={['transition-opacity duration-500', status === 'ready' ? 'opacity-100' : 'opacity-0'].join(' ')}>
         <Document
           file={pdfPath}
-          onLoadSuccess={() => setStatus('ready')}
-          onLoadError={() => setStatus('error')}
+          onLoadSuccess={() => updateStatus('ready')}
+          onLoadError={() => updateStatus('error')}
           loading={null}
           error={null}
         >

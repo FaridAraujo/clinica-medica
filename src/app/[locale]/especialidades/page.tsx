@@ -75,7 +75,7 @@ export default async function EspecialidadesPage({ params }: Props) {
                 <div className="flex items-center gap-4 sm:gap-6">
                   <div className="hidden items-center gap-1.5 sm:flex">
                     <MedicalCrossIcon className="h-[0.5rem] w-[0.5rem] shrink-0 text-red" aria-hidden="true" />
-                    <span className="w-[80px] font-body text-[0.55rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
+                    <span className="w-[108px] font-body text-[0.55rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
                       {categoryFor(i)}
                     </span>
                   </div>
@@ -85,7 +85,7 @@ export default async function EspecialidadesPage({ params }: Props) {
                 </div>
               ),
               body: (
-                <p className="max-w-[52ch] font-body text-[1rem] leading-[1.95] text-navy/65 sm:pl-[128px]">
+                <p className="max-w-[52ch] font-body text-[1rem] leading-[1.95] text-navy/65 sm:pl-[152px]">
                   {item.description}
                 </p>
               ),

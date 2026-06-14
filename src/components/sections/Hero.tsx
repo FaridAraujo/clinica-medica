@@ -166,7 +166,7 @@ export default function Hero() {
                 (key === 'madrid' || key === 'clinic') ? 'hidden sm:flex' : '',
               ].join(' ')}
             >
-              <dt className="font-body text-[1.25rem] font-semibold leading-none tracking-tight text-white">
+              <dt className="font-heading text-[1.5rem] font-semibold leading-none tracking-tight text-white">
                 {value}
               </dt>
               <dd className="font-body text-[0.675rem] font-medium uppercase tracking-[0.12em] leading-tight text-white/40">
@@ -205,7 +205,7 @@ function ECGTrace({ className }: { className?: string }) {
       className={className}
       aria-hidden="true"
     >
-      <path d="M0,12 L40,12 L42,11 L44,12 L46,13 L47,3 L49,21 L50,12 L55,10.5 L58,12 L100,12" />
+      <path className="ecg-path" d="M0,12 L40,12 L42,11 L44,12 L46,13 L47,3 L49,21 L50,12 L55,10.5 L58,12 L100,12" />
     </svg>
   );
 }

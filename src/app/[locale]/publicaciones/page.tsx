@@ -40,8 +40,9 @@ export default function PublicacionesPage() {
             data-reveal-delay="0.15"
             className="mt-7 max-w-[52ch] font-body text-[1.0625rem] leading-[1.85] text-navy/50"
           >
-            Artículos científicos y material de investigación del Dr. Edwin Manuel
-            Alvarado Arce en cirugía cardiovascular y general.
+            Cuatro décadas de ejercicio clínico en cirugía cardiovascular, destiladas
+            en artículos científicos, revisiones históricas e investigación publicada
+            en revistas médicas nacionales.
           </p>
         </div>
       </section>

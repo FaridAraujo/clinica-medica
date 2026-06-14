@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import Hero from '@/components/sections/Hero';
 import MapEmbed from '@/components/ui/MapEmbed';
 import { AccordionList } from '@/components/ui/AccordionList';
+import AesculapiusRod from '@/components/ui/AesculapiusRod';
 import { PHONE_OFFICE, PHONE_MOBILE, CLINIC_ADDRESS, MAPS_EMBED_URL, WHATSAPP_URL, MAPS_DIRECTIONS_URL } from '@/lib/constants';
 import { buildHomeJsonLd } from '@/lib/jsonLd';
 
@@ -138,8 +139,9 @@ export default async function HomePage({ params }: Props) {
           Sección label + heading, luego foto placeholder de quirófano,
           luego bio + trayectoria en dos columnas.
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-warm-white py-12 sm:py-16 lg:py-24">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
+      <section className="relative overflow-hidden bg-warm-white py-12 sm:py-16 lg:py-24">
+        <AesculapiusRod className="pointer-events-none absolute -right-6 -bottom-10 h-[420px] w-auto text-navy/[0.04] sm:h-[480px]" />
+        <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
 
           {/* Section header — centrado */}
           <div className="mb-7 flex flex-col items-center gap-4 text-center">
@@ -182,35 +184,27 @@ export default async function HomePage({ params }: Props) {
               </Link>
             </div>
 
-            {/* Trayectoria — accordion */}
+            {/* Trayectoria — lista estática */}
             <div>
               <p className="mb-4 font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-navy/40">
                 Trayectoria
               </p>
-              <AccordionList
-                items={trayectoria.map(entry => ({
-                  heading: (
-                    <div key={entry.year} className="flex flex-col gap-0.5">
-                      <span className="font-body text-[0.575rem] font-semibold uppercase tracking-[0.14em] text-navy/40">
-                        {entry.year}
-                      </span>
-                      <span className="font-body text-[0.9rem] font-semibold leading-snug text-navy">
-                        {entry.title}
-                      </span>
-                    </div>
-                  ),
-                  body: (
-                    <div key={`${entry.year}-b`} className="flex flex-col gap-1.5">
-                      <span className="font-body text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-navy/45">
-                        {entry.institution}
-                      </span>
-                      <p className="max-w-[42ch] font-body text-[0.875rem] leading-relaxed text-navy/60">
-                        {entry.description}
-                      </p>
-                    </div>
-                  ),
-                }))}
-              />
+              <ul className="flex flex-col" role="list">
+                {trayectoria.map((entry, i) => (
+                  <li key={i} className="flex flex-col gap-0.5 border-t border-navy/[0.08] py-4">
+                    <span className="font-body text-[0.575rem] font-semibold uppercase tracking-[0.15em] text-navy/35">
+                      {entry.year}
+                    </span>
+                    <span className="font-body text-[0.875rem] font-semibold leading-snug text-navy">
+                      {entry.title}
+                    </span>
+                    <span className="font-body text-[0.6rem] uppercase tracking-[0.1em] text-navy/45">
+                      {entry.institution}
+                    </span>
+                  </li>
+                ))}
+                <li className="border-t border-navy/[0.08]" aria-hidden="true" />
+              </ul>
             </div>
           </div>
         </div>
@@ -248,6 +242,7 @@ export default async function HomePage({ params }: Props) {
 
           {/* Accordion de especialidades */}
           <AccordionList
+            icon="chevron"
             items={especialidades.map((item, i) => ({
               heading: (
                 <h3 key={item.title} className="font-heading font-light leading-snug text-navy" style={{ fontSize: 'clamp(1.125rem, 2vw, 1.5rem)' }}>

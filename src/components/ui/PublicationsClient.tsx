@@ -18,12 +18,14 @@ const PDFReader = dynamic(() => import('./PDFReader'), {
   ),
 });
 
-type Filter = 'all' | 'article' | 'video';
+type Filter = 'all' | 'article' | 'video' | 'recognition' | 'reference';
 
 const FILTER_LABELS: Record<Filter, string> = {
-  all:     'Todos',
-  article: 'Artículos',
-  video:   'Videos',
+  all:         'Todos',
+  article:     'Artículos',
+  video:       'Videos',
+  recognition: 'Reconocimientos',
+  reference:   'Referencias',
 };
 
 // ─── Skeletons ────────────────────────────────────────────────────────────────
@@ -34,15 +36,21 @@ function CardThumbnailSkeleton() {
 
 // ─── Badges ───────────────────────────────────────────────────────────────────
 
+const TYPE_BADGE: Record<Publication['type'], { label: string; cls: string }> = {
+  article:     { label: 'Artículo',       cls: 'bg-red/[0.1] text-red' },
+  video:       { label: 'Video',          cls: 'bg-blue/[0.1] text-blue' },
+  recognition: { label: 'Reconocimiento', cls: 'bg-navy/[0.07] text-navy/55' },
+  reference:   { label: 'Referencia',     cls: 'bg-navy/[0.05] text-navy/40' },
+};
+
 function TypeBadge({ type }: { type: Publication['type'] }) {
+  const { label, cls } = TYPE_BADGE[type];
   return (
     <span className={[
       'inline-flex items-center rounded-full px-2.5 py-0.5 font-body text-[0.5rem] font-semibold uppercase tracking-[0.16em]',
-      type === 'article'
-        ? 'bg-red/[0.1] text-red'
-        : 'bg-navy/[0.07] text-navy/60',
+      cls,
     ].join(' ')}>
-      {type === 'article' ? 'PDF' : 'Video'}
+      {label}
     </span>
   );
 }
@@ -66,6 +74,15 @@ function VideoThumbnail({ videoId }: { videoId: string }) {
   );
 }
 
+// ─── Colores de placeholder por tipo ─────────────────────────────────────────
+
+const PLACEHOLDER_BG: Record<Publication['type'], string> = {
+  article:     'bg-red/[0.06]',
+  video:       'bg-blue/[0.06]',
+  recognition: 'bg-navy/[0.05]',
+  reference:   'bg-navy/[0.04]',
+};
+
 // ─── Tarjeta ──────────────────────────────────────────────────────────────────
 
 function PublicationCard({
@@ -75,22 +92,41 @@ function PublicationCard({
   pub: Publication;
   onOpen: (p: Publication) => void;
 }) {
+  const [pdfStatus, setPdfStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+
   const isInteractive = !!(pub.pdfPath || pub.videoId);
+
+  const handleClick = () => {
+    if (!isInteractive) return;
+    // Reconocimientos y referencias — abrir PDF en nueva pestaña siempre
+    if (pub.pdfPath && (pub.type === 'recognition' || pub.type === 'reference')) {
+      window.open(pub.pdfPath, '_blank', 'noopener,noreferrer');
+      return;
+    }
+    // Artículo que pdfjs no pudo cargar → también nueva pestaña
+    if (pub.pdfPath && pdfStatus === 'error') {
+      window.open(pub.pdfPath, '_blank', 'noopener,noreferrer');
+      return;
+    }
+    onOpen(pub);
+  };
 
   return (
     <article
       className={[
-        'group flex flex-col border border-navy/[0.08] bg-white transition-shadow duration-200',
+        'group flex flex-col border border-navy/[0.11] bg-white',
+        'shadow-[0_2px_12px_-2px_rgba(13,34,64,0.09)]',
+        'transition-[box-shadow,transform] duration-200',
         isInteractive
-          ? 'cursor-pointer hover:shadow-[0_4px_24px_-4px_rgba(13,34,64,0.12)]'
+          ? 'cursor-pointer hover:shadow-[0_8px_36px_-6px_rgba(13,34,64,0.18)] hover:-translate-y-0.5'
           : '',
       ].join(' ')}
-      onClick={isInteractive ? () => onOpen(pub) : undefined}
+      onClick={handleClick}
       style={isInteractive ? { touchAction: 'manipulation' } : undefined}
       role={isInteractive ? 'button' : undefined}
       tabIndex={isInteractive ? 0 : undefined}
       onKeyDown={isInteractive ? (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(pub); }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick(); }
       } : undefined}
       aria-label={isInteractive ? `Abrir: ${pub.title}` : undefined}
     >
@@ -99,8 +135,35 @@ function PublicationCard({
         className="relative w-full shrink-0 overflow-hidden bg-navy/[0.03]"
         style={{ aspectRatio: '16/10' }}
       >
-        {pub.type === 'article' && pub.pdfPath ? (
-          <PDFThumbnail pdfPath={pub.pdfPath} fill variant="light" />
+        {pub.pdfPath ? (
+          <>
+            {/* PDFThumbnail — oculto cuando falla, visible cuando carga */}
+            <div className={pdfStatus === 'error' ? 'invisible absolute inset-0' : 'h-full w-full'}>
+              <PDFThumbnail
+                pdfPath={pub.pdfPath}
+                fill
+                variant="light"
+                onStatusChange={setPdfStatus}
+              />
+            </div>
+
+            {/* Placeholder diseñado — solo cuando pdfjs falla */}
+            {pdfStatus === 'error' && (
+              <div className={[
+                'absolute inset-0 flex flex-col justify-between overflow-hidden p-5',
+                PLACEHOLDER_BG[pub.type],
+              ].join(' ')}>
+                <TypeBadge type={pub.type} />
+                <span
+                  className="select-none self-end font-heading font-light leading-none text-navy/[0.1]"
+                  style={{ fontSize: 'clamp(3.5rem, 8vw, 5.5rem)' }}
+                  aria-hidden="true"
+                >
+                  {pub.year}
+                </span>
+              </div>
+            )}
+          </>
         ) : pub.type === 'video' && pub.videoId ? (
           <VideoThumbnail videoId={pub.videoId} />
         ) : (
@@ -121,11 +184,11 @@ function PublicationCard({
           <TypeBadge type={pub.type} />
           {pub.journal && (
             <>
-              <span className="text-navy/20" aria-hidden="true">·</span>
-              <span className="font-body text-[0.65rem] text-navy/40">{pub.journal}</span>
+              <span className="text-navy/30" aria-hidden="true">·</span>
+              <span className="font-body text-[0.65rem] text-navy/55">{pub.journal}</span>
             </>
           )}
-          <span className="ml-auto font-body text-[0.6rem] tabular-nums text-navy/30">{pub.year}</span>
+          <span className="ml-auto font-body text-[0.6rem] tabular-nums text-navy/45">{pub.year}</span>
         </div>
 
         {/* Título */}
@@ -137,13 +200,13 @@ function PublicationCard({
         </h3>
 
         {/* Autores */}
-        <p className="font-body text-[0.775rem] leading-relaxed text-navy/45">
+        <p className="font-body text-[0.775rem] leading-relaxed text-navy/60">
           {pub.authors}
         </p>
 
         {/* Abstract */}
         {pub.abstract && (
-          <p className="line-clamp-3 font-body text-[0.825rem] leading-[1.75] text-navy/35">
+          <p className="line-clamp-3 font-body text-[0.825rem] leading-[1.75] text-navy/50">
             {pub.abstract}
           </p>
         )}
@@ -154,7 +217,7 @@ function PublicationCard({
             {pub.tags.map(tag => (
               <span
                 key={tag}
-                className="rounded-full border border-navy/[0.1] px-2.5 py-0.5 font-body text-[0.5rem] font-medium uppercase tracking-[0.13em] text-navy/35"
+                className="rounded-full border border-navy/[0.15] px-2.5 py-0.5 font-body text-[0.5rem] font-medium uppercase tracking-[0.13em] text-navy/50"
               >
                 {tag}
               </span>
@@ -163,15 +226,15 @@ function PublicationCard({
         )}
 
         {/* Acciones */}
-        <div className="mt-auto flex items-center gap-5 border-t border-navy/[0.06] pt-5">
+        <div className="mt-auto flex items-center gap-5 border-t border-navy/[0.08] pt-5">
           {isInteractive && (
             <button
-              onClick={(e) => { e.stopPropagation(); onOpen(pub); }}
+              onClick={(e) => { e.stopPropagation(); handleClick(); }}
               style={{ touchAction: 'manipulation' }}
-              className="inline-flex items-center gap-1.5 font-body text-[0.75rem] font-medium text-navy/50 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue/40"
+              className="inline-flex items-center gap-1.5 font-body text-[0.75rem] font-medium text-navy/65 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue/40"
             >
               <EyeIcon className="h-3.5 w-3.5 shrink-0" />
-              {pub.type === 'video' ? 'Ver video' : 'Leer artículo'}
+              {pub.type === 'video' ? 'Ver video' : (pub.type === 'recognition' || pub.type === 'reference') ? 'Ver documento' : 'Leer artículo'}
             </button>
           )}
           {pub.pdfPath && (
@@ -278,9 +341,10 @@ export default function PublicationsClient({ items }: { items: Publication[] }) 
   const [filter, setFilter]     = useState<Filter>('all');
   const [selected, setSelected] = useState<Publication | null>(null);
 
-  const hasArticles = items.some(p => p.type === 'article');
-  const hasVideos   = items.some(p => p.type === 'video');
-  const showFilters = hasArticles && hasVideos;
+  const availableTypes = (['article', 'video', 'recognition', 'reference'] as const).filter(t =>
+    items.some(p => p.type === t)
+  );
+  const showFilters = availableTypes.length > 1;
 
   const filtered = items.filter(p => filter === 'all' || p.type === filter);
 
@@ -314,7 +378,7 @@ export default function PublicationsClient({ items }: { items: Publication[] }) 
 
         {showFilters && (
           <div className="flex gap-5" role="group" aria-label="Filtrar">
-            {(['all', 'article', 'video'] as Filter[]).map(f => (
+            {(['all', ...availableTypes] as Filter[]).map(f => (
               <button
                 key={f}
                 onClick={() => setFilter(f)}
