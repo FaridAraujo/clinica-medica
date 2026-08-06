@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { getLocale } from 'next-intl/server';
+import { SITE_URL } from '@/lib/constants';
 import './globals.css';
 
 const cormorant = Cormorant_Garamond({
@@ -19,8 +20,20 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://dralvarado.vercel.app'),
-  robots: { index: true, follow: true },
+  // Fuente única de verdad del dominio (ver constants.ts) — resuelve todas las
+  // URLs relativas de canonical, Open Graph e imágenes.
+  metadataBase: new URL(SITE_URL),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
 };
 
 export default async function RootLayout({
@@ -32,7 +45,7 @@ export default async function RootLayout({
 
   return (
     <html
-      lang={locale}
+      lang={locale === 'es' ? 'es-CR' : locale}
       className={`${cormorant.variable} ${inter.variable}`}
     >
       <body className="min-h-screen antialiased">{children}</body>

@@ -13,11 +13,13 @@ import {
 
 interface Props { params: Promise<{ locale: string }> }
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
   return {
     title: 'Contacto — Dr. Edwin Alvarado | Agendar Cita',
     description:
       'Agende su consulta con el Dr. Edwin Manuel Alvarado Arce. Atención privada de cirugía cardiovascular y general en Heredia, Costa Rica.',
+    alternates: { canonical: `/${locale}/contacto` },
   };
 }
 
@@ -139,7 +141,7 @@ export default async function ContactoPage({ params }: Props) {
               >
                 Envíenos su consulta
               </h2>
-              <div data-reveal data-reveal-delay="0.11" className="mt-6 h-[2px] w-12 bg-red" aria-hidden="true" />
+              <div data-reveal-rule data-reveal-delay="0.11" className="mt-6 h-[2px] w-12 bg-red" aria-hidden="true" />
               <p data-reveal data-reveal-delay="0.15" className="mt-6 max-w-[42ch] font-body text-[1rem] leading-[1.85] text-navy/60">
                 Complete el formulario y elija si prefiere enviarlo por WhatsApp o por correo electrónico. Le confirmaremos disponibilidad a la brevedad.
               </p>

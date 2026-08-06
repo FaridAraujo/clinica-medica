@@ -38,6 +38,11 @@ body {
 
 :where(h1, h2, h3, h4) {
   font-family: var(--font-cormorant), Georgia, serif;
+  text-wrap: balance;
+}
+
+:where(p) {
+  text-wrap: pretty;
 }
 
 @keyframes scrollPulse {
@@ -89,6 +94,24 @@ body {
     opacity: 0;
     will-change: opacity, transform;
   }
+
+  /* Filetes rojos — se dibujan de izquierda a derecha, sin fade */
+  [data-reveal-rule] {
+    transform: scaleX(0);
+    transform-origin: left center;
+    will-change: transform;
+  }
+
+  /* Filete del hero — CSS-driven para no colisionar con GSAP del hero */
+  .rule-hero {
+    transform: scaleX(0);
+    transform-origin: left center;
+    animation: ruleGrow 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.85s forwards;
+  }
+}
+
+@keyframes ruleGrow {
+  to { transform: scaleX(1); }
 }
 
 /* ── Grain — textura sutil sobre fondos navy ────────────────── */

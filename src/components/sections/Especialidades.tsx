@@ -47,7 +47,7 @@ export default function Especialidades() {
           >
             {t('title')}
           </h2>
-          <div className="mt-4 h-[2px] w-14 bg-red" aria-hidden="true" />
+          <div data-reveal-rule data-reveal-delay="0.05" className="mt-4 h-[2px] w-14 bg-red" aria-hidden="true" />
         </div>
 
         {/* Cards — gap-px + bg on grid = gutters as lines */}

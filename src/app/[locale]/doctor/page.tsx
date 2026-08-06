@@ -6,11 +6,13 @@ import { AccordionList } from '@/components/ui/AccordionList';
 
 interface Props { params: Promise<{ locale: string }> }
 
-export async function generateMetadata(_: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
   return {
     title: 'Dr. Edwin Alvarado, Sobre el Doctor | Cirujano Cardiovascular',
     description:
       'Más de 40 años de trayectoria en cirugía cardiovascular y general. Formado en el Hospital Ramón y Cajal de Madrid. Jefe del Servicio de Cirugía de Tórax y Cardiovascular del Hospital México (CCSS).',
+    alternates: { canonical: `/${locale}/doctor` },
   };
 }
 
@@ -71,11 +73,11 @@ export default async function DoctorPage({ params }: Props) {
                 className="mt-5 font-heading font-light leading-[1.04] text-navy"
                 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)' }}
               >
-                Dr. Edwin Manuel<br />Alvarado Arce
+                Dr. Edwin Manuel<br />Alvarado Arce
               </h1>
-              <div data-reveal data-reveal-delay="0.11" className="mt-7 h-[2px] w-14 bg-red" aria-hidden="true" />
+              <div data-reveal-rule data-reveal-delay="0.11" className="mt-7 h-[2px] w-14 bg-red" aria-hidden="true" />
               <p data-reveal data-reveal-delay="0.15" className="mt-7 font-body text-[0.825rem] font-medium uppercase tracking-[0.22em] text-navy/45">
-                Cirujano Cardiovascular y General · Heredia, Costa Rica
+                Cirujano Cardiovascular y General · Heredia, Costa Rica
               </p>
             </div>
 
@@ -175,7 +177,7 @@ export default async function DoctorPage({ params }: Props) {
                     Trayectoria
                   </p>
                   <p className="font-heading text-[1.625rem] font-medium leading-none text-navy">
-                    +40 años
+                    +40 años
                   </p>
                   <p className="font-body text-[0.8rem] leading-relaxed text-navy/70">
                     de experiencia clínica continua

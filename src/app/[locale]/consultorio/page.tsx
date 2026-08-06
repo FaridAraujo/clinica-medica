@@ -11,11 +11,13 @@ import {
 
 interface Props { params: Promise<{ locale: string }> }
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
   return {
     title: 'El Consultorio — Dr. Edwin Alvarado | Heredia, Costa Rica',
     description:
       'Consulta privada de cirugía cardiovascular y general en Heredia, Costa Rica. Atención directa con el especialista, sin intermediarios ni listas de espera institucionales.',
+    alternates: { canonical: `/${locale}/consultorio` },
   };
 }
 
@@ -49,7 +51,7 @@ export default async function ConsultorioPage({ params }: Props) {
           >
             {tC('title')}
           </h1>
-          <div data-reveal data-reveal-delay="0.11" className="mt-7 h-[2px] w-14 bg-red" aria-hidden="true" />
+          <div data-reveal-rule data-reveal-delay="0.11" className="mt-7 h-[2px] w-14 bg-red" aria-hidden="true" />
           <p data-reveal data-reveal-delay="0.15" className="mt-7 max-w-[52ch] font-body text-[1.0625rem] leading-[1.85] text-white/45">
             Atención privada en Heredia, Costa Rica. Directo con el especialista,
             sin intermediarios ni listas de espera institucionales.

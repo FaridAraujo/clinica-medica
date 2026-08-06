@@ -1,5 +1,13 @@
-// TODO: Reemplazar con dominio final antes de deploy
-export const SITE_URL = 'https://dralvarado.cr';
+// ⚠️ FUENTE ÚNICA DE VERDAD del dominio: lo consumen metadataBase (layout),
+// el sitemap, el robots y todo el JSON-LD. No dupliques el dominio en otro lado.
+export const SITE_URL = 'https://drealvaradoarce.com';
+
+// Nombre del sitio para Open Graph / structured data
+export const SITE_NAME = 'Dr. Edwin Alvarado · Cirugía Cardiovascular';
+
+// Perfiles externos verificables — cuando tenga Google Business Profile o
+// directorios médicos, agregar las URLs aquí para activar sameAs en JSON-LD.
+export const SOCIAL_PROFILES: string[] = [];
 
 export const CLINIC_ADDRESS = '50 metros al oeste de la Mussi de la UNA, Heredia';
 
@@ -14,7 +22,8 @@ export const CLINIC_GEO = {
 // TODO: Reemplazar con la URL exacta del embed una vez confirmada
 export const MAPS_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.2007573364986!2d-84.11317129999999!3d10.000269399999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0fba37d24b8cd%3A0x704fd40c95cbf458!2sMia%20Araujo%20Studio!5e0!3m2!1ses!2scr!4v1778734934947!5m2!1ses!2scr';
 
-// TODO: Confirm consultation hours with Dr. Alvarado before launch
+// El horario varía según citas — no se publica horario fijo.
+// En JSON-LD se declara explícitamente "por cita previa".
 export const CLINIC_HOURS: string | null = null;
 
 // Contact info from business card

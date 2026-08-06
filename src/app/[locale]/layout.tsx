@@ -3,6 +3,7 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
+import { SITE_NAME } from '@/lib/constants';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import ScrollAnimator from '@/components/ui/ScrollAnimator';
@@ -27,11 +28,45 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
+    // Google ya casi no pondera meta keywords, pero Bing y varios directorios
+    // médicos sí las leen. Cubrimos las variantes de búsqueda más probables.
+    keywords: [
+      'Dr. Alvarado',
+      'Dr. Edwin Alvarado',
+      'Doctor Edwin Alvarado',
+      'Edwin Manuel Alvarado Arce',
+      'cirujano cardiovascular',
+      'cirujano cardiovascular Heredia',
+      'cirujano cardiovascular Costa Rica',
+      'cirugía de corazón Costa Rica',
+      'cirujano de tórax',
+      'doctor Heredia',
+      'doctor Costa Rica',
+      'médico Heredia',
+      'clínica Heredia',
+      'consultorio médico Heredia',
+      'consultorios médicos Heredia',
+      'especialista del corazón Heredia',
+    ],
+    authors: [{ name: 'Dr. Edwin Manuel Alvarado Arce' }],
+    creator: 'Dr. Edwin Manuel Alvarado Arce',
+    publisher: 'Consultorio Dr. Edwin Alvarado',
+    category: 'health',
+    alternates: {
+      canonical: `/${locale}`,
+    },
     openGraph: {
       title: t('ogTitle'),
       description: t('description'),
+      url: `/${locale}`,
+      siteName: SITE_NAME,
       locale: 'es_CR',
       type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('ogTitle'),
+      description: t('description'),
     },
   };
 }

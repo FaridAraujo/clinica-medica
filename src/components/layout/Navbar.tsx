@@ -97,9 +97,9 @@ export default function Navbar() {
       >
         <nav
           aria-label="Navegación principal"
-          className="flex h-16 items-center justify-between px-6 sm:px-10 lg:px-14"
+          className="grid h-16 grid-cols-[1fr_auto_1fr] items-center px-6 sm:px-10 lg:px-14"
         >
-          {/* Logo */}
+          {/* Logo — columna izquierda */}
           <Link
             href={`/${locale}`}
             style={{ touchAction: 'manipulation' }}
@@ -128,7 +128,7 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop links */}
+          {/* Desktop links — columna central, geométricamente centrada */}
           <ul className="hidden items-center gap-8 lg:flex" role="list">
             {links.map(({ href, label }) => {
               const active = isActive(href);
@@ -165,53 +165,57 @@ export default function Navbar() {
             })}
           </ul>
 
-          {/* Desktop CTA */}
-          <div
-            className={[
-              'hidden items-center lg:flex',
-              'transition-[opacity,transform] duration-300 ease-out',
-              ctaVisible
-                ? 'translate-y-0 opacity-100'
-                : 'pointer-events-none -translate-y-1 opacity-0',
-            ].join(' ')}
-          >
-            <Link
-              href={`/${locale}/agendar`}
-              tabIndex={ctaVisible ? 0 : -1}
-              style={{ touchAction: 'manipulation' }}
-              className="group relative inline-flex items-center py-2.5 active:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
-            >
-              <span className={['relative font-body text-[0.825rem] font-medium transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:group-hover:text-blue', dark ? 'text-white' : 'text-navy'].join(' ')}>
-                {t('agendar')}
-                <span
-                  aria-hidden="true"
-                  className={['absolute -bottom-1 left-0 right-0 h-px transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:group-hover:bg-blue', dark ? 'bg-white/25' : 'bg-navy/25'].join(' ')}
-                />
-              </span>
-            </Link>
-          </div>
+          {/* Columna derecha — CTA en desktop, hamburger en mobile */}
+          <div className="flex items-center justify-end">
 
-          {/* Hamburger */}
-          <button
-            ref={hamburgerRef}
-            type="button"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
-            onClick={() => setOpen(v => !v)}
-            style={{ touchAction: 'manipulation' }}
-            className="relative flex h-11 w-11 flex-col items-center justify-center lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
-          >
-            {['', '', ''].map((_, i) => (
-              <span key={i} aria-hidden="true" className={[
-                'absolute block h-px w-[22px] origin-center transition-all duration-200 ease-out',
-                dark ? 'bg-white' : 'bg-navy',
-                i === 0 ? (open ? 'rotate-45'              : '-translate-y-[6px]') : '',
-                i === 1 ? (open ? 'opacity-0 scale-x-0 duration-150' : '')        : '',
-                i === 2 ? (open ? '-rotate-45'             : 'translate-y-[6px]') : '',
-              ].join(' ')} />
-            ))}
-          </button>
+            {/* Desktop CTA */}
+            <div
+              className={[
+                'hidden items-center lg:flex',
+                'transition-[opacity,transform] duration-300 ease-out',
+                ctaVisible
+                  ? 'translate-y-0 opacity-100'
+                  : 'pointer-events-none -translate-y-1 opacity-0',
+              ].join(' ')}
+            >
+              <Link
+                href={`/${locale}/agendar`}
+                tabIndex={ctaVisible ? 0 : -1}
+                style={{ touchAction: 'manipulation' }}
+                className="group relative inline-flex items-center py-2.5 active:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
+              >
+                <span className={['relative font-body text-[0.825rem] font-medium transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:group-hover:text-blue', dark ? 'text-white' : 'text-navy'].join(' ')}>
+                  {t('agendar')}
+                  <span
+                    aria-hidden="true"
+                    className={['absolute -bottom-1 left-0 right-0 h-px transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:group-hover:bg-blue', dark ? 'bg-white/25' : 'bg-navy/25'].join(' ')}
+                  />
+                </span>
+              </Link>
+            </div>
+
+            {/* Hamburger — mobile only */}
+            <button
+              ref={hamburgerRef}
+              type="button"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+              onClick={() => setOpen(v => !v)}
+              style={{ touchAction: 'manipulation' }}
+              className="relative flex h-11 w-11 flex-col items-center justify-center lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
+            >
+              {['', '', ''].map((_, i) => (
+                <span key={i} aria-hidden="true" className={[
+                  'absolute block h-px w-[22px] origin-center transition-all duration-200 ease-out',
+                  dark ? 'bg-white' : 'bg-navy',
+                  i === 0 ? (open ? 'rotate-45'                      : '-translate-y-[6px]') : '',
+                  i === 1 ? (open ? 'opacity-0 scale-x-0 duration-150' : '')                 : '',
+                  i === 2 ? (open ? '-rotate-45'                      : 'translate-y-[6px]') : '',
+                ].join(' ')} />
+              ))}
+            </button>
+          </div>
         </nav>
       </header>
 

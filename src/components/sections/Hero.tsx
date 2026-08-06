@@ -117,11 +117,11 @@ export default function Hero() {
             className="hero-item font-heading font-light leading-[1.08] text-white"
             style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)' }}
           >
-            Dr. Edwin Manuel<br />Alvarado Arce
+            Dr.{' '}Edwin Manuel<br />Alvarado Arce
           </h1>
 
           {/* Red rule */}
-          <div className="hero-item my-7 h-[2px] w-14 bg-red" aria-hidden="true" />
+          <div className="hero-item rule-hero my-7 h-[2px] w-14 bg-red" aria-hidden="true" />
 
           {/* Subtitle — oculto en mobile, visible desde sm */}
           <p className="hero-item hidden max-w-[46ch] font-body text-[1.0625rem] leading-relaxed text-white/60 sm:block">

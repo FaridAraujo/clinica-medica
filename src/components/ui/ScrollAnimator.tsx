@@ -42,6 +42,31 @@ export default function ScrollAnimator() {
             }
           );
         });
+
+        // Filetes rojos — scaleX 0→1, sin fade, transform-origin left
+        const rules = document.querySelectorAll<HTMLElement>('[data-reveal-rule]');
+
+        rules.forEach((el) => {
+          const delay = parseFloat(el.dataset.revealDelay ?? '0');
+
+          gsap.fromTo(
+            el,
+            { scaleX: 0 },
+            {
+              scaleX: 1,
+              duration: 0.55,
+              delay,
+              ease: 'power3.out',
+              transformOrigin: 'left center',
+              clearProps: 'transform',
+              scrollTrigger: {
+                trigger: el,
+                start: 'top 90%',
+                once: true,
+              },
+            }
+          );
+        });
       })
     );
 

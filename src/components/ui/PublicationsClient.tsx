@@ -114,7 +114,7 @@ function PublicationCard({
   return (
     <article
       className={[
-        'group flex flex-col border border-navy/[0.11] bg-white',
+        'group flex flex-row sm:flex-col border border-navy/[0.11] bg-white',
         'shadow-[0_2px_12px_-2px_rgba(13,34,64,0.09)]',
         'transition-[box-shadow,transform] duration-200',
         isInteractive
@@ -131,14 +131,11 @@ function PublicationCard({
       aria-label={isInteractive ? `Abrir: ${pub.title}` : undefined}
     >
       {/* ── Thumbnail ─────────────────────────────────────── */}
-      <div
-        className="relative w-full shrink-0 overflow-hidden bg-navy/[0.03]"
-        style={{ aspectRatio: '16/10' }}
-      >
+      {/* Mobile: franja vertical fija izquierda. sm+: barra horizontal con aspect ratio */}
+      <div className="relative w-[96px] shrink-0 overflow-hidden bg-navy/[0.03] sm:w-full sm:aspect-[16/10]">
         {pub.pdfPath ? (
           <>
-            {/* PDFThumbnail — oculto cuando falla, visible cuando carga */}
-            <div className={pdfStatus === 'error' ? 'invisible absolute inset-0' : 'h-full w-full'}>
+            <div className={pdfStatus === 'error' ? 'invisible absolute inset-0' : 'absolute inset-0'}>
               <PDFThumbnail
                 pdfPath={pub.pdfPath}
                 fill
@@ -147,16 +144,15 @@ function PublicationCard({
               />
             </div>
 
-            {/* Placeholder diseñado — solo cuando pdfjs falla */}
             {pdfStatus === 'error' && (
               <div className={[
-                'absolute inset-0 flex flex-col justify-between overflow-hidden p-5',
+                'absolute inset-0 flex flex-col justify-between overflow-hidden p-3 sm:p-5',
                 PLACEHOLDER_BG[pub.type],
               ].join(' ')}>
                 <TypeBadge type={pub.type} />
                 <span
                   className="select-none self-end font-heading font-light leading-none text-navy/[0.1]"
-                  style={{ fontSize: 'clamp(3.5rem, 8vw, 5.5rem)' }}
+                  style={{ fontSize: 'clamp(2rem, 8vw, 5.5rem)' }}
                   aria-hidden="true"
                 >
                   {pub.year}
@@ -170,23 +166,21 @@ function PublicationCard({
           <CardThumbnailSkeleton />
         )}
 
-        {/* Overlay sutil al hover */}
         {isInteractive && (
           <div className="absolute inset-0 bg-navy/0 transition-colors duration-200 group-hover:bg-navy/[0.04]" />
         )}
       </div>
 
       {/* ── Contenido ─────────────────────────────────────── */}
-      <div className="flex flex-1 flex-col gap-3 p-6">
+      <div className="flex flex-1 flex-col gap-2 p-4 sm:gap-3 sm:p-6">
 
         {/* Meta superior */}
         <div className="flex items-center gap-2">
           <TypeBadge type={pub.type} />
           {pub.journal && (
-            <>
-              <span className="text-navy/30" aria-hidden="true">·</span>
-              <span className="font-body text-[0.65rem] text-navy/55">{pub.journal}</span>
-            </>
+            <span className="hidden sm:inline font-body text-[0.65rem] text-navy/55 before:mr-2 before:text-navy/30 before:content-['·']">
+              {pub.journal}
+            </span>
           )}
           <span className="ml-auto font-body text-[0.6rem] tabular-nums text-navy/45">{pub.year}</span>
         </div>
@@ -194,26 +188,26 @@ function PublicationCard({
         {/* Título */}
         <h3
           className="font-heading font-light leading-snug text-navy transition-colors duration-150 group-hover:text-blue"
-          style={{ fontSize: 'clamp(1.2rem, 2vw, 1.5rem)' }}
+          style={{ fontSize: 'clamp(0.9375rem, 2vw, 1.5rem)' }}
         >
           {pub.title}
         </h3>
 
         {/* Autores */}
-        <p className="font-body text-[0.775rem] leading-relaxed text-navy/60">
+        <p className="font-body text-[0.75rem] leading-relaxed text-navy/60 sm:text-[0.775rem]">
           {pub.authors}
         </p>
 
-        {/* Abstract */}
+        {/* Abstract — solo en desktop */}
         {pub.abstract && (
-          <p className="line-clamp-3 font-body text-[0.825rem] leading-[1.75] text-navy/50">
+          <p className="hidden sm:block line-clamp-3 font-body text-[0.825rem] leading-[1.75] text-navy/50">
             {pub.abstract}
           </p>
         )}
 
-        {/* Tags */}
+        {/* Tags — solo en desktop */}
         {pub.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 pt-1">
+          <div className="hidden sm:flex flex-wrap gap-1.5 pt-1">
             {pub.tags.map(tag => (
               <span
                 key={tag}
@@ -226,7 +220,7 @@ function PublicationCard({
         )}
 
         {/* Acciones */}
-        <div className="mt-auto flex items-center gap-5 border-t border-navy/[0.08] pt-5">
+        <div className="mt-auto flex items-center gap-3 border-t border-navy/[0.08] pt-3 sm:gap-5 sm:pt-5">
           {isInteractive && (
             <button
               onClick={(e) => { e.stopPropagation(); handleClick(); }}
@@ -234,7 +228,9 @@ function PublicationCard({
               className="inline-flex items-center gap-1.5 font-body text-[0.75rem] font-medium text-navy/65 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue/40"
             >
               <EyeIcon className="h-3.5 w-3.5 shrink-0" />
-              {pub.type === 'video' ? 'Ver video' : (pub.type === 'recognition' || pub.type === 'reference') ? 'Ver documento' : 'Leer artículo'}
+              <span className="hidden sm:inline">
+                {pub.type === 'video' ? 'Ver video' : (pub.type === 'recognition' || pub.type === 'reference') ? 'Ver documento' : 'Leer artículo'}
+              </span>
             </button>
           )}
           {pub.pdfPath && (
@@ -246,7 +242,7 @@ function PublicationCard({
               className="ml-auto inline-flex items-center gap-1.5 font-body text-[0.75rem] text-navy/35 transition-colors hover:text-navy/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue/40"
             >
               <DownloadIcon className="h-3.5 w-3.5 shrink-0" />
-              Descargar
+              <span className="hidden sm:inline">Descargar</span>
             </a>
           )}
         </div>
@@ -377,7 +373,7 @@ export default function PublicationsClient({ items }: { items: Publication[] }) 
         </span>
 
         {showFilters && (
-          <div className="flex gap-5" role="group" aria-label="Filtrar">
+          <div className="flex gap-5 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="group" aria-label="Filtrar">
             {(['all', ...availableTypes] as Filter[]).map(f => (
               <button
                 key={f}

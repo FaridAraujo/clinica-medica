@@ -1,14 +1,16 @@
 import type { Metadata } from 'next';
-import BookingFlow from '@/components/ui/BookingFlow';
+// import BookingFlow from '@/components/ui/BookingFlow'; // TODO: reactivar con el agendamiento en línea
 import { PHONE_OFFICE, WHATSAPP_URL } from '@/lib/constants';
 
 interface Props { params: Promise<{ locale: string }> }
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
   return {
     title: 'Agendar Cita — Dr. Edwin Alvarado | Cirugía Cardiovascular',
     description:
       'Solicite su cita con el Dr. Edwin Manuel Alvarado Arce. Seleccione fecha y horario disponible. Confirmación directa por WhatsApp.',
+    alternates: { canonical: `/${locale}/agendar` },
   };
 }
 
@@ -87,9 +89,32 @@ export default async function AgendarPage({ params }: Props) {
         </div>
       </header>
 
-      {/* ── Flujo de agendamiento ─────────────────────────────────────── */}
+      {/* ── Contacto directo por WhatsApp ────────────────────────────── */}
+      {/* TODO: Reemplazar este bloque por <BookingFlow /> cuando se habilite
+          el agendamiento en línea. El componente BookingFlow está listo. */}
       <div className="mx-auto max-w-5xl px-6 py-14 sm:px-10 sm:py-16 lg:px-14 lg:py-20">
-        <BookingFlow />
+        <div className="flex flex-col items-start gap-6">
+          <p className="max-w-[52ch] font-body text-[1rem] leading-[1.85] text-navy/55">
+            Para agendar su consulta, escríbanos directamente por WhatsApp.
+            Le responderemos a la brevedad para confirmar fecha y horario.
+          </p>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-14 items-center gap-3 bg-navy px-8 font-body text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-[#25D366] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2"
+          >
+            <WaIcon className="h-4 w-4 shrink-0" aria-hidden="true" />
+            Escribir por WhatsApp
+          </a>
+          <a
+            href={`tel:+506${PHONE_OFFICE.replace(/-/g, '')}`}
+            className="inline-flex items-center gap-2 font-body text-[0.875rem] text-navy/40 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+          >
+            <PhoneIcon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+            {PHONE_OFFICE}
+          </a>
+        </div>
       </div>
 
     </main>

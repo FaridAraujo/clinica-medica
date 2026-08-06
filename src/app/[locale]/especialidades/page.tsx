@@ -4,11 +4,13 @@ import { AccordionList } from '@/components/ui/AccordionList';
 
 interface Props { params: Promise<{ locale: string }> }
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
   return {
     title: 'Especialidades — Dr. Edwin Alvarado | Cirugía Cardiovascular',
     description:
       'Áreas de atención: cirugía de corazón abierto, válvulas cardíacas, aorta, revascularización coronaria, cirugía general y consultas especializadas en Heredia, Costa Rica.',
+    alternates: { canonical: `/${locale}/especialidades` },
   };
 }
 

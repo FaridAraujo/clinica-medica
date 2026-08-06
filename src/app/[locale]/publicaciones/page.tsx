@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   title: 'Publicaciones — Dr. Edwin Alvarado | Cirugía Cardiovascular',
   description:
     'Artículos científicos, trabajos de investigación y material académico del Dr. Edwin Manuel Alvarado Arce en cirugía cardiovascular y general.',
+  // Locale único ('es'); si se agregan más, migrar a generateMetadata con params.
+  alternates: { canonical: '/es/publicaciones' },
 };
 
 export default function PublicacionesPage() {
@@ -30,7 +32,7 @@ export default function PublicacionesPage() {
             Contribuciones académicas
           </h1>
           <div
-            data-reveal
+            data-reveal-rule
             data-reveal-delay="0.11"
             className="mt-7 h-[2px] w-14 bg-red"
             aria-hidden="true"

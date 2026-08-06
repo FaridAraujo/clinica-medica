@@ -46,18 +46,18 @@
     ]
   },
   "hero": {
-    "eyebrow": "Consultorio Médico · Heredia, Costa Rica",
-    "title": "Dr. Edwin Manuel Alvarado Arce",
-    "subtitle": "Formación en el Hospital Ramón y Cajal de Madrid. Más de 40 años de experiencia en cirugía cardiovascular y general en Costa Rica.",
+    "eyebrow": "Consultorio Médico · Heredia, Costa Rica",
+    "title": "Dr. Edwin Manuel Alvarado Arce",
+    "subtitle": "Formación en el Hospital Ramón y Cajal de Madrid. Más de 40 años de experiencia en cirugía cardiovascular y general en Costa Rica.",
     "cta": "Agendar una cita",
     "ctaSecondary": "Conocer más",
     "stats": {
-      "experience": { "value": "+40 años",       "label": "de experiencia clínica" },
+      "experience": { "value": "+40 años",       "label": "de experiencia clínica" },
       "service":    { "value": "Hospital México", "label": "Jefe, Cirugía de Tórax y Cardiovascular" },
-      "teaching":   { "value": "UCR · UCIMED",   "label": "Profesor y Catedrático" },
+      "teaching":   { "value": "UCR · UCIMED",   "label": "Profesor y Catedrático" },
       "union":      { "value": "Unión Médica",   "label": "Fiscal Nacional" },
       "madrid":     { "value": "Madrid",          "label": "Formación en España" },
-      "clinic":     { "value": "Heredia, CR",     "label": "Consulta privada activa" }
+      "clinic":     { "value": "Heredia, CR",     "label": "Consulta privada activa" }
     }
   },
   "sobre": {
@@ -81,7 +81,7 @@
       {
         "year": "Especialización",
         "title": "Cirugía Cardiovascular",
-        "institution": "Hospital Ramón y Cajal · Universidad Alcalá de Henares, Madrid, España",
+        "institution": "Hospital Ramón y Cajal · Universidad Alcalá de Henares, Madrid, España",
         "description": "Formación de especialidad en uno de los centros cardiovasculares de referencia de España."
       },
       {
@@ -105,7 +105,7 @@
       {
         "year": "Docencia",
         "title": "Profesor y Catedrático Universitario",
-        "institution": "Facultad de Medicina, UCR · UCIMED",
+        "institution": "Facultad de Medicina, UCR · UCIMED",
         "description": "Formación de médicos especialistas como Profesor de la Facultad de Medicina de la Universidad de Costa Rica y como Catedrático de la Universidad de Ciencias Médicas (UCIMED)."
       },
       {
