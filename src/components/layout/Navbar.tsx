@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { WHATSAPP_URL } from '@/lib/constants';
 
 const NAV_H = 64; // 4rem — must match h-16 below
 
@@ -178,8 +179,10 @@ export default function Navbar() {
                   : 'pointer-events-none -translate-y-1 opacity-0',
               ].join(' ')}
             >
-              <Link
-                href={`/${locale}/agendar`}
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 tabIndex={ctaVisible ? 0 : -1}
                 style={{ touchAction: 'manipulation' }}
                 className="group relative inline-flex items-center py-2.5 active:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
@@ -191,7 +194,7 @@ export default function Navbar() {
                     className={['absolute -bottom-1 left-0 right-0 h-px transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:group-hover:bg-blue', dark ? 'bg-white/25' : 'bg-navy/25'].join(' ')}
                   />
                 </span>
-              </Link>
+              </a>
             </div>
 
             {/* Hamburger — mobile only */}
@@ -300,15 +303,17 @@ export default function Navbar() {
 
           {/* CTA + nota pie */}
           <div className="mt-auto px-6 pb-8 pt-6">
-            <Link
-              href={`/${locale}/agendar`}
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={close}
               tabIndex={open ? 0 : -1}
               style={{ touchAction: 'manipulation' }}
               className="flex h-14 w-full items-center justify-center bg-navy font-body text-sm font-medium tracking-wide text-warm-white transition-colors active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 [@media(hover:hover)_and_(pointer:fine)]:hover:bg-blue"
             >
               {t('agendar')}
-            </Link>
+            </a>
             <p className="mt-5 font-body text-[0.625rem] font-medium uppercase tracking-[0.18em] text-navy/40">
               Cirugía Cardiovascular · Heredia, CR
             </p>

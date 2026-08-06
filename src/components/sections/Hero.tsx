@@ -130,13 +130,15 @@ export default function Hero() {
 
           {/* CTAs */}
           <div className="hero-item mt-0 flex flex-wrap items-center gap-4 sm:mt-10">
-            <Link
-              href={`/${locale}/agendar`}
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{ touchAction: 'manipulation' }}
               className="inline-flex h-12 items-center bg-red px-7 font-body text-sm font-medium tracking-wide text-white transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:bg-[#9a0e1a] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
             >
               {t('cta')}
-            </Link>
+            </a>
             <a
               href={WHATSAPP_URL}
               target="_blank"
