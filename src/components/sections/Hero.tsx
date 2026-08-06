@@ -139,15 +139,6 @@ export default function Hero() {
             >
               {t('cta')}
             </a>
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ touchAction: 'manipulation' }}
-              className="inline-flex h-12 items-center border border-white/30 px-7 font-body text-sm font-medium tracking-wide text-white/80 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:border-white/50 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
-            >
-              Consultar por WhatsApp
-            </a>
           </div>
         </div>
       </div>
