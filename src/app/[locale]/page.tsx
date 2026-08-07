@@ -7,6 +7,7 @@ import { AccordionList } from '@/components/ui/AccordionList';
 import AesculapiusRod from '@/components/ui/AesculapiusRod';
 import { PHONE_OFFICE, PHONE_MOBILE, CLINIC_ADDRESS, MAPS_EMBED_URL, WHATSAPP_URL, MAPS_DIRECTIONS_URL } from '@/lib/constants';
 import { buildHomeJsonLd } from '@/lib/jsonLd';
+import { publications } from '@/data/publications';
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -260,53 +261,77 @@ export default async function HomePage({ params }: Props) {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════
-          4. PUBLICACIONES — CTA cierre
-          Fondo navy para contrastar con bg-blue-pale de especialidades
-          y cerrar el home con peso editorial.
+          4. PUBLICACIONES — CTA cristalino
+          Filas reales de publicaciones como fondo decorativo.
+          Overlay translúcido azulado + blur encima.
+          CTA centrado sobre el conjunto.
       ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-navy py-16 sm:py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
-          <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+      <section className="relative overflow-hidden bg-white">
 
-            <div className="flex flex-col gap-5">
-              <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-white/30">
-                {tNav('publicaciones')}
-              </span>
-              <div
-                data-reveal-rule
-                data-reveal-delay="0.06"
-                className="h-[2px] w-14 bg-red"
-                aria-hidden="true"
-              />
-              <h2
-                data-reveal
-                data-reveal-delay="0.1"
-                className="font-heading font-light leading-[1.05] text-white"
-                style={{ fontSize: 'clamp(1.875rem, 3.8vw, 3.25rem)' }}
-              >
-                Cuatro décadas de<br className="hidden sm:block" /> investigación clínica
-              </h2>
-              <p
-                data-reveal
-                data-reveal-delay="0.15"
-                className="max-w-[48ch] font-body text-[1rem] leading-[1.85] text-white/45"
-              >
-                Artículos científicos, revisiones históricas y trabajos de
-                investigación publicados en revistas médicas nacionales.
-              </p>
-            </div>
-
-            <Link
-              href={`/${locale}/publicaciones`}
-              data-reveal
-              data-reveal-delay="0.2"
-              className="inline-flex h-12 shrink-0 items-center border border-white/20 px-7 font-body text-sm font-medium text-white/80 transition-colors duration-200 hover:border-white/40 hover:text-white active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 sm:self-end"
+        {/* ── Fondo decorativo: filas de publicaciones ── */}
+        <div className="pointer-events-none absolute inset-0 select-none" aria-hidden="true">
+          {/* Duplicamos para llenar la altura en cualquier pantalla */}
+          {[...publications, ...publications].slice(0, 14).map((pub, i) => (
+            <div
+              key={i}
+              className="flex items-center gap-4 border-b border-navy/[0.055] px-6 py-[0.9rem] sm:px-14"
             >
-              {tNav('publicaciones')}
-            </Link>
-
-          </div>
+              <span className="w-9 shrink-0 font-body text-[0.525rem] tabular-nums font-medium text-navy/20">
+                {pub.year}
+              </span>
+              <span className={[
+                'h-[5px] w-[5px] shrink-0 rounded-full',
+                pub.type === 'article'     ? 'bg-red/30'    :
+                pub.type === 'video'       ? 'bg-blue/35'   :
+                pub.type === 'recognition' ? 'bg-navy/20'   : 'bg-navy/15',
+              ].join(' ')} />
+              <span className="flex-1 truncate font-heading font-light leading-none text-navy/30"
+                style={{ fontSize: 'clamp(0.8rem, 1.5vw, 1rem)' }}>
+                {pub.title}
+              </span>
+              {pub.journal && (
+                <span className="hidden shrink-0 font-body text-[0.5rem] uppercase tracking-[0.14em] text-navy/15 sm:inline">
+                  {pub.journal}
+                </span>
+              )}
+            </div>
+          ))}
         </div>
+
+        {/* ── Overlay cristal azulado ── */}
+        <div className="absolute inset-0 bg-[#daeef8]/70 backdrop-blur-[5px]" />
+
+        {/* ── Contenido centrado ── */}
+        <div className="relative z-10 flex flex-col items-center gap-6 px-6 py-20 text-center sm:py-28 lg:py-32">
+          <span data-reveal className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.22em] text-navy/50">
+            {tNav('publicaciones')}
+          </span>
+          <h2
+            data-reveal
+            data-reveal-delay="0.06"
+            className="font-heading font-light leading-[1.05] text-navy"
+            style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)' }}
+          >
+            Contribuciones académicas
+          </h2>
+          <p
+            data-reveal
+            data-reveal-delay="0.1"
+            className="max-w-[42ch] font-body text-[0.9375rem] leading-[1.85] text-navy/55"
+          >
+            Artículos científicos, revisiones históricas e investigación
+            publicada en revistas médicas nacionales.
+          </p>
+          <Link
+            href={`/${locale}/publicaciones`}
+            data-reveal
+            data-reveal-delay="0.15"
+            className="mt-2 inline-flex h-12 items-center bg-navy px-8 font-body text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-blue active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2"
+          >
+            Ver publicaciones
+          </Link>
+        </div>
+
       </section>
 
     </main>
