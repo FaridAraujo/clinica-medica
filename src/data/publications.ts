@@ -12,14 +12,30 @@ export type Publication = {
   year: number
   abstract?: string
   tags: string[]
-  pdfPath?: string   // '/publications/nombre-del-archivo.pdf'
-  videoId?: string   // ID de YouTube (lo que va después de ?v=)
+  pdfPath?: string      // '/publications/nombre-del-archivo.pdf'
+  videoId?: string      // ID de YouTube (lo que va después de ?v=)
+  externalUrl?: string  // URL externa (artículos de prensa, revistas online)
 }
 
 // Publicaciones
 // Agrega o edita entradas aquí. Los PDF van en la carpeta:
 //   public/publications/nombre-del-archivo.pdf
 export const publications: Publication[] = [
+
+  // Artículos de prensa y divulgación
+
+  {
+    id: 'vacunacion-derecho-historico-costa-rica',
+    type: 'article',
+    title: 'La vacunación: un derecho histórico en Costa Rica',
+    authors: 'Dr. Edwin Manuel Alvarado Arce',
+    journal: 'Panorama Digital',
+    year: 2021,
+    abstract:
+      'Reflexión histórica sobre la vacunación en Costa Rica desde 1805, cuando el médico Manuel del Sol encabezó la primera campaña contra la viruela en Cartago. Analiza la importancia de los programas de inmunización y la urgencia de acelerar la vacunación ante la pandemia por COVID-19.',
+    tags: ['Salud Pública', 'Vacunación', 'Historia de la Medicina', 'COVID-19'],
+    externalUrl: 'https://www.panoramadigital.co.cr/la-vacunacion-un-derecho-historico-en-costa-rica/',
+  },
 
   // Videos
 

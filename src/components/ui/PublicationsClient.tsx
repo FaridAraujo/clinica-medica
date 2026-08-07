@@ -94,10 +94,15 @@ function PublicationCard({
 }) {
   const [pdfStatus, setPdfStatus] = useState<'loading' | 'ready' | 'error'>('loading');
 
-  const isInteractive = !!(pub.pdfPath || pub.videoId);
+  const isInteractive = !!(pub.pdfPath || pub.videoId || pub.externalUrl);
 
   const handleClick = () => {
     if (!isInteractive) return;
+    // URL externa (artículos de prensa) — abrir en nueva pestaña
+    if (pub.externalUrl) {
+      window.open(pub.externalUrl, '_blank', 'noopener,noreferrer');
+      return;
+    }
     // Reconocimientos y referencias — abrir PDF en nueva pestaña siempre
     if (pub.pdfPath && (pub.type === 'recognition' || pub.type === 'reference')) {
       window.open(pub.pdfPath, '_blank', 'noopener,noreferrer');
@@ -230,6 +235,7 @@ function PublicationCard({
               <EyeIcon className="h-3.5 w-3.5 shrink-0" />
               <span>
                 {pub.type === 'video' ? 'Ver video' : (pub.type === 'recognition' || pub.type === 'reference') ? 'Ver documento' : 'Leer artículo'}
+                {pub.externalUrl && <ExternalLinkIcon className="ml-1 inline h-3 w-3 opacity-50" />}
               </span>
             </button>
           )}
