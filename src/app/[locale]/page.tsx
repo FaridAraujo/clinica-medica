@@ -259,6 +259,56 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
+      {/* ══════════════════════════════════════════════════════════════
+          4. PUBLICACIONES — CTA cierre
+          Fondo navy para contrastar con bg-blue-pale de especialidades
+          y cerrar el home con peso editorial.
+      ══════════════════════════════════════════════════════════════ */}
+      <section className="bg-navy py-16 sm:py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-14">
+          <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+
+            <div className="flex flex-col gap-5">
+              <span data-reveal className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-white/30">
+                {tNav('publicaciones')}
+              </span>
+              <div
+                data-reveal-rule
+                data-reveal-delay="0.06"
+                className="h-[2px] w-14 bg-red"
+                aria-hidden="true"
+              />
+              <h2
+                data-reveal
+                data-reveal-delay="0.1"
+                className="font-heading font-light leading-[1.05] text-white"
+                style={{ fontSize: 'clamp(1.875rem, 3.8vw, 3.25rem)' }}
+              >
+                Cuatro décadas de<br className="hidden sm:block" /> investigación clínica
+              </h2>
+              <p
+                data-reveal
+                data-reveal-delay="0.15"
+                className="max-w-[48ch] font-body text-[1rem] leading-[1.85] text-white/45"
+              >
+                Artículos científicos, revisiones históricas y trabajos de
+                investigación publicados en revistas médicas nacionales.
+              </p>
+            </div>
+
+            <Link
+              href={`/${locale}/publicaciones`}
+              data-reveal
+              data-reveal-delay="0.2"
+              className="inline-flex h-12 shrink-0 items-center border border-white/20 px-7 font-body text-sm font-medium text-white/80 transition-colors duration-200 hover:border-white/40 hover:text-white active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 sm:self-end"
+            >
+              {tNav('publicaciones')}
+            </Link>
+
+          </div>
+        </div>
+      </section>
+
     </main>
   );
 }

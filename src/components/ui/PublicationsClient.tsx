@@ -114,7 +114,7 @@ function PublicationCard({
   return (
     <article
       className={[
-        'group flex flex-row sm:flex-col border border-navy/[0.11] bg-white',
+        'group flex flex-col border border-navy/[0.11] bg-white',
         'shadow-[0_2px_12px_-2px_rgba(13,34,64,0.09)]',
         'transition-[box-shadow,transform] duration-200',
         isInteractive
@@ -131,8 +131,8 @@ function PublicationCard({
       aria-label={isInteractive ? `Abrir: ${pub.title}` : undefined}
     >
       {/* ── Thumbnail ─────────────────────────────────────── */}
-      {/* Mobile: franja vertical fija izquierda. sm+: barra horizontal con aspect ratio */}
-      <div className="relative w-[96px] shrink-0 overflow-hidden bg-navy/[0.03] sm:w-full sm:aspect-[16/10]">
+      {/* Mobile: banner horizontal compacto. sm+: aspect ratio más alto */}
+      <div className="relative h-[110px] w-full overflow-hidden bg-navy/[0.03] sm:h-auto sm:aspect-[16/10]">
         {pub.pdfPath ? (
           <>
             <div className={pdfStatus === 'error' ? 'invisible absolute inset-0' : 'absolute inset-0'}>
@@ -220,7 +220,7 @@ function PublicationCard({
         )}
 
         {/* Acciones */}
-        <div className="mt-auto flex items-center gap-3 border-t border-navy/[0.08] pt-3 sm:gap-5 sm:pt-5">
+        <div className="mt-2 flex items-center gap-3 border-t border-navy/[0.08] pt-3 sm:mt-auto sm:gap-5 sm:pt-5">
           {isInteractive && (
             <button
               onClick={(e) => { e.stopPropagation(); handleClick(); }}
@@ -228,7 +228,7 @@ function PublicationCard({
               className="inline-flex items-center gap-1.5 font-body text-[0.75rem] font-medium text-navy/65 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue/40"
             >
               <EyeIcon className="h-3.5 w-3.5 shrink-0" />
-              <span className="hidden sm:inline">
+              <span>
                 {pub.type === 'video' ? 'Ver video' : (pub.type === 'recognition' || pub.type === 'reference') ? 'Ver documento' : 'Leer artículo'}
               </span>
             </button>

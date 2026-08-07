@@ -98,7 +98,7 @@ export default function Navbar() {
       >
         <nav
           aria-label="Navegación principal"
-          className="grid h-16 grid-cols-[1fr_auto_1fr] items-center px-6 sm:px-10 lg:px-14"
+          className="flex h-16 items-center justify-between px-6 sm:px-10 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:justify-normal lg:px-14"
         >
           {/* Logo — columna izquierda */}
           <Link
