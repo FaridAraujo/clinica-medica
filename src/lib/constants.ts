@@ -11,16 +11,14 @@ export const SOCIAL_PROFILES: string[] = [];
 
 export const CLINIC_ADDRESS = '50 metros al oeste de la Mussi de la UNA, Heredia';
 
-// Coordenadas aproximadas del consultorio en Heredia
-// TODO: Confirmar coordenadas exactas con Google Maps
+// Coordenadas exactas del consultorio — extraídas del Google Business Profile verificado
 export const CLINIC_GEO = {
-  latitude: 10.000269,
-  longitude: -84.113171,
+  latitude: 10.0001219,
+  longitude: -84.1131542,
 } as const;
 
-// URL de embed de Google Maps — obtener desde maps.google.com > Compartir > Incorporar un mapa
-// TODO: Reemplazar con la URL exacta del embed una vez confirmada
-export const MAPS_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.2007573364986!2d-84.11317129999999!3d10.000269399999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0fba37d24b8cd%3A0x704fd40c95cbf458!2sMia%20Araujo%20Studio!5e0!3m2!1ses!2scr!4v1778734934947!5m2!1ses!2scr';
+// Embed de Google Maps — apunta al perfil verificado "Consultorio Dr. Edwin Manuel Alvarado Arce"
+export const MAPS_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.202540951632!2d-84.1131542!3d10.000121900000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0fbc1cc6e7665%3A0xd7d51f18c717c804!2sConsultorio%20Dr.%20Edwin%20Manuel%20Alvarado%20Arce!5e0!3m2!1ses-419!2scr!4v1786061700394!5m2!1ses-419!2scr';
 
 // El horario varía según citas — no se publica horario fijo.
 // En JSON-LD se declara explícitamente "por cita previa".
@@ -36,5 +34,5 @@ const WA_PHONE = '50685418877'; // +506 8541-8877
 const WA_MESSAGE = 'Hola Dr. Alvarado, me gustaría agendar una cita en su consultorio.';
 export const WHATSAPP_URL = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(WA_MESSAGE)}`;
 
-// Google Maps — opens directions to the clinic
-export const MAPS_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${CLINIC_GEO.latitude},${CLINIC_GEO.longitude}`;
+// Google Maps — abre el perfil verificado del consultorio
+export const MAPS_DIRECTIONS_URL = 'https://maps.app.goo.gl/dJkvWLHfaJHE7tHb8';
