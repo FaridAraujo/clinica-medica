@@ -168,7 +168,19 @@ function PublicationCard({
         ) : pub.type === 'video' && pub.videoId ? (
           <VideoThumbnail videoId={pub.videoId} />
         ) : (
-          <CardThumbnailSkeleton />
+          <div className={[
+            'absolute inset-0 flex flex-col justify-between overflow-hidden p-3 sm:p-5',
+            PLACEHOLDER_BG[pub.type],
+          ].join(' ')}>
+            <TypeBadge type={pub.type} />
+            <span
+              className="select-none self-end font-heading font-light leading-none text-navy/[0.1]"
+              style={{ fontSize: 'clamp(2rem, 8vw, 5.5rem)' }}
+              aria-hidden="true"
+            >
+              {pub.year}
+            </span>
+          </div>
         )}
 
         {isInteractive && (
